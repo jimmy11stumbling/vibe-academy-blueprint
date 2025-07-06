@@ -1,13 +1,18 @@
 
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Mail, Lock, User } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -16,271 +21,145 @@ interface AuthModalProps {
 }
 
 const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode }) => {
-  const [activeTab, setActiveTab] = useState(mode);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    name: ''
-  });
-
   const { signIn, signUp } = useAuth();
   const { toast } = useToast();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      if (activeTab === 'signup') {
-        if (formData.password !== formData.confirmPassword) {
-          toast({
-            title: "Error",
-            description: "Passwords don't match",
-            variant: "destructive"
-          });
-          return;
-        }
-        
-        const { error } = await signUp(formData.email, formData.password);
-        if (error) {
-          toast({
-            title: "Sign Up Failed",
-            description: error.message,
-            variant: "destructive"
-          });
-        } else {
-          toast({
-            title: "Success!",
-            description: "Please check your email to confirm your account.",
-          });
-          onClose();
-        }
+      const { error } = mode === 'login' 
+        ? await signIn(email, password)
+        : await signUp(email, password);
+
+      if (error) {
+        toast({
+          variant: "destructive",
+          title: "Authentication Error",
+          description: error.message || "An error occurred during authentication",
+        });
       } else {
-        const { error } = await signIn(formData.email, formData.password);
-        if (error) {
-          toast({
-            title: "Login Failed",
-            description: error.message,
-            variant: "destructive"
-          });
-        } else {
-          toast({
-            title: "Welcome back!",
-            description: "You've been successfully logged in.",
-          });
-          onClose();
-        }
+        toast({
+          title: mode === 'login' ? "Welcome back!" : "Account created!",
+          description: mode === 'login' 
+            ? "You have successfully signed in." 
+            : "Please check your email to verify your account.",
+        });
+        onClose();
+        setEmail('');
+        setPassword('');
       }
     } catch (error) {
       toast({
+        variant: "destructive",
         title: "Error",
         description: "Something went wrong. Please try again.",
-        variant: "destructive"
       });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const resetForm = () => {
-    setFormData({
-      email: '',
-      password: '',
-      confirmPassword: '',
-      name: ''
-    });
-  };
-
-  const handleTabChange = (value: string) => {
-    setActiveTab(value as 'login' | 'signup');
-    resetForm();
-  };
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-center text-2xl font-bold">
-            Welcome to Vibe Coders
+          <DialogTitle className="text-2xl font-bold text-center">
+            {mode === 'login' ? 'Welcome Back' : 'Create Account'}
           </DialogTitle>
+          <DialogDescription className="text-center text-muted-foreground">
+            {mode === 'login' 
+              ? 'Sign in to your Vibe Coders account to continue learning'
+              : 'Join thousands of no-code builders and start your journey today'
+            }
+          </DialogDescription>
         </DialogHeader>
-        
-        <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="login" className="space-y-4 mt-6">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="login-email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="login-email"
-                    name="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="login-password">Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="login-password"
-                    name="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-              
-              <Button type="submit" className="w-full hero-gradient text-white" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Signing in...
-                  </>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="pl-10"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="password">Password</Label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+              <Input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="pl-10 pr-10"
+                required
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeOff className="h-4 w-4 text-muted-foreground" />
                 ) : (
-                  'Sign In'
+                  <Eye className="h-4 w-4 text-muted-foreground" />
                 )}
               </Button>
-            </form>
-            
-            <div className="text-center text-sm text-muted-foreground">
-              <button
-                type="button"
-                className="hover:text-primary transition-colors"
-                onClick={() => toast({ title: "Demo Mode", description: "Password reset is not available in demo mode." })}
-              >
-                Forgot your password?
-              </button>
             </div>
-          </TabsContent>
-          
-          <TabsContent value="signup" className="space-y-4 mt-6">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="signup-name">Full Name</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="signup-name"
-                    name="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="signup-email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="signup-email"
-                    name="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="signup-password">Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="signup-password"
-                    name="password"
-                    type="password"
-                    placeholder="Create a password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="confirm-password">Confirm Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="confirm-password"
-                    name="confirmPassword"
-                    type="password"
-                    placeholder="Confirm your password"
-                    value={formData.confirmPassword}
-                    onChange={handleInputChange}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-              
-              <Button type="submit" className="w-full hero-gradient text-white" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Creating account...
-                  </>
-                ) : (
-                  'Create Account'
-                )}
-              </Button>
-            </form>
-            
-            <div className="text-center text-xs text-muted-foreground">
-              By signing up, you agree to our{' '}
+          </div>
+
+          <Button
+            type="submit"
+            className="w-full hero-gradient text-white hover:opacity-90"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Please wait...' : (mode === 'login' ? 'Sign In' : 'Create Account')}
+          </Button>
+        </form>
+
+        <div className="text-center text-sm text-muted-foreground">
+          {mode === 'login' ? (
+            <>
+              Don't have an account?{' '}
               <button
                 type="button"
-                className="hover:text-primary transition-colors underline"
-                onClick={() => toast({ title: "Demo Mode", description: "Terms and Privacy policy links not available in demo mode." })}
+                className="text-primary hover:underline font-medium"
+                onClick={() => window.location.reload()}
               >
-                Terms of Service
-              </button>{' '}
-              and{' '}
-              <button
-                type="button"
-                className="hover:text-primary transition-colors underline"
-                onClick={() => toast({ title: "Demo Mode", description: "Terms and Privacy policy links not available in demo mode." })}
-              >
-                Privacy Policy
+                Sign up
               </button>
-            </div>
-          </TabsContent>
-        </Tabs>
+            </>
+          ) : (
+            <>
+              Already have an account?{' '}
+              <button
+                type="button"
+                className="text-primary hover:underline font-medium"
+                onClick={() => window.location.reload()}
+              >
+                Sign in
+              </button>
+            </>
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );
