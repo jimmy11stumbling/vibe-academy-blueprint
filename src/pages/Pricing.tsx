@@ -1,12 +1,48 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Check, X, Star, Zap, Crown } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Pricing = () => {
+  const { user } = useAuth();
+  const [authModal, setAuthModal] = useState<{ isOpen: boolean; mode: 'login' | 'signup' }>({
+    isOpen: false,
+    mode: 'signup'
+  });
+
+  const openAuthModal = (mode: 'login' | 'signup') => {
+    setAuthModal({ isOpen: true, mode });
+  };
+
+  const handlePlanAction = (planName: string) => {
+    if (planName === 'Free') {
+      if (!user) {
+        openAuthModal('signup');
+      } else {
+        // Already have access to free plan
+        console.log('Free plan activated');
+      }
+    } else if (planName === 'Pro') {
+      if (!user) {
+        openAuthModal('signup');
+      } else {
+        // Redirect to payment or subscription management
+        console.log('Starting Pro trial for user:', user.email);
+      }
+    } else if (planName === 'Enterprise') {
+      // Open contact form or redirect to sales
+      window.open('mailto:sales@vibecoders.com?subject=Enterprise Plan Inquiry', '_blank');
+    }
+  };
+
+  const handleScheduleDemo = () => {
+    // Open calendar booking or contact form
+    window.open('mailto:demo@vibecoders.com?subject=Demo Request', '_blank');
+  };
+
   const plans = [
     {
       name: 'Free',
@@ -148,6 +184,7 @@ const Pricing = () => {
                   <Button 
                     className={`w-full ${plan.popular ? 'hero-gradient text-white hover:opacity-90' : ''}`}
                     variant={plan.popular ? 'default' : 'outline'}
+                    onClick={() => handlePlanAction(plan.name)}
                   >
                     {plan.buttonText}
                   </Button>
@@ -205,10 +242,18 @@ const Pricing = () => {
               without writing a single line of code.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="hero-gradient text-white hover:opacity-90">
+              <Button 
+                size="lg" 
+                className="hero-gradient text-white hover:opacity-90"
+                onClick={() => user ? console.log('Start trial') : openAuthModal('signup')}
+              >
                 Start Free Trial
               </Button>
-              <Button size="lg" variant="outline">
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={handleScheduleDemo}
+              >
                 Schedule Demo
               </Button>
             </div>

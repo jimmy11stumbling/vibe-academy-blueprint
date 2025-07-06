@@ -1,26 +1,46 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleHashLink = (href: string) => {
+    if (href.startsWith('/#')) {
+      if (location.pathname === '/') {
+        // Already on home page, just scroll to section
+        const element = document.querySelector(href.substring(1));
+        element?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Navigate to home page first, then scroll
+        navigate('/');
+        setTimeout(() => {
+          const element = document.querySelector(href.substring(1));
+          element?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  };
+
   const footerLinks = {
     'Product': [
-      { name: 'Courses', href: '/#courses' },
-      { name: 'Projects', href: '/projects' },
-      { name: 'Community', href: '/#community' },
-      { name: 'Pricing', href: '/pricing' },
+      { name: 'Courses', href: '/#courses', isHash: true },
+      { name: 'Projects', href: '/projects', isHash: false },
+      { name: 'Community', href: '/#community', isHash: true },
+      { name: 'Pricing', href: '/pricing', isHash: false },
     ],
     'Company': [
-      { name: 'About', href: '#' },
-      { name: 'Blog', href: '#' },
-      { name: 'Careers', href: '#' },
-      { name: 'Contact', href: '#' },
+      { name: 'About', href: '#', isHash: false },
+      { name: 'Blog', href: '#', isHash: false },
+      { name: 'Careers', href: '#', isHash: false },
+      { name: 'Contact', href: '#', isHash: false },
     ],
     'Support': [
-      { name: 'Help Center', href: '#' },
-      { name: 'Privacy Policy', href: '#' },
-      { name: 'Terms of Service', href: '#' },
-      { name: 'Cookie Policy', href: '#' },
+      { name: 'Help Center', href: '#', isHash: false },
+      { name: 'Privacy Policy', href: '#', isHash: false },
+      { name: 'Terms of Service', href: '#', isHash: false },
+      { name: 'Cookie Policy', href: '#', isHash: false },
     ],
   };
 
@@ -30,12 +50,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 hero-gradient rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">V</span>
               </div>
               <span className="text-xl font-bold">Vibe Coders</span>
-            </div>
+            </Link>
             <p className="text-muted-foreground text-sm">
               Empowering the next generation of no-code builders with hands-on learning and community support.
             </p>
@@ -48,7 +68,14 @@ const Footer = () => {
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.name}>
-                    {link.href.startsWith('/') ? (
+                    {link.isHash ? (
+                      <button
+                        onClick={() => handleHashLink(link.href)}
+                        className="text-muted-foreground hover:text-foreground transition-colors text-sm bg-transparent border-none cursor-pointer p-0"
+                      >
+                        {link.name}
+                      </button>
+                    ) : link.href.startsWith('/') ? (
                       <Link
                         to={link.href}
                         className="text-muted-foreground hover:text-foreground transition-colors text-sm"

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun, Menu, X, User } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthModal from './AuthModal';
 
 const Navigation = () => {
@@ -16,6 +16,7 @@ const Navigation = () => {
   
   const { user, signOut, loading } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -23,10 +24,10 @@ const Navigation = () => {
   };
 
   const navLinks = [
-    { name: 'Courses', href: '/#courses' },
-    { name: 'Community', href: '/#community' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Pricing', href: '/pricing' },
+    { name: 'Courses', href: '/#courses', isHash: true },
+    { name: 'Community', href: '/#community', isHash: true },
+    { name: 'Projects', href: '/projects', isHash: false },
+    { name: 'Pricing', href: '/pricing', isHash: false },
   ];
 
   const openAuthModal = (mode: 'login' | 'signup') => {
@@ -41,16 +42,21 @@ const Navigation = () => {
     await signOut();
   };
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (href: string, isHash: boolean) => {
     setIsMobileMenuOpen(false);
-    if (href.startsWith('/#')) {
-      // Handle hash links for same page
+    
+    if (isHash) {
       if (location.pathname === '/') {
+        // Already on home page, just scroll to section
         const element = document.querySelector(href.substring(1));
         element?.scrollIntoView({ behavior: 'smooth' });
       } else {
-        // Navigate to home first, then scroll
-        window.location.href = href;
+        // Navigate to home page first, then scroll
+        navigate('/');
+        setTimeout(() => {
+          const element = document.querySelector(href.substring(1));
+          element?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
       }
     }
   };
@@ -88,7 +94,15 @@ const Navigation = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
-                link.href.startsWith('/') ? (
+                link.isHash ? (
+                  <button
+                    key={link.name}
+                    onClick={() => handleNavClick(link.href, link.isHash)}
+                    className="text-muted-foreground hover:text-foreground transition-colors duration-200 bg-transparent border-none cursor-pointer"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
                   <Link
                     key={link.name}
                     to={link.href}
@@ -96,21 +110,6 @@ const Navigation = () => {
                   >
                     {link.name}
                   </Link>
-                ) : (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => {
-                      if (location.pathname === '/' && link.href.startsWith('/#')) {
-                        e.preventDefault();
-                        const element = document.querySelector(link.href.substring(1));
-                        element?.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                    className="text-muted-foreground hover:text-foreground transition-colors duration-200"
-                  >
-                    {link.name}
-                  </a>
                 )
               ))}
             </div>
@@ -168,7 +167,15 @@ const Navigation = () => {
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border">
                 {navLinks.map((link) => (
-                  link.href.startsWith('/') ? (
+                  link.isHash ? (
+                    <button
+                      key={link.name}
+                      onClick={() => handleNavClick(link.href, link.isHash)}
+                      className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 bg-transparent border-none"
+                    >
+                      {link.name}
+                    </button>
+                  ) : (
                     <Link
                       key={link.name}
                       to={link.href}
@@ -177,15 +184,6 @@ const Navigation = () => {
                     >
                       {link.name}
                     </Link>
-                  ) : (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200"
-                      onClick={(e) => handleNavClick(link.href)}
-                    >
-                      {link.name}
-                    </a>
                   )
                 ))}
                 <div className="pt-4 pb-2 border-t border-border/50 space-y-2">
