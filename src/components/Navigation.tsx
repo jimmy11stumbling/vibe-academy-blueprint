@@ -1,13 +1,12 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun, Menu, X, User } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthModal from './AuthModal';
 
 const Navigation = () => {
-  const [isDark, setIsDark] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [authModal, setAuthModal] = useState<{ isOpen: boolean; mode: 'login' | 'signup' }>({
     isOpen: false,
@@ -15,13 +14,9 @@ const Navigation = () => {
   });
   
   const { user, signOut, loading } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('light');
-  };
 
   const navLinks = [
     { name: 'Courses', href: '/#courses', isHash: true },
@@ -36,6 +31,10 @@ const Navigation = () => {
 
   const closeAuthModal = () => {
     setAuthModal({ isOpen: false, mode: 'login' });
+  };
+
+  const handleAuthModeChange = (mode: 'login' | 'signup') => {
+    setAuthModal(prev => ({ ...prev, mode }));
   };
 
   const handleSignOut = async () => {
@@ -122,7 +121,7 @@ const Navigation = () => {
                 onClick={toggleTheme}
                 className="rounded-full"
               >
-                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
               
               <div className="hidden md:flex items-center space-x-2">
@@ -219,6 +218,7 @@ const Navigation = () => {
         isOpen={authModal.isOpen}
         onClose={closeAuthModal}
         mode={authModal.mode}
+        onModeChange={handleAuthModeChange}
       />
     </>
   );

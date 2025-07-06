@@ -18,9 +18,10 @@ interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   mode: 'login' | 'signup';
+  onModeChange?: (mode: 'login' | 'signup') => void;
 }
 
-const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode }) => {
+const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode, onModeChange }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -65,8 +66,22 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode }) => {
     }
   };
 
+  const switchMode = () => {
+    const newMode = mode === 'login' ? 'signup' : 'login';
+    if (onModeChange) {
+      onModeChange(newMode);
+    }
+  };
+
+  const handleClose = () => {
+    setEmail('');
+    setPassword('');
+    setShowPassword(false);
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">
@@ -93,6 +108,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="pl-10"
                 required
+                disabled={isLoading}
               />
             </div>
           </div>
@@ -109,6 +125,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="pl-10 pr-10"
                 required
+                disabled={isLoading}
               />
               <Button
                 type="button"
@@ -116,6 +133,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode }) => {
                 size="icon"
                 className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
                 onClick={() => setShowPassword(!showPassword)}
+                disabled={isLoading}
               >
                 {showPassword ? (
                   <EyeOff className="h-4 w-4 text-muted-foreground" />
@@ -142,7 +160,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode }) => {
               <button
                 type="button"
                 className="text-primary hover:underline font-medium"
-                onClick={() => window.location.reload()}
+                onClick={switchMode}
+                disabled={isLoading}
               >
                 Sign up
               </button>
@@ -153,7 +172,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode }) => {
               <button
                 type="button"
                 className="text-primary hover:underline font-medium"
-                onClick={() => window.location.reload()}
+                onClick={switchMode}
+                disabled={isLoading}
               >
                 Sign in
               </button>
