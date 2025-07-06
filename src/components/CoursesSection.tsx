@@ -1,118 +1,161 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Clock, Users, Star } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Clock, Users, Star, ArrowRight } from 'lucide-react';
 
 const CoursesSection = () => {
   const courses = [
     {
-      title: 'No-Code Fundamentals',
-      description: 'Start your journey with the basics of no-code development. Perfect for complete beginners.',
+      id: 1,
+      title: 'Bubble Fundamentals',
+      description: 'Master the basics of Bubble development. Build your first web application from scratch.',
       level: 'Beginner',
-      duration: '4 weeks',
-      students: '2.5k',
+      duration: '8 hours',
+      students: 2450,
       rating: 4.9,
       price: 'Free',
       image: '/placeholder.svg',
+      topics: ['Database Design', 'UI/UX', 'Workflows', 'Responsive Design']
     },
     {
+      id: 2,
       title: 'Advanced Bubble Development',
-      description: 'Master complex Bubble.io applications with advanced workflows and database design.',
+      description: 'Take your Bubble skills to the next level with advanced features and optimization techniques.',
       level: 'Advanced',
-      duration: '8 weeks',
-      students: '1.2k',
+      duration: '12 hours',
+      students: 1230,
       rating: 4.8,
-      price: '$299',
+      price: '$99',
       image: '/placeholder.svg',
+      topics: ['API Integrations', 'Custom States', 'Performance', 'Plugins']
     },
     {
+      id: 3,
       title: 'Webflow Mastery',
-      description: 'Create stunning, responsive websites with Webflow. From design to deployment.',
+      description: 'Create stunning, responsive websites with Webflow. Perfect for designers and developers.',
       level: 'Intermediate',
-      duration: '6 weeks',
-      students: '1.8k',
+      duration: '10 hours',
+      students: 1850,
+      rating: 4.7,
+      price: '$79',
+      image: '/placeholder.svg',
+      topics: ['CMS', 'Interactions', 'E-commerce', 'SEO']
+    },
+    {
+      id: 4,
+      title: 'Airtable & Automation',
+      description: 'Build powerful databases and automate workflows with Airtable and Zapier.',
+      level: 'Beginner',
+      duration: '6 hours',
+      students: 980,
+      rating: 4.6,
+      price: '$59',
+      image: '/placeholder.svg',
+      topics: ['Database Design', 'Formulas', 'Automations', 'Integrations']
+    },
+    {
+      id: 5,
+      title: 'Glide Mobile Apps',
+      description: 'Turn spreadsheets into beautiful mobile apps without coding.',
+      level: 'Beginner',
+      duration: '5 hours',
+      students: 1420,
+      rating: 4.8,
+      price: '$49',
+      image: '/placeholder.svg',
+      topics: ['App Design', 'Data Sources', 'User Authentication', 'Publishing']
+    },
+    {
+      id: 6,
+      title: 'Complete No-Code Stack',
+      description: 'Learn to integrate multiple no-code tools to build complex applications.',
+      level: 'Advanced',
+      duration: '20 hours',
+      students: 650,
       rating: 4.9,
       price: '$199',
       image: '/placeholder.svg',
-    },
+      topics: ['System Architecture', 'Tool Integration', 'Project Management', 'Client Delivery']
+    }
   ];
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case 'Beginner':
-        return 'bg-green-500/10 text-green-500 border-green-500/20';
-      case 'Intermediate':
-        return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-      case 'Advanced':
-        return 'bg-red-500/10 text-red-500 border-red-500/20';
-      default:
-        return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
+      case 'Beginner': return 'bg-green-100 text-green-800';
+      case 'Intermediate': return 'bg-yellow-100 text-yellow-800';
+      case 'Advanced': return 'bg-red-100 text-red-800';
+      default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   return (
-    <section id="courses" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/20">
-      <div className="max-w-7xl mx-auto">
+    <section id="courses" className="py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Featured Courses
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Popular Courses
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Choose from our comprehensive course library designed to take you 
-            from beginner to professional no-code developer.
+            Start your no-code journey with our most loved courses, designed by industry experts.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {courses.map((course, index) => (
-            <Card key={index} className="glass-card border-border/50 hover:border-primary/20 transition-all duration-300 group overflow-hidden">
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 relative overflow-hidden">
+          {courses.map((course) => (
+            <Card key={course.id} className="glass-card border-border/50 hover:border-primary/20 transition-all duration-300 group">
+              <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
                 <img 
                   src={course.image} 
                   alt={course.title}
-                  className="w-full h-full object-cover opacity-50"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute top-4 left-4">
-                  <Badge className={getLevelColor(course.level)}>
+              </div>
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between mb-2">
+                  <Badge variant="secondary" className={getLevelColor(course.level)}>
                     {course.level}
                   </Badge>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <Badge variant="secondary" className="bg-black/50 text-white border-white/20">
+                  <div className="text-2xl font-bold hero-gradient bg-clip-text text-transparent">
                     {course.price}
-                  </Badge>
+                  </div>
                 </div>
-              </div>
-              
-              <CardHeader>
-                <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">
-                  {course.title}
-                </CardTitle>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <CardTitle className="text-xl mb-2">{course.title}</CardTitle>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {course.description}
                 </p>
               </CardHeader>
-              
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
+                  <span className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />
                     {course.duration}
-                  </div>
-                  <div className="flex items-center gap-1">
+                  </span>
+                  <span className="flex items-center gap-1">
                     <Users className="h-4 w-4" />
-                    {course.students}
-                  </div>
-                  <div className="flex items-center gap-1">
+                    {course.students.toLocaleString()}
+                  </span>
+                  <span className="flex items-center gap-1">
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     {course.rating}
-                  </div>
+                  </span>
                 </div>
-                
+                <div className="flex flex-wrap gap-1">
+                  {course.topics.slice(0, 3).map((topic) => (
+                    <Badge key={topic} variant="outline" className="text-xs">
+                      {topic}
+                    </Badge>
+                  ))}
+                  {course.topics.length > 3 && (
+                    <Badge variant="outline" className="text-xs">
+                      +{course.topics.length - 3} more
+                    </Badge>
+                  )}
+                </div>
                 <Button className="w-full hero-gradient text-white hover:opacity-90">
                   Enroll Now
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </CardContent>
             </Card>
@@ -120,8 +163,9 @@ const CoursesSection = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="px-8">
+          <Button variant="outline" size="lg">
             View All Courses
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
       </div>
