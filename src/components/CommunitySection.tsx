@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { MessageSquare, Users, Calendar, ExternalLink, Heart, Eye } from 'lucide-react';
 
@@ -18,6 +18,7 @@ const CommunitySection = () => {
       id: 1,
       author: 'Sarah Chen',
       avatar: 'SC',
+      avatarImage: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
       title: 'Just launched my first SaaS using Bubble!',
       excerpt: 'After 3 months of learning, I finally deployed my project management tool. The community support was incredible!',
       likes: 43,
@@ -30,6 +31,7 @@ const CommunitySection = () => {
       id: 2,
       author: 'Marcus Rodriguez',
       avatar: 'MR',
+      avatarImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       title: 'Need help with Webflow CMS filtering',
       excerpt: 'Working on a blog with multiple categories. Has anyone implemented advanced filtering with custom code?',
       likes: 15,
@@ -42,6 +44,7 @@ const CommunitySection = () => {
       id: 3,
       author: 'Emma Thompson',
       avatar: 'ET',
+      avatarImage: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
       title: 'Automation workflow that saved me 20 hours/week',
       excerpt: 'Built an automated lead qualification system using Airtable + Zapier. Happy to share the template!',
       likes: 67,
@@ -111,6 +114,7 @@ const CommunitySection = () => {
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3">
                         <Avatar className="h-10 w-10">
+                          <AvatarImage src={post.avatarImage} alt={post.author} />
                           <AvatarFallback className="hero-gradient text-white">
                             {post.avatar}
                           </AvatarFallback>

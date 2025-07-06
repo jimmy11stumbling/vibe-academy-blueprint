@@ -16,7 +16,7 @@ const CoursesSection = () => {
       students: 2450,
       rating: 4.9,
       price: 'Free',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=225&fit=crop',
       topics: ['Database Design', 'UI/UX', 'Workflows', 'Responsive Design']
     },
     {
@@ -28,7 +28,7 @@ const CoursesSection = () => {
       students: 1230,
       rating: 4.8,
       price: '$99',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=225&fit=crop',
       topics: ['API Integrations', 'Custom States', 'Performance', 'Plugins']
     },
     {
@@ -40,7 +40,7 @@ const CoursesSection = () => {
       students: 1850,
       rating: 4.7,
       price: '$79',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=225&fit=crop',
       topics: ['CMS', 'Interactions', 'E-commerce', 'SEO']
     },
     {
@@ -52,7 +52,7 @@ const CoursesSection = () => {
       students: 980,
       rating: 4.6,
       price: '$59',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=225&fit=crop',
       topics: ['Database Design', 'Formulas', 'Automations', 'Integrations']
     },
     {
@@ -64,7 +64,7 @@ const CoursesSection = () => {
       students: 1420,
       rating: 4.8,
       price: '$49',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=225&fit=crop',
       topics: ['App Design', 'Data Sources', 'User Authentication', 'Publishing']
     },
     {
@@ -76,17 +76,17 @@ const CoursesSection = () => {
       students: 650,
       rating: 4.9,
       price: '$199',
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=225&fit=crop',
       topics: ['System Architecture', 'Tool Integration', 'Project Management', 'Client Delivery']
     }
   ];
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case 'Beginner': return 'bg-green-100 text-green-800';
-      case 'Intermediate': return 'bg-yellow-100 text-yellow-800';
-      case 'Advanced': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'Beginner': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
+      case 'Intermediate': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
+      case 'Advanced': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
+      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
     }
   };
 
@@ -110,6 +110,7 @@ const CoursesSection = () => {
                   src={course.image} 
                   alt={course.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                 />
               </div>
               <CardHeader className="pb-3">
