@@ -1,113 +1,217 @@
 
 import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+import { 
+  Github, 
+  Twitter, 
+  Linkedin, 
+  Youtube, 
+  Mail, 
+  Phone, 
+  MapPin,
+  ArrowRight
+} from 'lucide-react';
 
 const Footer = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleHashLink = (href: string) => {
-    if (href.startsWith('/#')) {
-      if (location.pathname === '/') {
-        // Already on home page, just scroll to section
-        const element = document.querySelector(href.substring(1));
-        element?.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        // Navigate to home page first, then scroll
-        navigate('/');
-        setTimeout(() => {
-          const element = document.querySelector(href.substring(1));
-          element?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
-    }
-  };
+  const currentYear = new Date().getFullYear();
 
   const footerLinks = {
-    'Product': [
-      { name: 'Courses', href: '/#courses', isHash: true },
-      { name: 'Projects', href: '/projects', isHash: false },
-      { name: 'Community', href: '/#community', isHash: true },
-      { name: 'Pricing', href: '/pricing', isHash: false },
+    product: [
+      { name: 'Courses', href: '/courses' },
+      { name: 'Projects', href: '/projects' },
+      { name: 'Community', href: '/#community' },
+      { name: 'Pricing', href: '/pricing' }
     ],
-    'Company': [
-      { name: 'About', href: '#', isHash: false },
-      { name: 'Blog', href: '#', isHash: false },
-      { name: 'Careers', href: '#', isHash: false },
-      { name: 'Contact', href: '#', isHash: false },
+    resources: [
+      { name: 'Documentation', href: '#' },
+      { name: 'Blog', href: '#' },
+      { name: 'Tutorials', href: '#' },
+      { name: 'Templates', href: '#' }
     ],
-    'Support': [
-      { name: 'Help Center', href: '#', isHash: false },
-      { name: 'Privacy Policy', href: '#', isHash: false },
-      { name: 'Terms of Service', href: '#', isHash: false },
-      { name: 'Cookie Policy', href: '#', isHash: false },
+    support: [
+      { name: 'Help Center', href: '#' },
+      { name: 'Contact Us', href: '#' },
+      { name: 'Status Page', href: '#' },
+      { name: 'Bug Reports', href: '#' }
     ],
+    legal: [
+      { name: 'Privacy Policy', href: '#' },
+      { name: 'Terms of Service', href: '#' },
+      { name: 'Cookie Policy', href: '#' },
+      { name: 'GDPR', href: '#' }
+    ]
   };
 
-  return (
-    <footer className="border-t border-border/50 py-12 mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
-          <div className="space-y-4">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 hero-gradient rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">V</span>
-              </div>
-              <span className="text-xl font-bold">Vibe Coders</span>
-            </Link>
-            <p className="text-muted-foreground text-sm">
-              Empowering the next generation of no-code builders with hands-on learning and community support.
-            </p>
-          </div>
+  const socialLinks = [
+    { name: 'GitHub', icon: Github, href: '#' },
+    { name: 'Twitter', icon: Twitter, href: '#' },
+    { name: 'LinkedIn', icon: Linkedin, href: '#' },
+    { name: 'YouTube', icon: Youtube, href: '#' }
+  ];
 
-          {/* Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="font-semibold mb-4">{category}</h3>
-              <ul className="space-y-2">
-                {links.map((link) => (
+  return (
+    <footer className="bg-muted/30 border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Newsletter Section */}
+        <div className="py-12 border-b border-border">
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="text-2xl font-bold mb-2">Stay Updated</h3>
+            <p className="text-muted-foreground mb-6">
+              Get the latest no-code tips, course updates, and community news delivered to your inbox.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1"
+              />
+              <Button className="hero-gradient text-white hover:opacity-90">
+                Subscribe
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Footer Content */}
+        <div className="py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+            {/* Company Info */}
+            <div className="lg:col-span-2">
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 hero-gradient rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">V</span>
+                </div>
+                <span className="text-xl font-bold">Vibe Coders</span>
+              </div>
+              <p className="text-muted-foreground text-sm mb-6 max-w-sm">
+                Empowering the next generation of builders with comprehensive no-code education 
+                and a supportive community.
+              </p>
+              
+              {/* Contact Info */}
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  <span>hello@vibecoders.com</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  <span>+1 (555) 123-4567</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
+                  <span>San Francisco, CA</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Product Links */}
+            <div>
+              <h4 className="font-semibold mb-4">Product</h4>
+              <ul className="space-y-3">
+                {footerLinks.product.map((link) => (
                   <li key={link.name}>
-                    {link.isHash ? (
+                    {link.href.startsWith('#') ? (
                       <button
-                        onClick={() => handleHashLink(link.href)}
-                        className="text-muted-foreground hover:text-foreground transition-colors text-sm bg-transparent border-none cursor-pointer p-0"
+                        onClick={() => {
+                          if (link.href === '/#community') {
+                            window.location.href = link.href;
+                          }
+                        }}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors bg-transparent border-none cursor-pointer"
                       >
                         {link.name}
                       </button>
-                    ) : link.href.startsWith('/') ? (
+                    ) : (
                       <Link
                         to={link.href}
-                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                       >
                         {link.name}
                       </Link>
-                    ) : (
-                      <a
-                        href={link.href}
-                        className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                      >
-                        {link.name}
-                      </a>
                     )}
                   </li>
                 ))}
               </ul>
             </div>
-          ))}
+
+            {/* Resources Links */}
+            <div>
+              <h4 className="font-semibold mb-4">Resources</h4>
+              <ul className="space-y-3">
+                {footerLinks.resources.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Support Links */}
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-3">
+                {footerLinks.support.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Legal Links */}
+            <div>
+              <h4 className="font-semibold mb-4">Legal</h4>
+              <ul className="space-y-3">
+                {footerLinks.legal.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom */}
-        <div className="pt-8 border-t border-border/50">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-xs text-muted-foreground">
-              © 2024 Vibe Coders Academy. All rights reserved.
-            </p>
-            <div className="flex space-x-6 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
-              <a href="#" className="hover:text-foreground transition-colors">Terms</a>
-              <a href="#" className="hover:text-foreground transition-colors">Support</a>
-            </div>
+        <Separator />
+
+        {/* Bottom Footer */}
+        <div className="py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div className="text-sm text-muted-foreground">
+            © {currentYear} Vibe Coders. All rights reserved.
+          </div>
+          
+          {/* Social Links */}
+          <div className="flex items-center space-x-4">
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.href}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label={social.name}
+              >
+                <social.icon className="h-5 w-5" />
+              </a>
+            ))}
           </div>
         </div>
       </div>
