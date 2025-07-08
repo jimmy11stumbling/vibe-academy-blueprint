@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -44,7 +43,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode, onModeChan
         if (formData.password !== formData.confirmPassword) {
           throw new Error('Passwords do not match');
         }
-        await signUp(formData.email, formData.password, formData.name);
+        await signUp(formData.email, formData.password, { fullName: formData.name });
       }
       onClose();
     } catch (error) {
