@@ -6,481 +6,469 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { Separator } from '@/components/ui/separator';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useToast } from '@/hooks/use-toast';
-import {
-  User,
-  Bell,
-  Shield,
-  CreditCard,
-  Download,
-  Trash2,
+import { 
+  User, 
+  Bell, 
+  Shield, 
+  CreditCard, 
+  Download, 
+  Trash2, 
+  Moon, 
+  Sun, 
+  Globe,
+  Mail,
+  Smartphone,
+  Lock,
   Eye,
   EyeOff,
-  Settings as SettingsIcon,
-  Moon,
-  Sun,
-  Globe,
-  Smartphone,
-  Mail
+  AlertTriangle
 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { toast } from 'sonner';
+import UserProfile from '@/components/UserProfile';
 
 const Settings = () => {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { theme, toggleTheme } = useTheme();
-  const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
-  const [settings, setSettings] = useState({
-    notifications: {
-      email: true,
-      push: false,
-      sms: false,
-      marketing: true,
-      courseUpdates: true,
-      communityActivity: false
-    },
-    privacy: {
-      profileVisibility: 'public',
-      showProgress: true,
-      showCertificates: true,
-      allowMessages: true
-    },
-    preferences: {
-      language: 'en',
-      timezone: 'America/New_York',
-      currency: 'USD',
-      theme: theme
-    }
+  const [notifications, setNotifications] = useState({
+    email: true,
+    push: false,
+    marketing: true,
+    courseUpdates: true,
+    communityActivity: false
   });
 
-  const handleSaveSettings = async () => {
-    setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      toast({
-        title: 'Settings Updated',
-        description: 'Your settings have been successfully saved.',
-      });
-    }, 1000);
+  const [privacy, setPrivacy] = useState({
+    profileVisible: true,
+    showProgress: true,
+    allowMessages: true
+  });
+
+  const handleNotificationChange = (key: string, value: boolean) => {
+    setNotifications(prev => ({ ...prev, [key]: value }));
+    toast.success('Notification preferences updated');
   };
 
-  const handleDeleteAccount = async () => {
-    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      setIsLoading(true);
-      // Simulate API call
-      setTimeout(() => {
-        setIsLoading(false);
-        toast({
-          title: 'Account Deleted',
-          description: 'Your account has been successfully deleted.',
-          variant: 'destructive'
-        });
-        signOut();
-      }, 1000);
-    }
+  const handlePrivacyChange = (key: string, value: boolean) => {
+    setPrivacy(prev => ({ ...prev, [key]: value }));
+    toast.success('Privacy settings updated');
+  };
+
+  const handlePasswordChange = () => {
+    toast.success('Password change email sent to your inbox');
   };
 
   const handleExportData = () => {
-    toast({
-      title: 'Data Export Started',
-      description: 'We\'ll email you a copy of your data within 24 hours.',
-    });
+    toast.success('Data export initiated. You will receive an email when ready.');
   };
+
+  const handleDeleteAccount = () => {
+    toast.error('Account deletion requires additional verification. Check your email.');
+  };
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="pt-24 pb-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-2xl font-bold mb-4">Please log in to access settings</h1>
+            <Button className="hero-gradient text-white">Sign In</Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
       
       <main className="pt-24 pb-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold mb-2">Settings</h1>
-            <p className="text-muted-foreground">
-              Manage your account settings and preferences.
-            </p>
+            <p className="text-muted-foreground">Manage your account preferences and settings</p>
           </div>
 
           <Tabs defaultValue="profile" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5">
-              <TabsTrigger value="profile" className="flex items-center gap-2">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-6">
+              <TabsTrigger value="profile" className="flex items-center gap-1">
                 <User className="h-4 w-4" />
-                Profile
+                <span className="hidden sm:inline">Profile</span>
               </TabsTrigger>
-              <TabsTrigger value="notifications" className="flex items-center gap-2">
+              <TabsTrigger value="notifications" className="flex items-center gap-1">
                 <Bell className="h-4 w-4" />
-                Notifications
+                <span className="hidden sm:inline">Notifications</span>
               </TabsTrigger>
-              <TabsTrigger value="privacy" className="flex items-center gap-2">
+              <TabsTrigger value="privacy" className="flex items-center gap-1">
                 <Shield className="h-4 w-4" />
-                Privacy
+                <span className="hidden sm:inline">Privacy</span>
               </TabsTrigger>
-              <TabsTrigger value="billing" className="flex items-center gap-2">
+              <TabsTrigger value="billing" className="flex items-center gap-1">
                 <CreditCard className="h-4 w-4" />
-                Billing
+                <span className="hidden sm:inline">Billing</span>
               </TabsTrigger>
-              <TabsTrigger value="advanced" className="flex items-center gap-2">
-                <SettingsIcon className="h-4 w-4" />
-                Advanced
+              <TabsTrigger value="preferences" className="flex items-center gap-1">
+                <Globe className="h-4 w-4" />
+                <span className="hidden sm:inline">Preferences</span>
+              </TabsTrigger>
+              <TabsTrigger value="data" className="flex items-center gap-1">
+                <Download className="h-4 w-4" />
+                <span className="hidden sm:inline">Data</span>
               </TabsTrigger>
             </TabsList>
 
-            {/* Profile Settings */}
             <TabsContent value="profile">
-              <Card className="glass-card border-border/50">
-                <CardHeader>
-                  <CardTitle>Profile Information</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="fullName">Full Name</Label>
-                      <Input id="fullName" defaultValue={user?.fullName} />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" defaultValue={user?.email} />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input id="phone" type="tel" placeholder="+1 (555) 123-4567" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="location">Location</Label>
-                      <Input id="location" placeholder="San Francisco, CA" />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="bio">Bio</Label>
-                    <Input id="bio" placeholder="Tell us about yourself..." />
-                  </div>
-
-                  <Separator />
-
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Change Password</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="currentPassword">Current Password</Label>
-                        <div className="relative">
-                          <Input 
-                            id="currentPassword" 
-                            type={showPassword ? 'text' : 'password'}
-                            className="pr-10"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-3 text-muted-foreground hover:text-foreground bg-transparent border-none cursor-pointer"
-                          >
-                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                          </button>
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="newPassword">New Password</Label>
-                        <Input id="newPassword" type="password" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <Button onClick={handleSaveSettings} disabled={isLoading}>
-                    {isLoading ? 'Saving...' : 'Save Changes'}
-                  </Button>
-                </CardContent>
-              </Card>
+              <UserProfile />
             </TabsContent>
 
-            {/* Notification Settings */}
             <TabsContent value="notifications">
               <Card className="glass-card border-border/50">
                 <CardHeader>
-                  <CardTitle>Notification Preferences</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Bell className="h-5 w-5" />
+                    Notification Preferences
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Email Notifications</h3>
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
                           <Mail className="h-4 w-4 text-muted-foreground" />
-                          <div>
-                            <div className="font-medium">Course Updates</div>
-                            <div className="text-sm text-muted-foreground">New lessons and course announcements</div>
-                          </div>
+                          <Label>Email Notifications</Label>
                         </div>
-                        <Switch 
-                          checked={settings.notifications.courseUpdates}
-                          onCheckedChange={(checked) => 
-                            setSettings(prev => ({
-                              ...prev,
-                              notifications: { ...prev.notifications, courseUpdates: checked }
-                            }))
-                          }
-                        />
+                        <p className="text-sm text-muted-foreground">
+                          Receive notifications via email
+                        </p>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Bell className="h-4 w-4 text-muted-foreground" />
-                          <div>
-                            <div className="font-medium">Community Activity</div>
-                            <div className="text-sm text-muted-foreground">Comments, likes, and mentions</div>
-                          </div>
-                        </div>
-                        <Switch 
-                          checked={settings.notifications.communityActivity}
-                          onCheckedChange={(checked) => 
-                            setSettings(prev => ({
-                              ...prev,
-                              notifications: { ...prev.notifications, communityActivity: checked }
-                            }))
-                          }
-                        />
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Globe className="h-4 w-4 text-muted-foreground" />
-                          <div>
-                            <div className="font-medium">Marketing Emails</div>
-                            <div className="text-sm text-muted-foreground">Product updates and promotions</div>
-                          </div>
-                        </div>
-                        <Switch 
-                          checked={settings.notifications.marketing}
-                          onCheckedChange={(checked) => 
-                            setSettings(prev => ({
-                              ...prev,
-                              notifications: { ...prev.notifications, marketing: checked }
-                            }))
-                          }
-                        />
-                      </div>
+                      <Switch
+                        checked={notifications.email}
+                        onCheckedChange={(value) => handleNotificationChange('email', value)}
+                      />
                     </div>
-                  </div>
 
-                  <Separator />
-
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Push Notifications</h3>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Smartphone className="h-4 w-4 text-muted-foreground" />
-                        <div>
-                          <div className="font-medium">Enable Push Notifications</div>
-                          <div className="text-sm text-muted-foreground">Receive notifications on your device</div>
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <Smartphone className="h-4 w-4 text-muted-foreground" />
+                          <Label>Push Notifications</Label>
                         </div>
+                        <p className="text-sm text-muted-foreground">
+                          Receive push notifications on your device
+                        </p>
                       </div>
-                      <Switch 
-                        checked={settings.notifications.push}
-                        onCheckedChange={(checked) => 
-                          setSettings(prev => ({
-                            ...prev,
-                            notifications: { ...prev.notifications, push: checked }
-                          }))
-                        }
+                      <Switch
+                        checked={notifications.push}
+                        onCheckedChange={(value) => handleNotificationChange('push', value)}
+                      />
+                    </div>
+
+                    <Separator />
+
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-1">
+                        <Label>Course Updates</Label>
+                        <p className="text-sm text-muted-foreground">
+                          New lessons, assignments, and course announcements
+                        </p>
+                      </div>
+                      <Switch
+                        checked={notifications.courseUpdates}
+                        onCheckedChange={(value) => handleNotificationChange('courseUpdates', value)}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-1">
+                        <Label>Community Activity</Label>
+                        <p className="text-sm text-muted-foreground">
+                          Comments, likes, and community interactions
+                        </p>
+                      </div>
+                      <Switch
+                        checked={notifications.communityActivity}
+                        onCheckedChange={(value) => handleNotificationChange('communityActivity', value)}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-1">
+                        <Label>Marketing Emails</Label>
+                        <p className="text-sm text-muted-foreground">
+                          Product updates, newsletters, and promotional content
+                        </p>
+                      </div>
+                      <Switch
+                        checked={notifications.marketing}
+                        onCheckedChange={(value) => handleNotificationChange('marketing', value)}
                       />
                     </div>
                   </div>
-
-                  <Button onClick={handleSaveSettings} disabled={isLoading}>
-                    {isLoading ? 'Saving...' : 'Save Preferences'}
-                  </Button>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            {/* Privacy Settings */}
             <TabsContent value="privacy">
-              <Card className="glass-card border-border/50">
-                <CardHeader>
-                  <CardTitle>Privacy & Security</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Profile Visibility</h3>
+              <div className="space-y-6">
+                <Card className="glass-card border-border/50">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Shield className="h-5 w-5" />
+                      Privacy & Security
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-medium">Show Learning Progress</div>
-                          <div className="text-sm text-muted-foreground">Display your course progress publicly</div>
+                        <div className="space-y-1">
+                          <Label>Public Profile</Label>
+                          <p className="text-sm text-muted-foreground">
+                            Make your profile visible to other users
+                          </p>
                         </div>
-                        <Switch 
-                          checked={settings.privacy.showProgress}
-                          onCheckedChange={(checked) => 
-                            setSettings(prev => ({
-                              ...prev,
-                              privacy: { ...prev.privacy, showProgress: checked }
-                            }))
-                          }
+                        <Switch
+                          checked={privacy.profileVisible}
+                          onCheckedChange={(value) => handlePrivacyChange('profileVisible', value)}
                         />
                       </div>
+
                       <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-medium">Show Certificates</div>
-                          <div className="text-sm text-muted-foreground">Display earned certificates on your profile</div>
+                        <div className="space-y-1">
+                          <Label>Show Learning Progress</Label>
+                          <p className="text-sm text-muted-foreground">
+                            Display your course progress on your profile
+                          </p>
                         </div>
-                        <Switch 
-                          checked={settings.privacy.showCertificates}
-                          onCheckedChange={(checked) => 
-                            setSettings(prev => ({
-                              ...prev,
-                              privacy: { ...prev.privacy, showCertificates: checked }
-                            }))
-                          }
+                        <Switch
+                          checked={privacy.showProgress}
+                          onCheckedChange={(value) => handlePrivacyChange('showProgress', value)}
                         />
                       </div>
+
                       <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-medium">Allow Direct Messages</div>
-                          <div className="text-sm text-muted-foreground">Let other users send you messages</div>
+                        <div className="space-y-1">
+                          <Label>Allow Direct Messages</Label>
+                          <p className="text-sm text-muted-foreground">
+                            Let other users send you direct messages
+                          </p>
                         </div>
-                        <Switch 
-                          checked={settings.privacy.allowMessages}
-                          onCheckedChange={(checked) => 
-                            setSettings(prev => ({
-                              ...prev,
-                              privacy: { ...prev.privacy, allowMessages: checked }
-                            }))
-                          }
+                        <Switch
+                          checked={privacy.allowMessages}
+                          onCheckedChange={(value) => handlePrivacyChange('allowMessages', value)}
                         />
                       </div>
                     </div>
-                  </div>
 
-                  <Separator />
+                    <Separator />
 
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Theme Preference</h3>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        {theme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-                        <div>
-                          <div className="font-medium">Dark Mode</div>
-                          <div className="text-sm text-muted-foreground">Use dark theme for better visibility</div>
+                    <div className="space-y-4">
+                      <h3 className="font-semibold">Password & Security</h3>
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <Label>Current Password</Label>
+                          <div className="flex gap-2">
+                            <div className="relative flex-1">
+                              <Input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter current password"
+                              />
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                className="absolute right-0 top-0 h-full px-3"
+                                onClick={() => setShowPassword(!showPassword)}
+                              >
+                                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                              </Button>
+                            </div>
+                            <Button onClick={handlePasswordChange}>
+                              <Lock className="mr-2 h-4 w-4" />
+                              Change Password
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                      <Switch 
-                        checked={theme === 'dark'}
-                        onCheckedChange={toggleTheme}
-                      />
                     </div>
-                  </div>
-
-                  <Button onClick={handleSaveSettings} disabled={isLoading}>
-                    {isLoading ? 'Saving...' : 'Save Settings'}
-                  </Button>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
 
-            {/* Billing Settings */}
             <TabsContent value="billing">
               <Card className="glass-card border-border/50">
                 <CardHeader>
-                  <CardTitle>Billing & Subscription</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <CreditCard className="h-5 w-5" />
+                    Billing & Subscription
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+                  <div className="flex items-center justify-between p-4 border border-border rounded-lg">
                     <div>
-                      <div className="font-semibold">Premium Plan</div>
-                      <div className="text-sm text-muted-foreground">$29/month • Next billing: Jan 15, 2024</div>
+                      <h3 className="font-semibold">Current Plan</h3>
+                      <p className="text-sm text-muted-foreground">Free Plan</p>
                     </div>
-                    <Badge variant="default">Active</Badge>
+                    <Badge variant="outline">Active</Badge>
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Payment Method</h3>
-                    <div className="flex items-center justify-between p-4 border border-border rounded-lg">
-                      <div className="flex items-center gap-3">
-                        <CreditCard className="h-5 w-5" />
-                        <div>
-                          <div className="font-medium">•••• •••• •••• 4242</div>
-                          <div className="text-sm text-muted-foreground">Expires 12/25</div>
-                        </div>
-                      </div>
-                      <Button variant="outline" size="sm">Update</Button>
-                    </div>
-                  </div>
+                    <h3 className="font-semibold">Upgrade Options</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <Card className="border-border/50">
+                        <CardContent className="p-4">
+                          <h4 className="font-semibold mb-2">Pro Plan</h4>
+                          <p className="text-2xl font-bold mb-2">$29/month</p>
+                          <ul className="text-sm text-muted-foreground space-y-1">
+                            <li>• Unlimited course access</li>
+                            <li>• Priority support</li>
+                            <li>• Advanced projects</li>
+                          </ul>
+                          <Button className="w-full mt-4 hero-gradient text-white">
+                            Upgrade to Pro
+                          </Button>
+                        </CardContent>
+                      </Card>
 
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Billing History</h3>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between py-2">
-                        <span>Dec 15, 2023</span>
-                        <span>$29.00</span>
-                      </div>
-                      <div className="flex items-center justify-between py-2">
-                        <span>Nov 15, 2023</span>
-                        <span>$29.00</span>
-                      </div>
-                      <div className="flex items-center justify-between py-2">
-                        <span>Oct 15, 2023</span>
-                        <span>$29.00</span>
-                      </div>
+                      <Card className="border-border/50">
+                        <CardContent className="p-4">
+                          <h4 className="font-semibold mb-2">Enterprise</h4>
+                          <p className="text-2xl font-bold mb-2">$99/month</p>
+                          <ul className="text-sm text-muted-foreground space-y-1">
+                            <li>• Everything in Pro</li>
+                            <li>• Team collaboration</li>
+                            <li>• Custom integrations</li>
+                          </ul>
+                          <Button variant="outline" className="w-full mt-4">
+                            Contact Sales
+                          </Button>
+                        </CardContent>
+                      </Card>
                     </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <Button variant="outline">Manage Subscription</Button>
-                    <Button variant="outline">Download Invoices</Button>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            {/* Advanced Settings */}
-            <TabsContent value="advanced">
+            <TabsContent value="preferences">
               <Card className="glass-card border-border/50">
                 <CardHeader>
-                  <CardTitle>Advanced Settings</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Globe className="h-5 w-5" />
+                    App Preferences
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Data Management</h3>
                     <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-medium">Export Data</div>
-                        <div className="text-sm text-muted-foreground">Download a copy of your data</div>
+                      <div className="space-y-1">
+                        <Label>Theme</Label>
+                        <p className="text-sm text-muted-foreground">
+                          Choose your preferred theme
+                        </p>
                       </div>
-                      <Button variant="outline" onClick={handleExportData}>
-                        <Download className="h-4 w-4 mr-2" />
-                        Export
+                      <Button
+                        variant="outline"
+                        onClick={toggleTheme}
+                        className="flex items-center gap-2"
+                      >
+                        {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                        {theme === 'dark' ? 'Light' : 'Dark'} Mode
                       </Button>
                     </div>
-                  </div>
 
-                  <Separator />
+                    <div className="space-y-2">
+                      <Label>Language</Label>
+                      <Select defaultValue="en">
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="en">English</SelectItem>
+                          <SelectItem value="es">Español</SelectItem>
+                          <SelectItem value="fr">Français</SelectItem>
+                          <SelectItem value="de">Deutsch</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
 
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-red-600">Danger Zone</h3>
-                    <div className="p-4 border border-red-200 rounded-lg bg-red-50 dark:bg-red-900/10 dark:border-red-800">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="font-medium text-red-900 dark:text-red-100">Delete Account</div>
-                          <div className="text-sm text-red-700 dark:text-red-200">
-                            Permanently delete your account and all data
-                          </div>
-                        </div>
-                        <Button 
-                          variant="destructive" 
-                          onClick={handleDeleteAccount}
-                          disabled={isLoading}
-                        >
-                          <Trash2 className="h-4 w-4 mr-2" />
-                          Delete
-                        </Button>
-                      </div>
+                    <div className="space-y-2">
+                      <Label>Time Zone</Label>
+                      <Select defaultValue="pst">
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="pst">Pacific Standard Time</SelectItem>
+                          <SelectItem value="est">Eastern Standard Time</SelectItem>
+                          <SelectItem value="cst">Central Standard Time</SelectItem>
+                          <SelectItem value="utc">UTC</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="data">
+              <div className="space-y-6">
+                <Card className="glass-card border-border/50">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Download className="h-5 w-5" />
+                      Data Management
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between p-4 border border-border rounded-lg">
+                        <div>
+                          <h3 className="font-semibold">Export Your Data</h3>
+                          <p className="text-sm text-muted-foreground">
+                            Download a copy of all your personal data
+                          </p>
+                        </div>
+                        <Button variant="outline" onClick={handleExportData}>
+                          <Download className="mr-2 h-4 w-4" />
+                          Export Data
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card border-red-200 dark:border-red-800">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-red-600">
+                      <AlertTriangle className="h-5 w-5" />
+                      Danger Zone
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center justify-between p-4 border border-red-200 dark:border-red-800 rounded-lg bg-red-50 dark:bg-red-900/20">
+                      <div>
+                        <h3 className="font-semibold text-red-600">Delete Account</h3>
+                        <p className="text-sm text-red-600/80">
+                          Permanently delete your account and all associated data
+                        </p>
+                      </div>
+                      <Button variant="destructive" onClick={handleDeleteAccount}>
+                        <Trash2 className="mr-2 h-4 w-4" />
+                        Delete Account
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
           </Tabs>
         </div>

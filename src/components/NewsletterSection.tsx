@@ -2,137 +2,149 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { Mail, ArrowRight, CheckCircle } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { ArrowRight, Mail, Gift, Zap, BookOpen, Users } from 'lucide-react';
+import { toast } from 'sonner';
 
 const NewsletterSection = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    if (!email) {
+      toast.error('Please enter your email address');
+      return;
+    }
 
+    setIsLoading(true);
+    
     // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsSubscribed(true);
-      toast({
-        title: 'Welcome to Vibe Coders!',
-        description: 'You\'ve successfully subscribed to our newsletter.',
-      });
-      setEmail('');
-    }, 1000);
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    toast.success('Successfully subscribed! Check your email for a welcome message.');
+    setEmail('');
+    setIsLoading(false);
   };
 
   const benefits = [
-    'Weekly no-code tips and tutorials',
-    'Early access to new courses',
-    'Exclusive community events',
-    'Industry news and trends',
-    'Free templates and resources'
+    {
+      icon: Gift,
+      title: 'Free Resources',
+      description: 'Weekly templates, tools, and exclusive content'
+    },
+    {
+      icon: Zap,
+      title: 'Latest Updates',
+      description: 'Be first to know about new courses and features'
+    },
+    {
+      icon: BookOpen,
+      title: 'Learning Tips',
+      description: 'Expert insights and no-code best practices'
+    },
+    {
+      icon: Users,
+      title: 'Community Access',
+      description: 'Connect with fellow no-code enthusiasts'
+    }
   ];
 
-  if (isSubscribed) {
-    return (
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="glass-card border-border/50 text-center">
-            <CardContent className="p-12">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="h-8 w-8 text-green-600" />
+  return (
+    <section className="py-24 bg-muted/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4">Newsletter</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Stay Ahead of the
+              <span className="hero-gradient bg-clip-text text-transparent"> No-Code Curve</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Get weekly insights, exclusive resources, and early access to new courses. 
+              Join 25,000+ no-code enthusiasts who trust our newsletter.
+            </p>
+          </div>
+
+          {/* Newsletter Signup Card */}
+          <Card className="glass-card border-border/50 mb-12">
+            <CardContent className="p-8">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+                  <Mail className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Never Miss an Update</h3>
+                <p className="text-muted-foreground">
+                  Subscribe to our newsletter and get a free no-code starter kit worth $99
+                </p>
               </div>
-              <h2 className="text-3xl font-bold mb-4">You're All Set!</h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                Thanks for subscribing! Check your email for a welcome message and your first no-code resource pack.
-              </p>
-              <Button 
-                onClick={() => setIsSubscribed(false)}
-                variant="outline"
-              >
-                Subscribe Another Email
-              </Button>
+
+              <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="flex-1"
+                    disabled={isLoading}
+                  />
+                  <Button 
+                    type="submit" 
+                    className="hero-gradient text-white hover:opacity-90 group"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        Subscribing...
+                      </div>
+                    ) : (
+                      <>
+                        Subscribe
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground text-center mt-3">
+                  No spam, unsubscribe at any time. We respect your privacy.
+                </p>
+              </form>
             </CardContent>
           </Card>
-        </div>
-      </section>
-    );
-  }
 
-  return (
-    <section className="py-20 bg-muted/30">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="glass-card border-border/50 overflow-hidden">
-          <CardContent className="p-0">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-              {/* Left Content */}
-              <div className="p-8 lg:p-12">
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Mail className="h-6 w-6 text-primary" />
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-bold">
-                    Stay in the Loop
-                  </h2>
+          {/* Benefits Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="text-center p-6">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+                  <benefit.icon className="h-6 w-6 text-primary" />
                 </div>
-                
-                <p className="text-lg text-muted-foreground mb-6">
-                  Get the latest no-code insights, course updates, and exclusive resources 
-                  delivered straight to your inbox every week.
+                <h4 className="font-semibold mb-2">{benefit.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {benefit.description}
                 </p>
-
-                <form onSubmit={handleSubmit} className="space-y-4 mb-6">
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Input
-                      type="email"
-                      placeholder="Enter your email address"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="flex-1"
-                    />
-                    <Button 
-                      type="submit" 
-                      disabled={isLoading}
-                      className="hero-gradient text-white hover:opacity-90 group"
-                    >
-                      {isLoading ? 'Subscribing...' : 'Subscribe'}
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </div>
-                </form>
-
-                <div className="text-xs text-muted-foreground">
-                  By subscribing, you agree to our Privacy Policy and Terms of Service. 
-                  Unsubscribe at any time.
-                </div>
               </div>
+            ))}
+          </div>
 
-              {/* Right Content - Benefits */}
-              <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-8 lg:p-12">
-                <h3 className="text-lg font-semibold mb-6">What you'll receive:</h3>
-                <div className="space-y-4">
-                  {benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-muted-foreground">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 p-4 bg-card/50 rounded-lg border border-border/50">
-                  <div className="text-sm font-medium mb-1">Join 25,000+ subscribers</div>
-                  <div className="text-xs text-muted-foreground">
-                    "The best no-code newsletter I've ever subscribed to!" - Sarah M.
-                  </div>
-                </div>
+          {/* Social Proof */}
+          <div className="text-center mt-12 pt-8 border-t border-border">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div 
+                    key={i}
+                    className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary border-2 border-background"
+                  />
+                ))}
               </div>
+              <span>Join 25,000+ subscribers who love our weekly newsletter</span>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </section>
   );

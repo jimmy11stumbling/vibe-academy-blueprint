@@ -1,84 +1,128 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
-import UserProfile from '@/components/UserProfile';
-import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   BookOpen, 
   Clock, 
-  Award, 
-  TrendingUp, 
-  Calendar,
-  Play,
+  Trophy, 
+  Star, 
+  Play, 
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  TrendingUp,
+  Calendar,
+  Users,
+  Target,
+  Award,
+  Zap
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
+import Loading from '@/components/Loading';
 
 const Dashboard = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  const [activeTab, setActiveTab] = useState('overview');
 
-  const upcomingDeadlines = [
-    { course: 'Advanced Bubble Development', task: 'Final Project', due: '2024-01-20', daysLeft: 3 },
-    { course: 'Webflow Masterclass', task: 'Portfolio Review', due: '2024-01-25', daysLeft: 8 },
-    { course: 'Zapier Automation', task: 'Workflow Assignment', due: '2024-01-30', daysLeft: 13 }
-  ];
-
-  const recentActivity = [
-    { type: 'completed', course: 'Bubble Basics', lesson: 'Database Design', time: '2 hours ago' },
-    { type: 'started', course: 'Webflow Advanced', lesson: 'Custom Interactions', time: '1 day ago' },
-    { type: 'achievement', course: 'General', lesson: 'Completed 10 courses!', time: '3 days ago' },
-    { type: 'completed', course: 'Airtable Pro', lesson: 'API Integration', time: '5 days ago' }
-  ];
-
-  const recommendedCourses = [
-    {
-      title: 'Advanced No-Code APIs',
-      instructor: 'Sarah Chen',
-      duration: '8 hours',
-      level: 'Advanced',
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop'
-    },
-    {
-      title: 'Mobile App Development',
-      instructor: 'Marcus Rodriguez',
-      duration: '12 hours',
-      level: 'Intermediate',
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=200&fit=crop'
-    },
-    {
-      title: 'E-commerce Mastery',
-      instructor: 'Emma Thompson',
-      duration: '15 hours',
-      level: 'Beginner',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop'
-    }
-  ];
+  if (loading) {
+    return <Loading fullScreen text="Loading Dashboard..." />;
+  }
 
   if (!user) {
     return (
       <div className="min-h-screen bg-background">
         <Navigation />
-        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
-          <Card className="w-full max-w-md mx-4">
-            <CardContent className="p-8 text-center">
-              <h2 className="text-2xl font-bold mb-4">Access Denied</h2>
-              <p className="text-muted-foreground mb-6">
-                Please log in to access your dashboard.
-              </p>
-              <Button className="w-full hero-gradient text-white">
-                <Link to="/">Go Home</Link>
-              </Button>
-            </CardContent>
-          </Card>
+        <div className="pt-24 pb-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-2xl font-bold mb-4">Please log in to access your dashboard</h1>
+            <Button className="hero-gradient text-white">Sign In</Button>
+          </div>
         </div>
       </div>
     );
   }
+
+  const enrolledCourses = [
+    {
+      id: 1,
+      title: 'Complete Bubble Development',
+      instructor: 'Sarah Johnson',
+      progress: 75,
+      totalLessons: 24,
+      completedLessons: 18,
+      thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop',
+      nextLesson: 'Advanced Database Relations',
+      estimatedTime: '45 min',
+      difficulty: 'Intermediate'
+    },
+    {
+      id: 2,
+      title: 'Webflow Masterclass',
+      instructor: 'Mike Chen',
+      progress: 40,
+      totalLessons: 18,
+      completedLessons: 7,
+      thumbnail: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=300&h=200&fit=crop',
+      nextLesson: 'Responsive Design Principles',
+      estimatedTime: '30 min',
+      difficulty: 'Beginner'
+    },
+    {
+      id: 3,
+      title: 'Airtable for Business',
+      instructor: 'Emily Davis',
+      progress: 90,
+      totalLessons: 12,
+      completedLessons: 11,
+      thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop',
+      nextLesson: 'Automation with Zapier',
+      estimatedTime: '25 min',
+      difficulty: 'Advanced'
+    }
+  ];
+
+  const achievements = [
+    { icon: Trophy, title: 'First Course Complete', earned: true },
+    { icon: Star, title: '5-Star Rating', earned: true },
+    { icon: Target, title: 'Goal Achiever', earned: true },
+    { icon: Zap, title: 'Quick Learner', earned: false },
+    { icon: Users, title: 'Community Helper', earned: false },
+    { icon: Award, title: 'Expert Level', earned: false }
+  ];
+
+  const stats = [
+    { label: 'Courses Enrolled', value: '3', icon: BookOpen },
+    { label: 'Hours Learned', value: '47', icon: Clock },
+    { label: 'Certificates', value: '1', icon: Award },
+    { label: 'Projects Built', value: '5', icon: Target }
+  ];
+
+  const recentActivity = [
+    {
+      type: 'course_progress',
+      title: 'Completed "Database Design" lesson',
+      course: 'Complete Bubble Development',
+      time: '2 hours ago',
+      icon: CheckCircle
+    },
+    {
+      type: 'achievement',
+      title: 'Earned "Goal Achiever" badge',
+      time: '1 day ago',
+      icon: Trophy
+    },
+    {
+      type: 'course_start',
+      title: 'Started "Webflow Masterclass"',
+      time: '3 days ago',
+      icon: Play
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -86,182 +130,230 @@ const Dashboard = () => {
       
       <main className="pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Welcome back, {user.fullName}!</h1>
-            <p className="text-muted-foreground">
-              Continue your no-code journey and track your progress.
-            </p>
+            <div className="flex items-center gap-4 mb-4">
+              <Avatar className="h-16 w-16">
+                <AvatarImage src={user.avatar} alt={user.fullName} />
+                <AvatarFallback className="hero-gradient text-white text-xl">
+                  {user.fullName?.split(' ').map(n => n[0]).join('') || 'U'}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <h1 className="text-3xl font-bold">Welcome back, {user.fullName || 'Student'}!</h1>
+                <p className="text-muted-foreground">Continue your no-code learning journey</p>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Content */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Quick Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="glass-card border-border/50">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-blue-500/10 rounded-lg">
-                        <BookOpen className="h-6 w-6 text-blue-500" />
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold">12</div>
-                        <div className="text-sm text-muted-foreground">Courses Enrolled</div>
-                      </div>
+          {/* Stats Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+            {stats.map((stat, index) => (
+              <Card key={index} className="glass-card border-border/50">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <stat.icon className="h-5 w-5 text-primary" />
                     </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="glass-card border-border/50">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-green-500/10 rounded-lg">
-                        <CheckCircle className="h-6 w-6 text-green-500" />
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold">8</div>
-                        <div className="text-sm text-muted-foreground">Completed</div>
-                      </div>
+                    <div>
+                      <div className="text-2xl font-bold">{stat.value}</div>
+                      <div className="text-sm text-muted-foreground">{stat.label}</div>
                     </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="glass-card border-border/50">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-purple-500/10 rounded-lg">
-                        <Award className="h-6 w-6 text-purple-500" />
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold">156</div>
-                        <div className="text-sm text-muted-foreground">Hours Learned</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Continue Learning */}
-              <Card className="glass-card border-border/50">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Play className="h-5 w-5" />
-                    Continue Learning
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-4 p-4 bg-muted/50 rounded-lg">
-                    <img 
-                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=80&h=80&fit=crop"
-                      alt="Course thumbnail"
-                      className="w-16 h-16 rounded-lg object-cover"
-                    />
-                    <div className="flex-1">
-                      <h3 className="font-semibold">Advanced Bubble Development</h3>
-                      <p className="text-sm text-muted-foreground">Lesson 8: Advanced Workflows</p>
-                      <div className="flex items-center gap-2 mt-2">
-                        <Progress value={75} className="flex-1" />
-                        <span className="text-sm text-muted-foreground">75%</span>
-                      </div>
-                    </div>
-                    <Button size="sm" className="hero-gradient text-white">
-                      Continue
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
+            ))}
+          </div>
+
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList className="mb-8">
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="courses">My Courses</TabsTrigger>
+              <TabsTrigger value="achievements">Achievements</TabsTrigger>
+              <TabsTrigger value="activity">Activity</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview" className="space-y-8">
+              {/* Continue Learning */}
+              <section>
+                <h2 className="text-2xl font-bold mb-6">Continue Learning</h2>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {enrolledCourses.slice(0, 2).map((course) => (
+                    <Card key={course.id} className="glass-card border-border/50 hover:border-primary/20 transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex gap-4">
+                          <img 
+                            src={course.thumbnail} 
+                            alt={course.title}
+                            className="w-20 h-20 rounded-lg object-cover"
+                          />
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-2">
+                              <div>
+                                <h3 className="font-semibold mb-1">{course.title}</h3>
+                                <p className="text-sm text-muted-foreground">by {course.instructor}</p>
+                              </div>
+                              <Badge variant="outline" className="text-xs">
+                                {course.difficulty}
+                              </Badge>
+                            </div>
+                            <div className="mb-3">
+                              <div className="flex items-center justify-between text-sm mb-1">
+                                <span>Progress</span>
+                                <span>{course.progress}%</span>
+                              </div>
+                              <Progress value={course.progress} className="h-2" />
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <div className="text-sm text-muted-foreground">
+                                Next: {course.nextLesson}
+                              </div>
+                              <Button size="sm" className="hero-gradient text-white">
+                                Continue
+                                <ArrowRight className="ml-1 h-3 w-3" />
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
 
               {/* Recent Activity */}
+              <section>
+                <h2 className="text-2xl font-bold mb-6">Recent Activity</h2>
+                <Card className="glass-card border-border/50">
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      {recentActivity.map((activity, index) => (
+                        <div key={index} className="flex items-center gap-4 pb-4 border-b border-border/50 last:border-0 last:pb-0">
+                          <div className="p-2 rounded-full bg-primary/10">
+                            <activity.icon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-medium">{activity.title}</p>
+                            {activity.course && (
+                              <p className="text-sm text-muted-foreground">{activity.course}</p>
+                            )}
+                          </div>
+                          <span className="text-sm text-muted-foreground">{activity.time}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+            </TabsContent>
+
+            <TabsContent value="courses">
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {enrolledCourses.map((course) => (
+                  <Card key={course.id} className="glass-card border-border/50 hover:border-primary/20 transition-all duration-300">
+                    <div className="aspect-video bg-muted rounded-t-lg overflow-hidden">
+                      <img 
+                        src={course.thumbnail} 
+                        alt={course.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="font-semibold mb-1">{course.title}</h3>
+                          <p className="text-sm text-muted-foreground">by {course.instructor}</p>
+                        </div>
+                        <Badge variant="outline" className="text-xs">
+                          {course.difficulty}
+                        </Badge>
+                      </div>
+                      
+                      <div className="mb-4">
+                        <div className="flex items-center justify-between text-sm mb-1">
+                          <span>Progress</span>
+                          <span>{course.completedLessons}/{course.totalLessons} lessons</span>
+                        </div>
+                        <Progress value={course.progress} className="h-2" />
+                      </div>
+                      
+                      <div className="space-y-2 mb-4">
+                        <div className="text-sm">
+                          <span className="text-muted-foreground">Next lesson:</span>
+                          <span className="ml-1 font-medium">{course.nextLesson}</span>
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Estimated time: {course.estimatedTime}
+                        </div>
+                      </div>
+                      
+                      <Button className="w-full hero-gradient text-white">
+                        Continue Learning
+                        <Play className="ml-2 h-4 w-4" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="achievements">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {achievements.map((achievement, index) => (
+                  <Card key={index} className={`glass-card border-border/50 ${achievement.earned ? 'bg-primary/5 border-primary/20' : 'opacity-60'}`}>
+                    <CardContent className="p-6 text-center">
+                      <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
+                        achievement.earned ? 'bg-primary/10' : 'bg-muted'
+                      }`}>
+                        <achievement.icon className={`h-8 w-8 ${
+                          achievement.earned ? 'text-primary' : 'text-muted-foreground'
+                        }`} />
+                      </div>
+                      <h3 className="font-semibold mb-2">{achievement.title}</h3>
+                      {achievement.earned ? (
+                        <Badge variant="secondary" className="bg-primary/10 text-primary">
+                          Earned
+                        </Badge>
+                      ) : (
+                        <Badge variant="outline">
+                          Locked
+                        </Badge>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="activity">
               <Card className="glass-card border-border/50">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Clock className="h-5 w-5" />
-                    Recent Activity
-                  </CardTitle>
+                  <CardTitle>Learning Activity</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     {recentActivity.map((activity, index) => (
-                      <div key={index} className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                        <div className={`w-2 h-2 rounded-full ${
-                          activity.type === 'completed' ? 'bg-green-500' :
-                          activity.type === 'started' ? 'bg-blue-500' :
-                          'bg-yellow-500'
-                        }`}></div>
-                        <div className="flex-1">
-                          <div className="font-medium">{activity.lesson}</div>
-                          <div className="text-sm text-muted-foreground">{activity.course}</div>
+                      <div key={index} className="flex items-start gap-4 pb-6 border-b border-border/50 last:border-0 last:pb-0">
+                        <div className="p-3 rounded-full bg-primary/10">
+                          <activity.icon className="h-5 w-5 text-primary" />
                         </div>
-                        <div className="text-xs text-muted-foreground">{activity.time}</div>
+                        <div className="flex-1">
+                          <h4 className="font-medium mb-1">{activity.title}</h4>
+                          {activity.course && (
+                            <p className="text-sm text-muted-foreground mb-2">{activity.course}</p>
+                          )}
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Calendar className="h-4 w-4" />
+                            <span>{activity.time}</span>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
                 </CardContent>
               </Card>
-            </div>
-
-            {/* Sidebar */}
-            <div className="space-y-8">
-              {/* Upcoming Deadlines */}
-              <Card className="glass-card border-border/50">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Calendar className="h-5 w-5" />
-                    Upcoming Deadlines
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {upcomingDeadlines.map((deadline, index) => (
-                    <div key={index} className="p-3 bg-muted/50 rounded-lg">
-                      <div className="font-medium text-sm">{deadline.task}</div>
-                      <div className="text-xs text-muted-foreground">{deadline.course}</div>
-                      <div className="flex items-center justify-between mt-2">
-                        <span className="text-xs text-muted-foreground">{deadline.due}</span>
-                        <Badge variant={deadline.daysLeft <= 5 ? 'destructive' : 'secondary'} className="text-xs">
-                          {deadline.daysLeft} days left
-                        </Badge>
-                      </div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-
-              {/* Recommended Courses */}
-              <Card className="glass-card border-border/50">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <TrendingUp className="h-5 w-5" />
-                    Recommended
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {recommendedCourses.map((course, index) => (
-                    <div key={index} className="space-y-2">
-                      <img 
-                        src={course.image}
-                        alt={course.title}
-                        className="w-full h-24 object-cover rounded-lg"
-                      />
-                      <div>
-                        <h4 className="font-medium text-sm">{course.title}</h4>
-                        <p className="text-xs text-muted-foreground">{course.instructor}</p>
-                        <div className="flex items-center gap-2 mt-1">
-                          <Badge variant="outline" className="text-xs">{course.level}</Badge>
-                          <span className="text-xs text-muted-foreground">{course.duration}</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                  <Button variant="outline" className="w-full" size="sm">
-                    <Link to="/courses" className="flex items-center gap-2">
-                      View All Courses
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
     </div>

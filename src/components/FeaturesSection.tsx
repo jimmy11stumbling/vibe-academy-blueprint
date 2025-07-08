@@ -4,112 +4,140 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { 
   Zap, 
-  Users, 
-  BookOpen, 
-  Award, 
-  MessageSquare, 
+  Code, 
+  Palette, 
+  Database, 
+  Shield, 
   Rocket,
-  Clock,
+  Users,
+  BookOpen,
   Target,
-  Globe
+  Globe,
+  Heart,
+  Award
 } from 'lucide-react';
 
 const FeaturesSection = () => {
   const features = [
     {
       icon: Zap,
-      title: 'Interactive Learning',
-      description: 'Hands-on projects and real-world applications that keep you engaged throughout your learning journey.',
-      badge: 'Popular',
-      color: 'text-yellow-500'
+      title: 'Lightning Fast Development',
+      description: 'Build applications 10x faster with our no-code platform and drag-and-drop interface.',
+      badge: 'Speed',
+      color: 'text-yellow-600'
     },
     {
-      icon: Users,
-      title: 'Expert Instructors',
-      description: 'Learn from industry professionals with years of experience in no-code development and business growth.',
-      badge: 'Verified',
-      color: 'text-blue-500'
+      icon: Code,
+      title: 'No Coding Required',
+      description: 'Create powerful applications without writing a single line of code. Perfect for beginners.',
+      badge: 'Beginner Friendly',
+      color: 'text-blue-600'
     },
     {
-      icon: BookOpen,
-      title: 'Comprehensive Curriculum',
-      description: 'From beginner to advanced levels, our structured curriculum covers all major no-code platforms.',
-      badge: 'Complete',
-      color: 'text-green-500'
+      icon: Palette,
+      title: 'Beautiful Design System',
+      description: 'Access to professionally designed templates and components for stunning applications.',
+      badge: 'Design',
+      color: 'text-purple-600'
     },
     {
-      icon: Award,
-      title: 'Industry Certificates',
-      description: 'Earn recognized certificates that boost your credibility and career prospects in the tech industry.',
-      badge: 'Certified',
-      color: 'text-purple-500'
+      icon: Database,
+      title: 'Powerful Database Integration',
+      description: 'Connect to multiple databases and APIs with our visual database designer.',
+      badge: 'Backend',
+      color: 'text-green-600'
     },
     {
-      icon: MessageSquare,
-      title: 'Community Support',
-      description: 'Join a vibrant community of learners and get help from peers and mentors whenever you need it.',
-      badge: 'Active',
-      color: 'text-orange-500'
+      icon: Shield,
+      title: 'Enterprise Security',
+      description: 'Built-in security features, authentication, and compliance tools for enterprise use.',
+      badge: 'Security',
+      color: 'text-red-600'
     },
     {
       icon: Rocket,
-      title: 'Career Acceleration',
-      description: 'Fast-track your career with job placement assistance and portfolio development guidance.',
-      badge: 'Premium',
-      color: 'text-red-500'
+      title: 'One-Click Deployment',
+      description: 'Deploy your applications to the cloud with a single click. No DevOps knowledge required.',
+      badge: 'Deployment',
+      color: 'text-orange-600'
     },
     {
-      icon: Clock,
-      title: 'Self-Paced Learning',
-      description: 'Learn at your own pace with lifetime access to all course materials and updates.',
-      badge: 'Flexible',
-      color: 'text-indigo-500'
+      icon: Users,
+      title: 'Collaborative Development',
+      description: 'Work together with your team in real-time on the same project.',
+      badge: 'Teamwork',
+      color: 'text-indigo-600'
+    },
+    {
+      icon: BookOpen,
+      title: 'Comprehensive Learning',
+      description: 'Access to tutorials, documentation, and community support.',
+      badge: 'Learning',
+      color: 'text-pink-600'
     },
     {
       icon: Target,
-      title: 'Project-Based',
-      description: 'Build real applications that you can add to your portfolio and showcase to potential employers.',
-      badge: 'Practical',
-      color: 'text-pink-500'
+      title: 'Goal-Oriented Courses',
+      description: 'Structured learning paths designed to achieve specific development goals.',
+      badge: 'Structured',
+      color: 'text-cyan-600'
     },
     {
       icon: Globe,
-      title: 'Global Access',
-      description: 'Access courses from anywhere in the world with our mobile-friendly platform and offline downloads.',
-      badge: 'Worldwide',
-      color: 'text-cyan-500'
+      title: 'Global Community',
+      description: 'Join thousands of developers worldwide in our supportive community.',
+      badge: 'Community',
+      color: 'text-emerald-600'
+    },
+    {
+      icon: Heart,
+      title: 'Passion for Teaching',
+      description: 'Our instructors are passionate about sharing knowledge and helping you succeed.',
+      badge: 'Passion',
+      color: 'text-rose-600'
+    },
+    {
+      icon: Award,
+      title: 'Industry Recognition',
+      description: 'Get certificates and credentials recognized by top tech companies.',
+      badge: 'Certified',
+      color: 'text-amber-600'
     }
   ];
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section id="features" className="py-24 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
+          <Badge variant="outline" className="mb-4">Features</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Why Choose Vibe Coders?
+            Everything You Need to Build
+            <span className="hero-gradient bg-clip-text text-transparent"> Amazing Apps</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            We provide everything you need to succeed in the no-code world, 
-            from beginner-friendly tutorials to advanced business applications.
+            Our comprehensive platform provides all the tools, resources, and support 
+            you need to create professional applications without coding.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <Card key={index} className="glass-card border-border/50 hover:border-primary/20 transition-all duration-300 group">
-              <CardHeader className="pb-4">
-                <div className="flex items-center justify-between mb-3">
-                  <div className={`p-2 rounded-lg bg-muted/50 ${feature.color}`}>
+              <CardHeader>
+                <div className="flex items-center justify-between mb-4">
+                  <div className={`p-3 rounded-lg bg-background/50 ${feature.color}`}>
                     <feature.icon className="h-6 w-6" />
                   </div>
                   <Badge variant="secondary" className="text-xs">
                     {feature.badge}
                   </Badge>
                 </div>
-                <CardTitle className="text-xl">{feature.title}</CardTitle>
+                <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                  {feature.title}
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </CardContent>
@@ -117,16 +145,26 @@ const FeaturesSection = () => {
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary mb-4">
-            <Zap className="h-4 w-4" />
-            Join 10,000+ Happy Students
+        {/* Stats Section */}
+        <div className="mt-20 pt-16 border-t border-border">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">500+</div>
+              <div className="text-sm text-muted-foreground">Templates Available</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">50k+</div>
+              <div className="text-sm text-muted-foreground">Apps Created</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">99.9%</div>
+              <div className="text-sm text-muted-foreground">Uptime</div>
+            </div>
+            <div>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">24/7</div>
+              <div className="text-sm text-muted-foreground">Support</div>
+            </div>
           </div>
-          <h3 className="text-2xl font-bold mb-4">Ready to Start Your No-Code Journey?</h3>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-            Join thousands of students who have transformed their careers with our comprehensive no-code courses.
-          </p>
         </div>
       </div>
     </section>
