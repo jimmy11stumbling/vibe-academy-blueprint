@@ -1,491 +1,418 @@
 
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
 import { 
   Play, 
   Clock, 
   Users, 
   Star, 
-  Download, 
-  Certificate, 
-  CheckCircle, 
-  PlayCircle,
-  FileText,
+  BookOpen, 
   Award,
-  Globe,
-  Smartphone,
-  Code
+  CheckCircle, 
+  Lock, 
+  Download,
+  MessageCircle,
+  ThumbsUp,
+  Share2
 } from 'lucide-react';
 
 const CourseDetail = () => {
   const { id } = useParams();
-  const [enrolledLessons, setEnrolledLessons] = useState<number[]>([]);
+  const [enrolledModules, setEnrolledModules] = useState<number[]>([1, 2]);
+  const [completedLessons, setCompletedLessons] = useState<number[]>([1, 2, 3]);
 
-  // Mock course data - in real app this would come from API
+  // Mock course data
   const course = {
-    id: 1,
-    title: 'Complete Bubble Bootcamp',
-    subtitle: 'Master No-Code Web App Development',
-    description: 'Build powerful web applications without writing a single line of code. This comprehensive course takes you from absolute beginner to advanced Bubble developer.',
-    longDescription: 'In this intensive bootcamp, you\'ll learn everything you need to know about Bubble, the world\'s most popular no-code platform. We\'ll start with the fundamentals and work our way up to building complex, real-world applications that you can actually deploy and monetize.',
-    instructor: {
-      name: 'Sarah Johnson',
-      avatar: 'SJ',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
-      bio: 'Senior No-Code Developer with 5+ years experience building applications for Fortune 500 companies.',
-      rating: 4.9,
-      students: 15420,
-      courses: 12
-    },
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=600&fit=crop',
-    level: 'Beginner to Advanced',
-    duration: '12 hours',
-    students: 2847,
+    id: parseInt(id || '1'),
+    title: 'Complete No-Code Web Development',
+    description: 'Master the art of building powerful web applications without writing a single line of code. Learn Bubble, Webflow, Airtable and more.',
+    instructor: 'Sarah Chen',
+    instructorAvatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    instructorBio: 'Senior No-Code Developer with 8+ years of experience building scalable applications.',
     rating: 4.9,
-    reviews: 356,
-    price: 149,
-    originalPrice: 299,
+    reviews: 234,
+    students: 1250,
+    duration: '12 hours',
+    lessons: 45,
+    level: 'Beginner to Advanced',
+    price: 99,
+    originalPrice: 199,
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop',
+    tags: ['No-Code', 'Web Development', 'Bubble', 'Webflow'],
+    lastUpdated: '2024-01-15',
     language: 'English',
-    lastUpdated: 'December 2024',
-    features: [
-      'Lifetime access to course materials',
-      'Certificate of completion',
-      'Direct instructor support',
-      '30-day money-back guarantee',
-      'Mobile and desktop access',
-      'Downloadable resources'
-    ],
-    skills: [
-      'Bubble fundamentals',
-      'Database design',
-      'User authentication',
-      'API integrations',
-      'Responsive design',
-      'App deployment'
-    ],
-    curriculum: [
-      {
-        id: 1,
-        title: 'Introduction to Bubble',
-        lessons: [
-          { id: 1, title: 'Welcome to the Course', duration: '5:30', type: 'video', isPreview: true },
-          { id: 2, title: 'Setting up your Bubble Account', duration: '8:15', type: 'video', isPreview: false },
-          { id: 3, title: 'Understanding the Interface', duration: '12:45', type: 'video', isPreview: false },
-          { id: 4, title: 'Your First App', duration: '15:30', type: 'practical', isPreview: false }
-        ]
-      },
-      {
-        id: 2,
-        title: 'Design Fundamentals',
-        lessons: [
-          { id: 5, title: 'Elements and Styling', duration: '18:20', type: 'video', isPreview: false },
-          { id: 6, title: 'Responsive Design Principles', duration: '22:10', type: 'video', isPreview: false },
-          { id: 7, title: 'Building Your First Page', duration: '25:45', type: 'practical', isPreview: false },
-          { id: 8, title: 'Design Challenge', duration: '30:00', type: 'assignment', isPreview: false }
-        ]
-      },
-      {
-        id: 3,
-        title: 'Database & Data Types',
-        lessons: [
-          { id: 9, title: 'Understanding Databases', duration: '16:30', type: 'video', isPreview: false },
-          { id: 10, title: 'Creating Data Types', duration: '20:15', type: 'video', isPreview: false },
-          { id: 11, title: 'Data Relationships', duration: '24:20', type: 'video', isPreview: false },
-          { id: 12, title: 'Database Project', duration: '35:00', type: 'project', isPreview: false }
-        ]
-      },
-      {
-        id: 4,
-        title: 'User Authentication',
-        lessons: [
-          { id: 13, title: 'Sign Up & Login Flows', duration: '19:45', type: 'video', isPreview: false },
-          { id: 14, title: 'User Profiles', duration: '17:30', type: 'video', isPreview: false },
-          { id: 15, title: 'Privacy & Security', duration: '14:20', type: 'video', isPreview: false },
-          { id: 16, title: 'Auth Implementation', duration: '28:15', type: 'practical', isPreview: false }
-        ]
-      },
-      {
-        id: 5,
-        title: 'Advanced Features',
-        lessons: [
-          { id: 17, title: 'API Integrations', duration: '26:30', type: 'video', isPreview: false },
-          { id: 18, title: 'Workflows & Logic', duration: '32:45', type: 'video', isPreview: false },
-          { id: 19, title: 'Payment Integration', duration: '24:15', type: 'video', isPreview: false },
-          { id: 20, title: 'Final Project', duration: '60:00', type: 'project', isPreview: false }
-        ]
-      }
-    ]
+    captions: true,
+    certificate: true,
+    enrolled: false
   };
 
-  const handleEnrollLesson = (lessonId: number) => {
-    setEnrolledLessons(prev => [...prev, lessonId]);
-  };
-
-  const getLessonIcon = (type: string) => {
-    switch (type) {
-      case 'video': return <PlayCircle className="h-4 w-4" />;
-      case 'practical': return <Code className="h-4 w-4" />;
-      case 'assignment': return <FileText className="h-4 w-4" />;
-      case 'project': return <Award className="h-4 w-4" />;
-      default: return <PlayCircle className="h-4 w-4" />;
+  const modules = [
+    {
+      id: 1,
+      title: 'Introduction to No-Code',
+      lessons: 8,
+      duration: '2 hours',
+      description: 'Get started with no-code fundamentals',
+      locked: false,
+      lessons_detail: [
+        { id: 1, title: 'What is No-Code?', duration: '15 min', completed: true },
+        { id: 2, title: 'No-Code vs Traditional Coding', duration: '20 min', completed: true },
+        { id: 3, title: 'Choosing the Right Platform', duration: '25 min', completed: true },
+        { id: 4, title: 'Setting Up Your Workspace', duration: '18 min', completed: false }
+      ]
+    },
+    {
+      id: 2,
+      title: 'Bubble Fundamentals',
+      lessons: 12,
+      duration: '3 hours',
+      description: 'Master Bubble.io for web app development',
+      locked: false,
+      lessons_detail: [
+        { id: 5, title: 'Bubble Interface Overview', duration: '22 min', completed: false },
+        { id: 6, title: 'Creating Your First App', duration: '35 min', completed: false },
+        { id: 7, title: 'Database Design', duration: '28 min', completed: false }
+      ]
+    },
+    {
+      id: 3,
+      title: 'Advanced Webflow',
+      lessons: 15,
+      duration: '4 hours',
+      description: 'Build responsive websites with Webflow',
+      locked: true,
+      lessons_detail: []
     }
+  ];
+
+  const reviews = [
+    {
+      id: 1,
+      user: 'Alex Johnson',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+      rating: 5,
+      comment: 'Excellent course! The instructor explains everything clearly and the projects are very practical.',
+      date: '2024-01-10',
+      helpful: 24
+    },
+    {
+      id: 2,
+      user: 'Maria Garcia',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+      rating: 5,
+      comment: 'This course completely changed my approach to web development. Highly recommended!',
+      date: '2024-01-08',
+      helpful: 18
+    }
+  ];
+
+  const handleEnrollment = () => {
+    console.log('Enrolling in course:', course.id);
+    // Enrollment logic would go here
   };
 
-  const totalLessons = course.curriculum.reduce((acc, section) => acc + section.lessons.length, 0);
-  const completedLessons = enrolledLessons.length;
-  const progressPercentage = (completedLessons / totalLessons) * 100;
+  const toggleLessonComplete = (lessonId: number) => {
+    setCompletedLessons(prev => 
+      prev.includes(lessonId) 
+        ? prev.filter(id => id !== lessonId)
+        : [...prev, lessonId]
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <main className="pt-16">
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-primary/10 via-background to-secondary/10 py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Course Info */}
-              <div className="lg:col-span-2">
-                <Badge variant="secondary" className="mb-4">{course.level}</Badge>
-                <h1 className="text-4xl font-bold mb-4">{course.title}</h1>
-                <p className="text-xl text-muted-foreground mb-6">{course.subtitle}</p>
-                <p className="text-lg leading-relaxed mb-6">{course.description}</p>
-                
-                {/* Stats */}
-                <div className="flex flex-wrap gap-6 mb-6">
-                  <div className="flex items-center gap-2">
-                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                    <span className="font-semibold">{course.rating}</span>
-                    <span className="text-muted-foreground">({course.reviews} reviews)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4 text-muted-foreground" />
-                    <span>{course.students.toLocaleString()} students</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-muted-foreground" />
-                    <span>{course.duration}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Globe className="h-4 w-4 text-muted-foreground" />
-                    <span>{course.language}</span>
-                  </div>
+      <main className="pt-24 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Course Header */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div className="lg:col-span-2">
+              <div className="mb-4">
+                <Link to="/courses" className="text-primary hover:underline text-sm">
+                  ← Back to Courses
+                </Link>
+              </div>
+              
+              <h1 className="text-4xl font-bold mb-4">{course.title}</h1>
+              <p className="text-xl text-muted-foreground mb-6">{course.description}</p>
+              
+              <div className="flex items-center gap-6 mb-6">
+                <div className="flex items-center gap-2">
+                  <Star className="h-5 w-5 text-yellow-500 fill-current" />
+                  <span className="font-semibold">{course.rating}</span>
+                  <span className="text-muted-foreground">({course.reviews} reviews)</span>
                 </div>
-
-                {/* Instructor */}
-                <div className="flex items-center gap-4 p-4 glass-card rounded-lg border border-border/50">
-                  <Avatar className="h-12 w-12">
-                    <AvatarImage src={course.instructor.image} alt={course.instructor.name} />
-                    <AvatarFallback className="hero-gradient text-white">
-                      {course.instructor.avatar}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h3 className="font-semibold">{course.instructor.name}</h3>
-                    <p className="text-sm text-muted-foreground">{course.instructor.bio}</p>
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground mt-1">
-                      <span>{course.instructor.rating} ⭐ instructor rating</span>
-                      <span>{course.instructor.students.toLocaleString()} students</span>
-                      <span>{course.instructor.courses} courses</span>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-muted-foreground" />
+                  <span>{course.students} students</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-muted-foreground" />
+                  <span>{course.duration}</span>
                 </div>
               </div>
 
-              {/* Course Preview Card */}
-              <div className="lg:col-span-1">
-                <Card className="glass-card border-border/50 sticky top-24">
-                  <div className="aspect-video bg-muted rounded-t-lg overflow-hidden relative">
-                    <img 
-                      src={course.image} 
-                      alt={course.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                      <Button size="lg" className="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30">
-                        <Play className="h-6 w-6 mr-2" />
-                        Preview Course
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <CardContent className="p-6">
-                    <div className="text-center mb-6">
-                      <div className="flex items-center justify-center gap-2 mb-2">
-                        <span className="text-3xl font-bold">${course.price}</span>
-                        <span className="text-lg text-muted-foreground line-through">${course.originalPrice}</span>
-                      </div>
-                      <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                        50% Off Limited Time
-                      </Badge>
-                    </div>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {course.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary">{tag}</Badge>
+                ))}
+              </div>
 
-                    <Button size="lg" className="w-full hero-gradient text-white hover:opacity-90 mb-4">
-                      Enroll Now
-                    </Button>
-                    
-                    <p className="text-xs text-center text-muted-foreground mb-4">
-                      30-day money-back guarantee
-                    </p>
-
-                    {/* What's Included */}
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-sm">This course includes:</h4>
-                      {course.features.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2 text-sm">
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                          <span>{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+              <div className="aspect-video bg-muted rounded-lg overflow-hidden mb-8">
+                <img 
+                  src={course.image} 
+                  alt={course.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Course Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <Tabs defaultValue="curriculum" className="space-y-8">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="curriculum">Curriculum</TabsTrigger>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="instructor">Instructor</TabsTrigger>
-              <TabsTrigger value="reviews">Reviews</TabsTrigger>
-            </TabsList>
-
-            {/* Curriculum Tab */}
-            <TabsContent value="curriculum" className="space-y-6">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold">Course Curriculum</h2>
-                <div className="text-sm text-muted-foreground">
-                  {totalLessons} lessons • {course.duration} total
-                </div>
-              </div>
-
-              {/* Progress */}
-              {enrolledLessons.length > 0 && (
-                <Card className="glass-card border-border/50">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-semibold">Your Progress</span>
-                      <span className="text-sm text-muted-foreground">
-                        {completedLessons}/{totalLessons} lessons completed
+            {/* Enrollment Card */}
+            <div className="lg:col-span-1">
+              <Card className="sticky top-24">
+                <CardContent className="p-6">
+                  <div className="text-center mb-6">
+                    <div className="text-3xl font-bold mb-2">
+                      ${course.price}
+                      <span className="text-lg text-muted-foreground line-through ml-2">
+                        ${course.originalPrice}
                       </span>
                     </div>
-                    <Progress value={progressPercentage} className="mb-2" />
-                    <p className="text-sm text-muted-foreground">
-                      {Math.round(progressPercentage)}% complete
-                    </p>
-                  </CardContent>
-                </Card>
-              )}
+                    <Badge variant="destructive" className="mb-4">
+                      50% OFF - Limited Time
+                    </Badge>
+                  </div>
 
-              {/* Sections */}
-              <div className="space-y-4">
-                {course.curriculum.map((section) => (
-                  <Card key={section.id} className="glass-card border-border/50">
+                  <Button 
+                    size="lg" 
+                    className="w-full hero-gradient text-white hover:opacity-90 mb-4"
+                    onClick={handleEnrollment}
+                  >
+                    Enroll Now
+                  </Button>
+
+                  <div className="space-y-3 text-sm">
+                    <div className="flex items-center gap-2">
+                      <BookOpen className="h-4 w-4 text-muted-foreground" />
+                      <span>{course.lessons} lessons</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-4 w-4 text-muted-foreground" />
+                      <span>{course.duration} total</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Award className="h-4 w-4 text-muted-foreground" />
+                      <span>Certificate of completion</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Download className="h-4 w-4 text-muted-foreground" />
+                      <span>Downloadable resources</span>
+                    </div>
+                  </div>
+
+                  <Separator className="my-6" />
+
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-12 w-12">
+                      <AvatarImage src={course.instructorAvatar} alt={course.instructor} />
+                      <AvatarFallback>SC</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <div className="font-semibold">{course.instructor}</div>
+                      <div className="text-sm text-muted-foreground">Instructor</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* Course Content Tabs */}
+          <Tabs defaultValue="curriculum" className="w-full">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="curriculum">Curriculum</TabsTrigger>
+              <TabsTrigger value="instructor">Instructor</TabsTrigger>
+              <TabsTrigger value="reviews">Reviews</TabsTrigger>
+              <TabsTrigger value="faq">FAQ</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="curriculum" className="mt-8">
+              <div className="space-y-6">
+                {modules.map((module) => (
+                  <Card key={module.id} className="overflow-hidden">
                     <CardHeader>
-                      <CardTitle className="text-lg">{section.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                      {section.lessons.map((lesson) => (
-                        <div 
-                          key={lesson.id} 
-                          className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/50 transition-colors"
-                        >
-                          <div className="flex items-center gap-3">
-                            {getLessonIcon(lesson.type)}
-                            <div>
-                              <h4 className="font-medium">{lesson.title}</h4>
-                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                <span>{lesson.duration}</span>
-                                <Badge variant="outline" className="text-xs">
-                                  {lesson.type}
-                                </Badge>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            {enrolledLessons.includes(lesson.id) && (
-                              <CheckCircle className="h-4 w-4 text-green-500" />
-                            )}
-                            {lesson.isPreview ? (
-                              <Button size="sm" variant="outline">
-                                Preview
-                              </Button>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <CardTitle className="flex items-center gap-2">
+                            {module.locked ? (
+                              <Lock className="h-5 w-5 text-muted-foreground" />
                             ) : (
-                              <Button 
-                                size="sm" 
-                                onClick={() => handleEnrollLesson(lesson.id)}
-                                disabled={enrolledLessons.includes(lesson.id)}
-                              >
-                                {enrolledLessons.includes(lesson.id) ? 'Completed' : 'Start'}
-                              </Button>
+                              <Play className="h-5 w-5 text-primary" />
                             )}
-                          </div>
+                            {module.title}
+                          </CardTitle>
+                          <p className="text-muted-foreground mt-1">{module.description}</p>
                         </div>
-                      ))}
-                    </CardContent>
+                        <div className="text-right text-sm text-muted-foreground">
+                          <div>{module.lessons} lessons</div>
+                          <div>{module.duration}</div>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    
+                    {!module.locked && module.lessons_detail.length > 0 && (
+                      <CardContent className="pt-0">
+                        <div className="space-y-2">
+                          {module.lessons_detail.map((lesson) => (
+                            <div 
+                              key={lesson.id}
+                              className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/50 transition-colors"
+                            >
+                              <div className="flex items-center gap-3">
+                                <button
+                                  onClick={() => toggleLessonComplete(lesson.id)}
+                                  className="flex-shrink-0"
+                                >
+                                  {lesson.completed ? (
+                                    <CheckCircle className="h-5 w-5 text-green-500" />
+                                  ) : (
+                                    <Play className="h-5 w-5 text-muted-foreground hover:text-primary" />
+                                  )}
+                                </button>
+                                <span className={lesson.completed ? 'line-through text-muted-foreground' : ''}>
+                                  {lesson.title}
+                                </span>
+                              </div>
+                              <span className="text-sm text-muted-foreground">
+                                {lesson.duration}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    )}
                   </Card>
                 ))}
               </div>
             </TabsContent>
 
-            {/* Overview Tab */}
-            <TabsContent value="overview" className="space-y-6">
-              <div>
-                <h2 className="text-2xl font-bold mb-4">Course Overview</h2>
-                <p className="text-lg leading-relaxed mb-6">{course.longDescription}</p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4">What you'll learn</h3>
-                    <div className="space-y-2">
-                      {course.skills.map((skill, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                          <span>{skill}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4">Course Details</h3>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-muted-foreground" />
-                        <span>{course.duration} on-demand video</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Smartphone className="h-4 w-4 text-muted-foreground" />
-                        <span>Access on mobile and TV</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Download className="h-4 w-4 text-muted-foreground" />
-                        <span>Downloadable resources</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Certificate className="h-4 w-4 text-muted-foreground" />
-                        <span>Certificate of completion</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-
-            {/* Instructor Tab */}
-            <TabsContent value="instructor" className="space-y-6">
-              <Card className="glass-card border-border/50">
-                <CardContent className="p-8">
+            <TabsContent value="instructor" className="mt-8">
+              <Card>
+                <CardContent className="p-6">
                   <div className="flex items-start gap-6">
                     <Avatar className="h-24 w-24">
-                      <AvatarImage src={course.instructor.image} alt={course.instructor.name} />
-                      <AvatarFallback className="hero-gradient text-white text-xl">
-                        {course.instructor.avatar}
-                      </AvatarFallback>
+                      <AvatarImage src={course.instructorAvatar} alt={course.instructor} />
+                      <AvatarFallback className="text-2xl">SC</AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
-                      <h2 className="text-2xl font-bold mb-2">{course.instructor.name}</h2>
-                      <p className="text-lg text-muted-foreground mb-4">{course.instructor.bio}</p>
-                      
-                      <div className="grid grid-cols-3 gap-6 mb-6">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold">{course.instructor.rating}</div>
-                          <div className="text-sm text-muted-foreground">Instructor Rating</div>
+                      <h3 className="text-2xl font-bold mb-2">{course.instructor}</h3>
+                      <p className="text-muted-foreground mb-4">{course.instructorBio}</p>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div>
+                          <div className="text-2xl font-bold">4.9</div>
+                          <div className="text-sm text-muted-foreground">Rating</div>
                         </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold">{course.instructor.students.toLocaleString()}</div>
+                        <div>
+                          <div className="text-2xl font-bold">1,250</div>
                           <div className="text-sm text-muted-foreground">Students</div>
                         </div>
-                        <div className="text-center">
-                          <div className="text-2xl font-bold">{course.instructor.courses}</div>
+                        <div>
+                          <div className="text-2xl font-bold">12</div>
                           <div className="text-sm text-muted-foreground">Courses</div>
                         </div>
+                        <div>
+                          <div className="text-2xl font-bold">5+</div>
+                          <div className="text-sm text-muted-foreground">Years</div>
+                        </div>
                       </div>
-                      
-                      <Button variant="outline">View Profile</Button>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            {/* Reviews Tab */}
-            <TabsContent value="reviews" className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                  <h2 className="text-2xl font-bold mb-4">Student Reviews</h2>
-                  <div className="text-center p-6 glass-card rounded-lg border border-border/50">
-                    <div className="text-4xl font-bold mb-2">{course.rating}</div>
-                    <div className="flex justify-center mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <div className="text-sm text-muted-foreground">{course.reviews} reviews</div>
+            <TabsContent value="reviews" className="mt-8">
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold">Student Reviews</h3>
+                  <div className="flex items-center gap-2">
+                    <Star className="h-5 w-5 text-yellow-500 fill-current" />
+                    <span className="font-semibold">{course.rating}</span>
+                    <span className="text-muted-foreground">({course.reviews} reviews)</span>
                   </div>
                 </div>
-                
-                <div className="md:col-span-2">
-                  <div className="space-y-4">
-                    {/* Sample reviews - in real app these would come from API */}
-                    {[
-                      {
-                        id: 1,
-                        name: 'John Smith',
-                        rating: 5,
-                        date: '2 weeks ago',
-                        comment: 'Excellent course! Sarah explains everything clearly and the projects are very practical. I built my first app and it\'s already live!'
-                      },
-                      {
-                        id: 2,
-                        name: 'Maria Garcia',
-                        rating: 5,
-                        date: '1 month ago',
-                        comment: 'Best no-code course I\'ve taken. The curriculum is well-structured and I love the hands-on approach. Highly recommended!'
-                      },
-                      {
-                        id: 3,
-                        name: 'David Chen',
-                        rating: 4,
-                        date: '2 months ago',
-                        comment: 'Great content and instructor. Could use more advanced topics but perfect for beginners to intermediate level.'
-                      }
-                    ].map((review) => (
-                      <Card key={review.id} className="glass-card border-border/50">
-                        <CardContent className="p-4">
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <h4 className="font-semibold">{review.name}</h4>
-                              <div className="flex items-center gap-2">
-                                <div className="flex">
-                                  {[...Array(review.rating)].map((_, i) => (
-                                    <Star key={i} className="h-3 w-3 text-yellow-400 fill-current" />
-                                  ))}
-                                </div>
-                                <span className="text-xs text-muted-foreground">{review.date}</span>
+
+                <div className="space-y-6">
+                  {reviews.map((review) => (
+                    <Card key={review.id}>
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <Avatar>
+                            <AvatarImage src={review.avatar} alt={review.user} />
+                            <AvatarFallback>{review.user.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="font-semibold">{review.user}</span>
+                              <div className="flex items-center">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star 
+                                    key={i} 
+                                    className={`h-4 w-4 ${i < review.rating ? 'text-yellow-500 fill-current' : 'text-muted-foreground'}`} 
+                                  />
+                                ))}
                               </div>
+                              <span className="text-sm text-muted-foreground">{review.date}</span>
+                            </div>
+                            <p className="text-muted-foreground mb-3">{review.comment}</p>
+                            <div className="flex items-center gap-4">
+                              <button className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors">
+                                <ThumbsUp className="h-4 w-4" />
+                                <span className="text-sm">{review.helpful}</span>
+                              </button>
+                              <button className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors">
+                                <MessageCircle className="h-4 w-4" />
+                                <span className="text-sm">Reply</span>
+                              </button>
                             </div>
                           </div>
-                          <p className="text-sm leading-relaxed">{review.comment}</p>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </div>
+            </TabsContent>
+
+            <TabsContent value="faq" className="mt-8">
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold mb-6">Frequently Asked Questions</h3>
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="font-semibold mb-2">Is this course suitable for complete beginners?</h4>
+                      <p className="text-muted-foreground">Yes! This course is designed for complete beginners with no prior coding experience. We start from the very basics and gradually build up to more advanced concepts.</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2">How long do I have access to the course?</h4>
+                      <p className="text-muted-foreground">You have lifetime access to the course content, including all future updates and additions.</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-2">Do I get a certificate upon completion?</h4>
+                      <p className="text-muted-foreground">Yes, you'll receive a certificate of completion that you can add to your LinkedIn profile or resume.</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>
