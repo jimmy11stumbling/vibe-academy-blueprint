@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -10,8 +9,8 @@ const CoursesSection = () => {
   const courses = [
     {
       id: 1,
-      title: 'Complete Bubble Bootcamp',
-      description: 'Master Bubble from basics to advanced features. Build 5 real-world applications including a marketplace and SaaS platform.',
+      title: 'Master Lovable Development',
+      description: 'Learn to build full-stack web applications using Lovable\'s AI-powered platform. From chat prompts to deployed apps.',
       instructor: 'Sarah Johnson',
       instructorAvatar: 'SJ',
       instructorImage: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
@@ -24,12 +23,12 @@ const CoursesSection = () => {
       price: '$149',
       originalPrice: '$299',
       isPopular: true,
-      tags: ['Bubble', 'Web Apps', 'Database']
+      tags: ['Lovable', 'Full-Stack', 'AI-Powered']
     },
     {
       id: 2,
-      title: 'Webflow Masterclass',
-      description: 'Design and develop stunning websites with Webflow. Learn responsive design, CMS, and e-commerce integration.',
+      title: 'Replit Collaborative Coding',
+      description: 'Master the collaborative in-browser IDE. Build, share, and deploy applications with real-time collaboration features.',
       instructor: 'Mike Chen',
       instructorAvatar: 'MC',
       instructorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
@@ -42,17 +41,17 @@ const CoursesSection = () => {
       price: '$99',
       originalPrice: '$199',
       isPopular: false,
-      tags: ['Webflow', 'Design', 'CMS']
+      tags: ['Replit', 'Collaboration', 'Cloud IDE']
     },
     {
       id: 3,
-      title: 'Airtable & Zapier Automation',
-      description: 'Automate your workflows with powerful integrations. Build custom business processes without code.',
+      title: 'Cursor AI-First Development',
+      description: 'Supercharge your coding with Cursor\'s AI-powered IDE. Learn codebase-aware chat and predictive editing.',
       instructor: 'Emma Davis',
       instructorAvatar: 'ED',
       instructorImage: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop',
-      level: 'Beginner',
+      level: 'Advanced',
       duration: '6 hours',
       students: 1456,
       rating: 4.7,
@@ -60,17 +59,17 @@ const CoursesSection = () => {
       price: '$79',
       originalPrice: '$159',
       isPopular: false,
-      tags: ['Airtable', 'Zapier', 'Automation']
+      tags: ['Cursor', 'AI IDE', 'VS Code']
     },
     {
       id: 4,
-      title: 'No-Code Mobile Apps',
-      description: 'Build native mobile apps using Glide and FlutterFlow. Deploy to iOS and Android app stores.',
+      title: 'Windsurf Agentic Coding',
+      description: 'Master enterprise-grade agentic coding with Windsurf. Build complex multi-file projects with AI automation.',
       instructor: 'Alex Rodriguez',
       instructorAvatar: 'AR',
       instructorImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=450&fit=crop',
-      level: 'Intermediate',
+      level: 'Advanced',
       duration: '10 hours',
       students: 987,
       rating: 4.8,
@@ -78,17 +77,17 @@ const CoursesSection = () => {
       price: '$129',
       originalPrice: '$259',
       isPopular: true,
-      tags: ['Mobile', 'Glide', 'FlutterFlow']
+      tags: ['Windsurf', 'Enterprise', 'Agentic AI']
     },
     {
       id: 5,
-      title: 'AI-Powered No-Code Apps',
-      description: 'Integration AI capabilities into your no-code applications. Use GPT, image recognition, and more.',
+      title: 'Bolt Full-Stack WebContainers',
+      description: 'Build complete applications in the browser using Bolt\'s WebContainer technology and AI agent capabilities.',
       instructor: 'Dr. Lisa Park',
       instructorAvatar: 'LP',
       instructorImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face',
       image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop',
-      level: 'Advanced',
+      level: 'Intermediate',
       duration: '9 hours',
       students: 743,
       rating: 4.9,
@@ -96,17 +95,17 @@ const CoursesSection = () => {
       price: '$199',
       originalPrice: '$399',
       isPopular: false,
-      tags: ['AI', 'OpenAI', 'Machine Learning']
+      tags: ['Bolt', 'WebContainers', 'StackBlitz']
     },
     {
       id: 6,
-      title: 'E-commerce with No-Code',
-      description: 'Build complete online stores using Shopify, Webflow Ecommerce, and payment integrations.',
+      title: 'Claude Code Security-First CLI',
+      description: 'Master terminal-based development with Claude Code. Learn secure, agentic coding with explicit control.',
       instructor: 'Tom Wilson',
       instructorAvatar: 'TW',
       instructorImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
       image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=450&fit=crop',
-      level: 'Beginner to Intermediate',
+      level: 'Advanced',
       duration: '11 hours',
       students: 1678,
       rating: 4.6,
@@ -114,7 +113,79 @@ const CoursesSection = () => {
       price: '$139',
       originalPrice: '$279',
       isPopular: false,
-      tags: ['E-commerce', 'Shopify', 'Payments']
+      tags: ['Claude Code', 'CLI', 'Security']
+    },
+    {
+      id: 7,
+      title: 'Gemini CLI Open-Source Development',
+      description: 'Harness Google\'s Gemini CLI for terminal-based AI development. Learn codebase analysis and command execution.',
+      instructor: 'Jennifer Lee',
+      instructorAvatar: 'JL',
+      instructorImage: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=450&fit=crop',
+      level: 'Intermediate',
+      duration: '7 hours',
+      students: 567,
+      rating: 4.8,
+      reviews: 87,
+      price: '$119',
+      originalPrice: '$239',
+      isPopular: false,
+      tags: ['Gemini CLI', 'Google', 'Open Source']
+    },
+    {
+      id: 8,
+      title: 'Base44 All-in-One App Building',
+      description: 'Create complete applications with Base44\'s integrated platform. From database to deployment in one place.',
+      instructor: 'Ryan Taylor',
+      instructorAvatar: 'RT',
+      instructorImage: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face',
+      image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=450&fit=crop',
+      level: 'Beginner',
+      duration: '5 hours',
+      students: 2134,
+      rating: 4.7,
+      reviews: 312,
+      price: '$69',
+      originalPrice: '$139',
+      isPopular: true,
+      tags: ['Base44', 'All-in-One', 'Wix']
+    },
+    {
+      id: 9,
+      title: 'V0 UI Generation with Vercel',
+      description: 'Master generative UI design with V0. Create React components from prompts and images using Vercel\'s platform.',
+      instructor: 'Maria Garcia',
+      instructorAvatar: 'MG',
+      instructorImage: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop',
+      level: 'Intermediate',
+      duration: '6 hours',
+      students: 1245,
+      rating: 4.8,
+      reviews: 178,
+      price: '$89',
+      originalPrice: '$179',
+      isPopular: false,
+      tags: ['V0', 'UI Generation', 'Vercel']
+    },
+    {
+      id: 10,
+      title: 'Rork Mobile App Development',
+      description: 'Build native cross-platform mobile apps with Rork. Learn React Native and Expo development through AI assistance.',
+      instructor: 'David Kim',
+      instructorAvatar: 'DK',
+      instructorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=450&fit=crop',
+      level: 'Intermediate',
+      duration: '8 hours',
+      students: 892,
+      rating: 4.5,
+      reviews: 124,
+      price: '$109',
+      originalPrice: '$219',
+      isPopular: false,
+      tags: ['Rork', 'Mobile Apps', 'React Native']
     }
   ];
 
@@ -136,7 +207,7 @@ const CoursesSection = () => {
         </div>
 
         {/* Course Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {courses.map((course) => (
             <Card key={course.id} className="glass-card border-border/50 hover:border-primary/20 transition-all duration-300 group relative">
               {course.isPopular && (
