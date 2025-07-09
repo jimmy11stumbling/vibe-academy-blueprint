@@ -152,9 +152,7 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
-            <Badge variant="secondary" className="mb-6 bg-primary/10 text-primary border-primary/20">
-              🚀 Join 25,000+ No-Code Builders
-            </Badge>
+            
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
               Build Apps
