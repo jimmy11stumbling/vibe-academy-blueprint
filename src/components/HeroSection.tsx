@@ -126,11 +126,11 @@ const HeroSection = () => {
                   <span className="text-xs font-medium">Code Preview</span>
                 </div>
                 <div className="space-y-1 text-xs font-mono">
-                  <div className="text-blue-600 dark:text-blue-400">function App() {</div>
+                  <div className="text-blue-600 dark:text-blue-400">function App() {`{`}</div>
                   <div className="text-gray-600 dark:text-gray-400 ml-4">return (</div>
                   <div className="text-green-600 dark:text-green-400 ml-8">&lt;NoCodeApp /&gt;</div>
                   <div className="text-gray-600 dark:text-gray-400 ml-4">)</div>
-                  <div className="text-blue-600 dark:text-blue-400">}</div>
+                  <div className="text-blue-600 dark:text-blue-400">{`}`}</div>
                 </div>
               </div>
             </div>
