@@ -180,15 +180,7 @@ const HeroSection = () => {
 
             {/* Stats */}
             <div className="flex flex-wrap justify-center lg:justify-start gap-8">
-              {stats.map((stat, index) => <div key={index} className="flex items-center gap-2">
-                  <div className="p-2 rounded-full bg-primary/10">
-                    <stat.icon className="h-4 w-4 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-bold">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </div>
-                </div>)}
+              {stats.map((stat, index) => {})}
             </div>
           </div>
 
