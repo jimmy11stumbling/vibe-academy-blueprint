@@ -215,15 +215,7 @@ const CoursesSection = () => {
                   {course.description}
                 </p>
                 
-                <div className="flex items-center gap-2 mb-3">
-                  <Avatar className="h-6 w-6">
-                    <AvatarImage src={course.instructorImage} alt={course.instructor} />
-                    <AvatarFallback className="text-xs hero-gradient text-white">
-                      {course.instructorAvatar}
-                    </AvatarFallback>
-                  </Avatar>
-                  <span className="text-sm font-medium">{course.instructor}</span>
-                </div>
+                
 
                 <div className="flex flex-wrap gap-1 mb-3">
                   {course.tags.map(tag => <Badge key={tag} variant="outline" className="text-xs">
