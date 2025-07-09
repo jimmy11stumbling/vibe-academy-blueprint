@@ -1,10 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Play, ArrowRight, Star, Users, BookOpen, Terminal, Code, Zap, Activity, Wifi, Download, Upload, GitBranch, Database, Layers, FileText, CheckCircle, Clock, Cpu } from 'lucide-react';
-
 const HeroSection = () => {
   const [buildProgress, setBuildProgress] = useState(0);
   const [currentCommand, setCurrentCommand] = useState('');
@@ -15,55 +13,23 @@ const HeroSection = () => {
   const [deployProgress, setDeployProgress] = useState(0);
   const [filesUpdated, setFilesUpdated] = useState(0);
   const [currentStep, setCurrentStep] = useState('Initializing...');
-
-  const stats = [
-    { icon: Users, value: '25,000+', label: 'Students' },
-    { icon: BookOpen, value: '200+', label: 'Courses' },
-    { icon: Star, value: '4.9/5', label: 'Rating' }
-  ];
-
-  const commands = [
-    'npm create no-code-app@latest',
-    'cd no-code-app',
-    'npm install --stream',
-    'npm run dev --hot-reload',
-    'git add . && git commit -m "feat: streaming updates"',
-    'npm run build --watch',
-    'npm run deploy --live'
-  ];
-
-  const codeSteps = [
-    'import { NoCodeBuilder } from "@/components/Builder"',
-    'const [components, setComponents] = useState([])',
-    'const handleDragDrop = (component) => {',
-    '  setComponents([...components, component])',
-    '  streamUpdate("component-added", component)',
-    '}',
-    'return <NoCodeBuilder onUpdate={handleDragDrop} />'
-  ];
-
-  const buildSteps = [
-    'Initializing build system...',
-    'Installing dependencies...',
-    'Compiling TypeScript...',
-    'Optimizing components...',
-    'Generating build files...',
-    'Running tests...',
-    'Deploying to production...',
-    'Build complete! 🚀'
-  ];
-
-  const logMessages = [
-    '✅ Component library loaded',
-    '🔄 Hot reload enabled',
-    '📦 Bundle size: 234KB',
-    '⚡ Performance score: 98/100',
-    '🔒 Security scan passed',
-    '🌐 CDN cache updated',
-    '📊 Analytics connected',
-    '🚀 Deployment successful'
-  ];
-
+  const stats = [{
+    icon: Users,
+    value: '25,000+',
+    label: 'Students'
+  }, {
+    icon: BookOpen,
+    value: '200+',
+    label: 'Courses'
+  }, {
+    icon: Star,
+    value: '4.9/5',
+    label: 'Rating'
+  }];
+  const commands = ['npm create no-code-app@latest', 'cd no-code-app', 'npm install --stream', 'npm run dev --hot-reload', 'git add . && git commit -m "feat: streaming updates"', 'npm run build --watch', 'npm run deploy --live'];
+  const codeSteps = ['import { NoCodeBuilder } from "@/components/Builder"', 'const [components, setComponents] = useState([])', 'const handleDragDrop = (component) => {', '  setComponents([...components, component])', '  streamUpdate("component-added", component)', '}', 'return <NoCodeBuilder onUpdate={handleDragDrop} />'];
+  const buildSteps = ['Initializing build system...', 'Installing dependencies...', 'Compiling TypeScript...', 'Optimizing components...', 'Generating build files...', 'Running tests...', 'Deploying to production...', 'Build complete! 🚀'];
+  const logMessages = ['✅ Component library loaded', '🔄 Hot reload enabled', '📦 Bundle size: 234KB', '⚡ Performance score: 98/100', '🔒 Security scan passed', '🌐 CDN cache updated', '📊 Analytics connected', '🚀 Deployment successful'];
   useEffect(() => {
     const intervals = [];
 
@@ -82,7 +48,7 @@ const HeroSection = () => {
           commandIndex++;
           charIndex = 0;
           setCurrentCommand('');
-          
+
           // Add some output for the command
           setTimeout(() => {
             const outputs = {
@@ -94,7 +60,6 @@ const HeroSection = () => {
               'npm run build --watch': ['🔨 Building for production...', '📊 Analyzing bundle...', '✅ Build successful'],
               'npm run deploy --live': ['🚀 Deploying to production...', '🌐 Live at: https://app.example.com', '✅ Deployment complete']
             };
-            
             const commandOutputs = outputs[command] || ['✅ Command executed'];
             commandOutputs.forEach((output, index) => {
               setTimeout(() => {
@@ -119,9 +84,7 @@ const HeroSection = () => {
       if (codeIndex < codeSteps.length) {
         const line = codeSteps[codeIndex];
         if (codeCharIndex < line.length) {
-          const currentCode = codeSteps.slice(0, codeIndex).join('\n') + 
-                            (codeIndex > 0 ? '\n' : '') + 
-                            line.slice(0, codeCharIndex + 1);
+          const currentCode = codeSteps.slice(0, codeIndex).join('\n') + (codeIndex > 0 ? '\n' : '') + line.slice(0, codeCharIndex + 1);
           setLiveCode(currentCode);
           codeCharIndex++;
         } else {
@@ -174,14 +137,11 @@ const HeroSection = () => {
       setIsBuilding(prev => !prev);
     }, 8000);
     intervals.push(buildingInterval);
-
     return () => {
       intervals.forEach(clearInterval);
     };
   }, []);
-
-  return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/50 overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/50 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
@@ -222,8 +182,7 @@ const HeroSection = () => {
 
             {/* Stats */}
             <div className="flex flex-wrap justify-center lg:justify-start gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="flex items-center gap-2">
+              {stats.map((stat, index) => <div key={index} className="flex items-center gap-2">
                   <div className="p-2 rounded-full bg-primary/10">
                     <stat.icon className="h-4 w-4 text-primary" />
                   </div>
@@ -231,8 +190,7 @@ const HeroSection = () => {
                     <div className="font-bold">{stat.value}</div>
                     <div className="text-sm text-muted-foreground">{stat.label}</div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
@@ -300,24 +258,13 @@ const HeroSection = () => {
                   </div>
                 </div>
                 <div className="space-y-1 max-h-24 overflow-y-auto">
-                  {cliOutput.slice(-6).map((line, index) => (
-                    <div key={index} className={`${
-                      line.startsWith('$') ? 'text-cyan-400' :
-                      line.includes('✅') ? 'text-green-400' :
-                      line.includes('📦') || line.includes('⬇️') ? 'text-blue-400' :
-                      line.includes('🔥') ? 'text-red-400' :
-                      line.includes('🚀') ? 'text-purple-400' :
-                      'text-gray-300'
-                    }`}>
+                  {cliOutput.slice(-6).map((line, index) => <div key={index} className={`${line.startsWith('$') ? 'text-cyan-400' : line.includes('✅') ? 'text-green-400' : line.includes('📦') || line.includes('⬇️') ? 'text-blue-400' : line.includes('🔥') ? 'text-red-400' : line.includes('🚀') ? 'text-purple-400' : 'text-gray-300'}`}>
                       {line}
-                    </div>
-                  ))}
-                  {currentCommand && (
-                    <div className="text-cyan-400 flex items-center">
+                    </div>)}
+                  {currentCommand && <div className="text-cyan-400 flex items-center">
                       <span>$ {currentCommand}</span>
                       <span className="ml-1 animate-pulse">|</span>
-                    </div>
-                  )}
+                    </div>}
                 </div>
               </div>
 
@@ -362,19 +309,17 @@ const HeroSection = () => {
                   <span className="text-xs font-medium">Live Activity Feed</span>
                 </div>
                 <div className="space-y-1 text-xs max-h-16 overflow-hidden">
-                  {logMessages.slice(0, 3).map((message, index) => (
-                    <div key={index} className="flex items-center gap-2 animate-fade-in">
+                  {logMessages.slice(0, 3).map((message, index) => <div key={index} className="flex items-center gap-2 animate-fade-in">
                       <div className="w-1 h-1 bg-blue-500 rounded-full animate-pulse"></div>
                       <span className="text-muted-foreground">{message}</span>
                       <span className="ml-auto text-xs text-muted-foreground">now</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
             </div>
 
             {/* Enhanced Floating Indicators */}
-            <div className="absolute -top-4 -right-4 glass-card rounded-lg p-3 border border-green-500/30 animate-bounce">
+            <div className="absolute -top-4 -right-4 glass-card rounded-lg p-3 border border-green-500/30 ">
               <div className="flex items-center gap-2 text-sm">
                 <div className="relative">
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
@@ -432,8 +377,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
