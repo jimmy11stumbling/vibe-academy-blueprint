@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -29,6 +30,8 @@ interface PlatformCardProps {
 }
 
 const PlatformCard = ({ platform }: PlatformCardProps) => {
+  const navigate = useNavigate();
+  
   const getArchetypeIcon = (archetype: string) => {
     if (archetype.includes('Full-Stack')) return Code;
     if (archetype.includes('IDE')) return Zap;
@@ -37,6 +40,10 @@ const PlatformCard = ({ platform }: PlatformCardProps) => {
   };
 
   const Icon = getArchetypeIcon(platform.archetype);
+
+  const handleLearnMore = () => {
+    navigate(`/platforms/${encodeURIComponent(platform.name)}`);
+  };
 
   return (
     <Card className="glass-card border-border/50 hover:border-primary/20 transition-all duration-300 h-full">
@@ -100,7 +107,7 @@ const PlatformCard = ({ platform }: PlatformCardProps) => {
         )}
 
         <div className="flex gap-2">
-          <Button size="sm" className="flex-1">
+          <Button size="sm" className="flex-1" onClick={handleLearnMore}>
             Learn More
           </Button>
           <Button size="sm" variant="outline">

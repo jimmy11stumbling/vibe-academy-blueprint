@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'sonner';
@@ -18,6 +17,7 @@ import Demo from '@/pages/Demo';
 import Resources from '@/pages/Resources';
 import UserProfile from '@/components/UserProfile';
 import SearchComponent from '@/components/SearchComponent';
+import PlatformDetailPage from '@/pages/PlatformDetail';
 
 function App() {
   return (
@@ -35,6 +35,7 @@ function App() {
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/pricing" element={<Pricing />} />
                   <Route path="/platforms" element={<Platforms />} />
+                  <Route path="/platforms/:platformName" element={<PlatformDetailPage />} />
                   <Route path="/analysis" element={<Analysis />} />
                   <Route path="/demo" element={<Demo />} />
                   <Route path="/resources" element={<Resources />} />

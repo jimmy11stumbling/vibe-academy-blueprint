@@ -1,7 +1,10 @@
 
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ResourceLibrary from '@/components/ResourceLibrary';
+import LearningPathBuilder from '@/components/LearningPathBuilder';
+import InteractiveDemo from '@/components/InteractiveDemo';
 
 const Resources = () => {
   return (
@@ -17,12 +20,44 @@ const Resources = () => {
             </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive collection of tutorials, documentation, code examples, 
+            Comprehensive collection of tutorials, learning paths, interactive demos, 
             and tools for mastering no-code development
           </p>
         </div>
 
-        <ResourceLibrary />
+        <Tabs defaultValue="library" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="library">Resource Library</TabsTrigger>
+            <TabsTrigger value="paths">Learning Paths</TabsTrigger>
+            <TabsTrigger value="demos">Interactive Demos</TabsTrigger>
+            <TabsTrigger value="tools">Development Tools</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="library">
+            <ResourceLibrary />
+          </TabsContent>
+
+          <TabsContent value="paths">
+            <LearningPathBuilder />
+          </TabsContent>
+
+          <TabsContent value="demos">
+            <InteractiveDemo />
+          </TabsContent>
+
+          <TabsContent value="tools" className="space-y-6">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold mb-4">Development Tools</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Essential tools and utilities for no-code and AI-assisted development
+              </p>
+            </div>
+            {/* Tools content would be implemented here */}
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Development tools section coming soon...</p>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
