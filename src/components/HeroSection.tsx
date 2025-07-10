@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Play, ArrowRight, Star, Users, BookOpen, Terminal, Code, Zap, Activity, Wifi, Download, Upload, GitBranch, Database, Layers, FileText, CheckCircle, Clock, Cpu } from 'lucide-react';
+
 const HeroSection = () => {
   const [buildProgress, setBuildProgress] = useState(0);
   const [currentCommand, setCurrentCommand] = useState('');
@@ -30,6 +31,7 @@ const HeroSection = () => {
   const codeSteps = ['import { NoCodeBuilder } from "@/components/Builder"', 'const [components, setComponents] = useState([])', 'const handleDragDrop = (component) => {', '  setComponents([...components, component])', '  streamUpdate("component-added", component)', '}', 'return <NoCodeBuilder onUpdate={handleDragDrop} />'];
   const buildSteps = ['Initializing build system...', 'Installing dependencies...', 'Compiling TypeScript...', 'Optimizing components...', 'Generating build files...', 'Running tests...', 'Deploying to production...', 'Build complete! 🚀'];
   const logMessages = ['✅ Component library loaded', '🔄 Hot reload enabled', '📦 Bundle size: 234KB', '⚡ Performance score: 98/100', '🔒 Security scan passed', '🌐 CDN cache updated', '📊 Analytics connected', '🚀 Deployment successful'];
+
   useEffect(() => {
     const intervals = [];
 
@@ -141,6 +143,7 @@ const HeroSection = () => {
       intervals.forEach(clearInterval);
     };
   }, []);
+
   return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/50 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
@@ -180,7 +183,17 @@ const HeroSection = () => {
 
             {/* Stats */}
             <div className="flex flex-wrap justify-center lg:justify-start gap-8">
-              {stats.map((stat, index) => {})}
+              {stats.map((stat, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    <stat.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold">{stat.value}</div>
+                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -369,4 +382,5 @@ const HeroSection = () => {
       </div>
     </section>;
 };
+
 export default HeroSection;
