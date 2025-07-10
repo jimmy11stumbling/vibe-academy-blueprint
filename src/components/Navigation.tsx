@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun, Menu, X, User } from 'lucide-react';
@@ -19,9 +20,11 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const navLinks = [
-    { name: 'Courses', href: '/#courses', isHash: true },
-    { name: 'Community', href: '/#community', isHash: true },
-    { name: 'Projects', href: '/projects', isHash: false },
+    { name: 'Platforms', href: '/platforms', isHash: false },
+    { name: 'Analysis', href: '/analysis', isHash: false },
+    { name: 'Demo', href: '/demo', isHash: false },
+    { name: 'Resources', href: '/resources', isHash: false },
+    { name: 'Courses', href: '/courses', isHash: false },
     { name: 'Pricing', href: '/pricing', isHash: false },
   ];
 
@@ -91,7 +94,7 @@ const Navigation = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-6">
               {navLinks.map((link) => (
                 link.isHash ? (
                   <button

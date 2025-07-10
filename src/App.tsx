@@ -12,6 +12,10 @@ import Courses from '@/pages/Courses';
 import CourseDetail from '@/pages/CourseDetail';
 import Projects from '@/pages/Projects';
 import Pricing from '@/pages/Pricing';
+import Platforms from '@/pages/Platforms';
+import Analysis from '@/pages/Analysis';
+import Demo from '@/pages/Demo';
+import Resources from '@/pages/Resources';
 import UserProfile from '@/components/UserProfile';
 import SearchComponent from '@/components/SearchComponent';
 
@@ -30,6 +34,10 @@ function App() {
                   <Route path="/courses/:id" element={<CourseDetail />} />
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/platforms" element={<Platforms />} />
+                  <Route path="/analysis" element={<Analysis />} />
+                  <Route path="/demo" element={<Demo />} />
+                  <Route path="/resources" element={<Resources />} />
                   <Route path="/profile" element={<UserProfile />} />
                   <Route path="/search" element={<SearchComponent />} />
                 </Routes>

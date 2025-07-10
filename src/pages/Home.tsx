@@ -16,8 +16,8 @@ const Home = () => {
       <CoursesSection />
       <TestimonialsSection />
       <CommunitySection />
-      <NewsletterSection />
       <CTASection />
+      <NewsletterSection />
     </div>
   );
 };
