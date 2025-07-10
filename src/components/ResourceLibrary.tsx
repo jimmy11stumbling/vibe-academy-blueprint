@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -258,7 +257,19 @@ const ResourceLibrary = () => {
     }
   };
 
+  const getTimeDisplay = (resource: any) => {
+    if ('duration' in resource && resource.duration) {
+      return resource.duration;
+    }
+    if ('readTime' in resource && resource.readTime) {
+      return resource.readTime;
+    }
+    return null;
+  };
+
   const ResourceCard = ({ resource }: { resource: any }) => {
+    const timeDisplay = getTimeDisplay(resource);
+
     return (
       <Card className="glass-card hover:border-primary/20 transition-all duration-300">
         <CardHeader className="pb-4">
@@ -293,10 +304,10 @@ const ResourceLibrary = () => {
                 <User className="h-3 w-3" />
                 <span>{resource.author}</span>
               </div>
-              {(resource.duration || resource.readTime) && (
+              {timeDisplay && (
                 <div className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
-                  <span>{resource.duration || resource.readTime}</span>
+                  <span>{timeDisplay}</span>
                 </div>
               )}
             </div>
@@ -397,49 +408,53 @@ const ResourceLibrary = () => {
 
         <TabsContent value="list" className="mt-6">
           <div className="space-y-4">
-            {filteredResources.map(resource => (
-              <Card key={resource.id} className="glass-card">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        {getTypeIcon(resource.type)}
-                        <h3 className="text-lg font-semibold">{resource.title}</h3>
-                        <Badge variant="outline" className={getDifficultyColor(resource.difficulty)}>
-                          {resource.difficulty}
-                        </Badge>
-                      </div>
-                      <p className="text-muted-foreground mb-3">{resource.description}</p>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <User className="h-3 w-3" />
-                          <span>{resource.author}</span>
+            {filteredResources.map(resource => {
+              const timeDisplay = getTimeDisplay(resource);
+              
+              return (
+                <Card key={resource.id} className="glass-card">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          {getTypeIcon(resource.type)}
+                          <h3 className="text-lg font-semibold">{resource.title}</h3>
+                          <Badge variant="outline" className={getDifficultyColor(resource.difficulty)}>
+                            {resource.difficulty}
+                          </Badge>
                         </div>
-                        {(resource.duration || resource.readTime) && (
+                        <p className="text-muted-foreground mb-3">{resource.description}</p>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            <span>{resource.duration || resource.readTime}</span>
+                            <User className="h-3 w-3" />
+                            <span>{resource.author}</span>
                           </div>
-                        )}
-                        <div className="flex items-center gap-1">
-                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                          <span>{resource.rating}</span>
+                          {timeDisplay && (
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              <span>{timeDisplay}</span>
+                            </div>
+                          )}
+                          <div className="flex items-center gap-1">
+                            <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                            <span>{resource.rating}</span>
+                          </div>
                         </div>
                       </div>
+                      <div className="flex gap-2 ml-4">
+                        <Button size="sm">
+                          {resource.type === 'video' ? 'Watch' : 
+                           resource.type === 'repository' ? 'View Code' : 'Download'}
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <ExternalLink className="h-3 w-3" />
+                        </Button>
+                      </div>
                     </div>
-                    <div className="flex gap-2 ml-4">
-                      <Button size="sm">
-                        {resource.type === 'video' ? 'Watch' : 
-                         resource.type === 'repository' ? 'View Code' : 'Download'}
-                      </Button>
-                      <Button size="sm" variant="outline">
-                        <ExternalLink className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </TabsContent>
       </Tabs>
