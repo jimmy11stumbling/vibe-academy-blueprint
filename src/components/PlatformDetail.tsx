@@ -22,7 +22,8 @@ import {
   Rocket,
   TrendingUp,
   CheckCircle,
-  ExternalLink
+  ExternalLink,
+  ChevronRight
 } from 'lucide-react';
 
 const platformData = {
