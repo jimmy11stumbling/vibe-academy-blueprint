@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark' | 'system';
 
 interface ThemeContextType {
   theme: Theme;
@@ -24,31 +24,52 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>('light');
+  const [theme, setThemeState] = useState<Theme>('system');
+
+  const getSystemTheme = (): 'light' | 'dark' => {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  const getEffectiveTheme = (currentTheme: Theme): 'light' | 'dark' => {
+    if (currentTheme === 'system') {
+      return getSystemTheme();
+    }
+    return currentTheme;
+  };
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme;
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const initialTheme = savedTheme || systemTheme;
+    const initialTheme = savedTheme || 'system';
     
     setThemeState(initialTheme);
-    updateDocumentClass(initialTheme);
-  }, []);
+    updateDocumentClass(getEffectiveTheme(initialTheme));
 
-  const updateDocumentClass = (newTheme: Theme) => {
+    // Listen for system theme changes when theme is set to 'system'
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemThemeChange = () => {
+      if (theme === 'system') {
+        updateDocumentClass(getSystemTheme());
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
+  }, [theme]);
+
+  const updateDocumentClass = (effectiveTheme: 'light' | 'dark') => {
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
-    root.classList.add(newTheme);
+    root.classList.add(effectiveTheme);
   };
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
     localStorage.setItem('theme', newTheme);
-    updateDocumentClass(newTheme);
+    updateDocumentClass(getEffectiveTheme(newTheme));
   };
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light';
     setTheme(newTheme);
   };
 
