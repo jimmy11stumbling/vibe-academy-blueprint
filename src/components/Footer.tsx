@@ -1,223 +1,158 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
 import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Facebook, 
+  Github, 
   Twitter, 
-  Instagram, 
   Linkedin, 
-  Youtube,
-  ArrowRight
+  Mail, 
+  ArrowUp,
+  Code,
+  Heart,
+  ExternalLink
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const footerLinks = {
-    courses: [
-      { name: 'No-Code Fundamentals', href: '/courses/fundamentals' },
-      { name: 'Bubble Development', href: '/courses/bubble' },
-      { name: 'Webflow Mastery', href: '/courses/webflow' },
-      { name: 'Automation with Zapier', href: '/courses/zapier' },
-      { name: 'Database Design', href: '/courses/database' }
+    Platform: [
+      { name: 'All Platforms', href: '/platforms' },
+      { name: 'Platform Analysis', href: '/analysis' },
+      { name: 'Interactive Demo', href: '/demo' },
+      { name: 'Comparison Tool', href: '/platforms' }
     ],
-    resources: [
-      { name: 'Community', href: '/#community' },
-      { name: 'Projects Gallery', href: '/projects' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Documentation', href: '/docs' },
-      { name: 'Templates', href: '/templates' }
+    Resources: [
+      { name: 'Learning Hub', href: '/resources' },
+      { name: 'Documentation', href: '/resources' },
+      { name: 'Code Examples', href: '/resources' },
+      { name: 'Best Practices', href: '/resources' }
     ],
-    company: [
-      { name: 'About Us', href: '/about' },
-      { name: 'Contact', href: '/contact' },
-      { name: 'Careers', href: '/careers' },
-      { name: 'Press', href: '/press' },
-      { name: 'Partnership', href: '/partnership' }
+    Community: [
+      { name: 'Discord Server', href: '#' },
+      { name: 'GitHub Repository', href: '#' },
+      { name: 'Twitter Updates', href: '#' },
+      { name: 'LinkedIn Network', href: '#' }
     ],
-    support: [
-      { name: 'Help Center', href: '/help' },
-      { name: 'Privacy Policy', href: '/privacy' },
-      { name: 'Terms of Service', href: '/terms' },
-      { name: 'Cookie Policy', href: '/cookies' },
-      { name: 'Refund Policy', href: '/refund' }
+    Company: [
+      { name: 'About Us', href: '#' },
+      { name: 'Contact', href: '#' },
+      { name: 'Privacy Policy', href: '#' },
+      { name: 'Terms of Service', href: '#' }
     ]
   };
 
   const socialLinks = [
-    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/vibecoders' },
-    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/vibecoders' },
-    { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/vibecoders' },
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/vibecoders' },
-    { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/vibecoders' }
+    { name: 'GitHub', icon: Github, href: '#' },
+    { name: 'Twitter', icon: Twitter, href: '#' },
+    { name: 'LinkedIn', icon: Linkedin, href: '#' },
+    { name: 'Email', icon: Mail, href: 'mailto:hello@nocode-analysis.com' }
   ];
 
-  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    console.log('Newsletter subscription:', email);
-    // Newsletter subscription logic would go here
-  };
-
   return (
-    <footer className="bg-muted/30 border-t">
+    <footer className="bg-muted/20 border-t">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Newsletter Section */}
-        <div className="py-12 border-b border-border">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-2">Stay Updated</h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Get the latest no-code tips, course updates, and exclusive content delivered to your inbox.
-            </p>
-          </div>
-          
-          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto">
-            <div className="flex gap-2">
-              <Input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                className="flex-1"
-                required
-              />
-              <Button type="submit" className="hero-gradient text-white hover:opacity-90">
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </form>
-        </div>
-
         {/* Main Footer Content */}
         <div className="py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
             {/* Brand Section */}
             <div className="lg:col-span-2">
-              <Link to="/" className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 hero-gradient rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">V</span>
+              <Link to="/" className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                  <Code className="h-5 w-5 text-white" />
                 </div>
-                <span className="text-xl font-bold">Vibe Coders</span>
+                <span className="text-xl font-bold">NoCode Analysis</span>
               </Link>
               <p className="text-muted-foreground mb-6 max-w-sm">
-                Empowering creators to build amazing applications without code. 
-                Join thousands of students learning the future of software development.
+                Comprehensive analysis and insights into the leading AI development 
+                platforms shaping the future of software creation.
               </p>
-              
-              {/* Contact Info */}
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  <span>hello@vibecoders.com</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  <span>+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4" />
-                  <span>San Francisco, CA</span>
-                </div>
+              <div className="flex items-center gap-3">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+                      aria-label={social.name}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Courses */}
-            <div>
-              <h4 className="font-semibold mb-4">Courses</h4>
-              <ul className="space-y-2">
-                {footerLinks.courses.map((link) => (
-                  <li key={link.name}>
-                    <Link 
-                      to={link.href} 
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Resources */}
-            <div>
-              <h4 className="font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2">
-                {footerLinks.resources.map((link) => (
-                  <li key={link.name}>
-                    <Link 
-                      to={link.href} 
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Company */}
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2">
-                {footerLinks.company.map((link) => (
-                  <li key={link.name}>
-                    <Link 
-                      to={link.href} 
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Support */}
-            <div>
-              <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2">
-                {footerLinks.support.map((link) => (
-                  <li key={link.name}>
-                    <Link 
-                      to={link.href} 
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Footer Links */}
+            {Object.entries(footerLinks).map(([category, links]) => (
+              <div key={category}>
+                <h3 className="font-semibold mb-4">{category}</h3>
+                <ul className="space-y-3">
+                  {links.map((link) => (
+                    <li key={link.name}>
+                      <Link
+                        to={link.href}
+                        className="text-muted-foreground hover:text-foreground transition-colors text-sm flex items-center gap-1 group"
+                      >
+                        {link.name}
+                        {link.href.startsWith('#') && (
+                          <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        )}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Bottom Section */}
+        {/* Newsletter CTA */}
+        <div className="py-8 border-t border-border">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <h3 className="font-semibold mb-1">Stay in the loop</h3>
+              <p className="text-sm text-muted-foreground">
+                Get weekly updates on platform developments and industry insights.
+              </p>
+            </div>
+            <Button asChild>
+              <Link to="/#newsletter">
+                <Mail className="h-4 w-4 mr-2" />
+                Subscribe Now
+              </Link>
+            </Button>
+          </div>
+        </div>
+
+        {/* Bottom Footer */}
         <div className="py-6 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-sm text-muted-foreground">
-              © {currentYear} Vibe Coders. All rights reserved.
+            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+              <span>© 2025 NoCode Analysis. Made with</span>
+              <Heart className="h-3 w-3 fill-red-500 text-red-500" />
+              <span>for developers everywhere.</span>
             </div>
             
-            {/* Social Links */}
             <div className="flex items-center gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label={social.name}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <span>All systems operational</span>
+              </div>
+              
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={scrollToTop}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <ArrowUp className="h-4 w-4 mr-1" />
+                Back to top
+              </Button>
             </div>
           </div>
         </div>

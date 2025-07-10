@@ -1,191 +1,196 @@
 
 import React from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { MessageCircle, Users, Star, ArrowRight, Heart, Share2 } from 'lucide-react';
+import { 
+  MessageSquare, 
+  Users, 
+  Github, 
+  Twitter, 
+  Linkedin, 
+  ExternalLink,
+  Calendar,
+  BookOpen,
+  Zap
+} from 'lucide-react';
 
 const CommunitySection = () => {
   const communityStats = [
-    { icon: Users, value: '15,000+', label: 'Active Members' },
-    { icon: MessageCircle, value: '2,500+', label: 'Daily Messages' },
-    { icon: Star, value: '4.9/5', label: 'Community Rating' },
-    { icon: Heart, value: '98%', label: 'Helpful Responses' }
+    { label: 'Active Members', value: '12K+', icon: Users },
+    { label: 'Monthly Discussions', value: '2.5K+', icon: MessageSquare },
+    { label: 'Platform Reviews', value: '500+', icon: BookOpen },
+    { label: 'Weekly Events', value: '8+', icon: Calendar }
   ];
 
-  const communityPosts = [
+  const communityChannels = [
     {
-      id: 1,
-      author: 'Alex Chen',
-      avatar: 'AC',
-      avatarImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-      role: 'Senior Developer',
-      time: '2 hours ago',
-      content: 'Just launched my first no-code SaaS using Bubble! The community tutorials were incredibly helpful. Revenue hit $1K in the first week! 🚀',
-      likes: 24,
-      comments: 8,
-      shares: 3,
-      tags: ['Success Story', 'Bubble', 'SaaS']
+      name: 'Discord Community',
+      description: 'Join our active Discord server for real-time discussions, platform updates, and peer support.',
+      members: '8.5K',
+      icon: MessageSquare,
+      link: '#',
+      color: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300'
     },
     {
-      id: 2,
-      author: 'Sarah Miller',
-      avatar: 'SM',
-      avatarImage: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
-      role: 'Product Manager',
-      time: '5 hours ago',
-      content: 'Looking for feedback on my marketplace app built with Webflow + Airtable. The integration challenges were worth it - now processing 100+ orders daily!',
-      likes: 18,
-      comments: 12,
-      shares: 5,
-      tags: ['Feedback', 'Webflow', 'Marketplace']
+      name: 'GitHub Repository',
+      description: 'Contribute to our open-source analysis tools and access all research data and methodologies.',
+      stars: '2.1K',
+      icon: Github,
+      link: '#',
+      color: 'bg-gray-100 text-gray-700 dark:bg-gray-900 dark:text-gray-300'
     },
     {
-      id: 3,
-      author: 'Marcus Johnson',
-      avatar: 'MJ',
-      avatarImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-      role: 'Entrepreneur',
-      time: '1 day ago',
-      content: 'The monthly community challenge pushed me to build something I never thought possible. My project management tool now has 500+ users!',
-      likes: 31,
-      comments: 15,
-      shares: 7,
-      tags: ['Challenge', 'Project Management', 'Growth']
+      name: 'Twitter Updates',
+      description: 'Follow us for the latest platform news, analysis updates, and industry insights.',
+      followers: '15K',
+      icon: Twitter,
+      link: '#',
+      color: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+    },
+    {
+      name: 'LinkedIn Network',
+      description: 'Connect with professionals and stay updated on enterprise platform adoption trends.',
+      connections: '5K',
+      icon: Linkedin,
+      link: '#',
+      color: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+    }
+  ];
+
+  const upcomingEvents = [
+    {
+      title: 'Platform Comparison Workshop',
+      date: 'Jan 25, 2025',
+      time: '2:00 PM EST',
+      type: 'Workshop',
+      description: 'Deep dive into selecting the right platform for your project needs.'
+    },
+    {
+      title: 'AI Development Trends 2025',
+      date: 'Feb 1, 2025',
+      time: '3:00 PM EST',
+      type: 'Webinar',
+      description: 'Explore emerging trends in AI-powered development tools.'
+    },
+    {
+      title: 'Community Q&A Session',
+      date: 'Feb 8, 2025',
+      time: '1:00 PM EST',
+      type: 'Q&A',
+      description: 'Open discussion with platform experts and community members.'
     }
   ];
 
   return (
-    <section id="community" className="py-24 bg-muted/30">
+    <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <Badge variant="outline" className="mb-4">Community</Badge>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Join a Thriving
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Join Our Growing
             <span className="hero-gradient bg-clip-text text-transparent block mt-2">
-              No-Code Community
+              Developer Community
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Connect with thousands of no-code enthusiasts, share your projects, 
-            get feedback, and learn from others building amazing applications without code.
+            Connect with thousands of developers, share insights, and stay updated 
+            on the latest developments in AI-powered development platforms.
           </p>
         </div>
 
         {/* Community Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {communityStats.map((stat, index) => (
-            <div key={index} className="text-center p-6 glass-card rounded-lg border border-border/50">
-              <div className="flex justify-center mb-3">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <stat.icon className="h-6 w-6 text-primary" />
-                </div>
-              </div>
-              <div className="text-2xl md:text-3xl font-bold mb-1">{stat.value}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Community Posts */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold text-center mb-8">Latest from the Community</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {communityPosts.map((post) => (
-              <Card key={post.id} className="glass-card border-border/50 hover:border-primary/20 transition-all duration-300">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start gap-3">
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={post.avatarImage} alt={post.author} />
-                      <AvatarFallback className="hero-gradient text-white text-sm">
-                        {post.avatar}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h4 className="font-semibold text-sm">{post.author}</h4>
-                        <Badge variant="secondary" className="text-xs">{post.role}</Badge>
-                      </div>
-                      <p className="text-xs text-muted-foreground">{post.time}</p>
-                    </div>
+          {communityStats.map((stat, index) => {
+            const Icon = stat.icon;
+            return (
+              <Card key={index} className="text-center glass-card">
+                <CardContent className="pt-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon className="h-6 w-6 text-primary" />
                   </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-sm leading-relaxed">{post.content}</p>
-                  
-                  <div className="flex flex-wrap gap-1">
-                    {post.tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  <div className="flex items-center justify-between pt-2 border-t border-border/50">
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Heart className="h-3 w-3" />
-                        {post.likes}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <MessageCircle className="h-3 w-3" />
-                        {post.comments}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Share2 className="h-3 w-3" />
-                        {post.shares}
-                      </span>
-                    </div>
-                  </div>
+                  <div className="text-2xl font-bold mb-1">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
-        {/* Community Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <div className="text-center p-6">
-            <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <MessageCircle className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Community Channels */}
+          <div>
+            <h3 className="text-2xl font-bold mb-6">Connect With Us</h3>
+            <div className="space-y-4">
+              {communityChannels.map((channel, index) => {
+                const Icon = channel.icon;
+                return (
+                  <Card key={index} className="glass-card hover:border-primary/20 transition-all duration-300 group">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${channel.color}`}>
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <CardTitle className="text-lg">{channel.name}</CardTitle>
+                            <div className="text-sm text-muted-foreground">
+                              {channel.members && `${channel.members} members`}
+                              {channel.stars && `${channel.stars} stars`}
+                              {channel.followers && `${channel.followers} followers`}
+                              {channel.connections && `${channel.connections} connections`}
+                            </div>
+                          </div>
+                        </div>
+                        <Button size="sm" variant="outline" className="group-hover:border-primary/50">
+                          <ExternalLink className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription>{channel.description}</CardDescription>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
-            <h4 className="text-lg font-semibold mb-2">24/7 Support</h4>
-            <p className="text-muted-foreground text-sm">
-              Get help anytime from our active community members and expert mentors.
-            </p>
           </div>
-          
-          <div className="text-center p-6">
-            <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Users className="h-8 w-8 text-green-600 dark:text-green-400" />
-            </div>
-            <h4 className="text-lg font-semibold mb-2">Networking</h4>
-            <p className="text-muted-foreground text-sm">
-              Connect with like-minded builders and potential collaborators for your projects.
-            </p>
-          </div>
-          
-          <div className="text-center p-6">
-            <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Star className="h-8 w-8 text-purple-600 dark:text-purple-400" />
-            </div>
-            <h4 className="text-lg font-semibold mb-2">Showcase</h4>
-            <p className="text-muted-foreground text-sm">
-              Share your projects and get valuable feedback from the community.
-            </p>
-          </div>
-        </div>
 
-        {/* CTA */}
-        <div className="text-center">
-          <Button size="lg" className="hero-gradient text-white hover:opacity-90 group">
-            Join Our Community
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <p className="text-sm text-muted-foreground mt-3">
-            Free to join • 15,000+ active members • Expert mentorship available
-          </p>
+          {/* Upcoming Events */}
+          <div>
+            <h3 className="text-2xl font-bold mb-6">Upcoming Events</h3>
+            <div className="space-y-4">
+              {upcomingEvents.map((event, index) => (
+                <Card key={index} className="glass-card">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">{event.title}</h4>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            <span>{event.date}</span>
+                          </div>
+                          <span>{event.time}</span>
+                        </div>
+                      </div>
+                      <Badge variant="secondary">{event.type}</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">{event.description}</p>
+                    <Button size="sm" className="w-full">
+                      <Zap className="h-3 w-3 mr-2" />
+                      Register Now
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            
+            <Button variant="outline" className="w-full mt-6">
+              <Calendar className="h-4 w-4 mr-2" />
+              View All Events
+            </Button>
+          </div>
         </div>
       </div>
     </section>

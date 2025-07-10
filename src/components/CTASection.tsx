@@ -2,85 +2,106 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Star, Users, BookOpen, Award } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap, Download, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const CTASection = () => {
-  const stats = [
-    { icon: Users, value: '10,000+', label: 'Active Students' },
-    { icon: BookOpen, value: '200+', label: 'Courses' },
-    { icon: Star, value: '4.9/5', label: 'Rating' },
-    { icon: Award, value: '95%', label: 'Success Rate' }
-  ];
-
   return (
-    <section className="py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <Badge variant="secondary" className="mb-4 bg-primary/10 text-primary border-primary/20">
-            Ready to Start?
-          </Badge>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Join the No-Code
-            <span className="hero-gradient bg-clip-text text-transparent block mt-2">
-              Revolution Today
-            </span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Transform your career and build the applications you've always dreamed of. 
-            Start with our comprehensive no-code courses and join a community of makers, 
-            builders, and innovators who are shaping the future of software development.
-          </p>
-        </div>
+    <section className="py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 left-10 w-40 h-40 bg-secondary/10 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-accent/5 rounded-full blur-3xl"></div>
+      </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center p-6 glass-card rounded-lg border border-border/50">
-              <div className="flex justify-center mb-3">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <stat.icon className="h-6 w-6 text-primary" />
-                </div>
-              </div>
-              <div className="text-2xl md:text-3xl font-bold mb-1">{stat.value}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <Badge variant="outline" className="mb-6">
+          <Sparkles className="h-3 w-3 mr-1" />
+          Ready to Get Started?
+        </Badge>
+        
+        <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          Choose Your Perfect
+          <span className="hero-gradient bg-clip-text text-transparent block mt-2">
+            Development Platform
+          </span>
+        </h2>
+        
+        <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+          Don't waste time evaluating platforms. Use our comprehensive analysis 
+          and expert insights to make the right choice for your next project.
+        </p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <div className="p-6 rounded-2xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Zap className="h-6 w-6 text-primary" />
             </div>
-          ))}
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button size="lg" className="hero-gradient text-white hover:opacity-90 group px-8">
-            Start Learning Today
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button size="lg" variant="outline" className="group px-8">
-            Explore Free Courses
-            <BookOpen className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-          </Button>
-        </div>
-
-        {/* Guarantee */}
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-green-50 dark:bg-green-900/20 rounded-full border border-green-200 dark:border-green-800">
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium text-green-700 dark:text-green-300">
-              30-day money-back guarantee • No questions asked
-            </span>
+            <h3 className="text-xl font-semibold mb-2">Instant Platform Matching</h3>
+            <p className="text-muted-foreground mb-4">
+              Answer a few questions and get personalized platform recommendations 
+              based on your project requirements.
+            </p>
+            <Button className="w-full group" asChild>
+              <Link to="/demo">
+                <Zap className="h-4 w-4 mr-2" />
+                Try Platform Matcher
+                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          </div>
+          
+          <div className="p-6 rounded-2xl border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300">
+            <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Download className="h-6 w-6 text-secondary" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">Complete Analysis Report</h3>
+            <p className="text-muted-foreground mb-4">
+              Download our comprehensive 50-page analysis report covering all 
+              10 platforms with detailed comparisons.
+            </p>
+            <Button variant="outline" className="w-full group" asChild>
+              <Link to="/analysis">
+                <Download className="h-4 w-4 mr-2" />
+                Download Report
+                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
           </div>
         </div>
-
-        {/* Social Proof */}
-        <div className="mt-16 pt-12 border-t border-border">
-          <div className="text-center mb-8">
-            <p className="text-muted-foreground mb-4">Join students from these amazing companies</p>
-            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-              <div className="text-lg font-semibold">Stripe</div>
-              <div className="text-lg font-semibold">Airbnb</div>
-              <div className="text-lg font-semibold">Shopify</div>
-              <div className="text-lg font-semibold">Notion</div>
-              <div className="text-lg font-semibold">Figma</div>
-              <div className="text-lg font-semibold">Slack</div>
-            </div>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button size="lg" className="group" asChild>
+            <Link to="/platforms">
+              <Sparkles className="h-4 w-4 mr-2" />
+              Explore All Platforms
+              <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
+          
+          <Button size="lg" variant="outline" asChild>
+            <Link to="/resources">
+              <BookOpen className="h-4 w-4 mr-2" />
+              Browse Resources
+            </Link>
+          </Button>
+        </div>
+        
+        <div className="mt-12 flex items-center justify-center gap-8 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            <span>Updated Weekly</span>
+          </div>
+          <div className="w-px h-4 bg-border"></div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+            <span>10+ Platforms Covered</span>
+          </div>
+          <div className="w-px h-4 bg-border"></div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+            <span>50+ Hours of Research</span>
           </div>
         </div>
       </div>
