@@ -240,25 +240,25 @@ const ResourceLibrary = () => {
     return matchesSearch && matchesCategory && matchesDifficulty;
   });
 
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case 'video': return <Video className="h-4 w-4" />;
+      case 'guide': case 'whitepaper': return <BookOpen className="h-4 w-4" />;
+      case 'repository': return <Code className="h-4 w-4" />;
+      default: return <BookOpen className="h-4 w-4" />;
+    }
+  };
+
+  const getDifficultyColor = (difficulty: string) => {
+    switch (difficulty) {
+      case 'beginner': return 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300';
+      case 'intermediate': return 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300';
+      case 'advanced': return 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300';
+      default: return 'bg-gray-100 text-gray-700 dark:bg-gray-900 dark:text-gray-300';
+    }
+  };
+
   const ResourceCard = ({ resource }: { resource: any }) => {
-    const getTypeIcon = (type: string) => {
-      switch (type) {
-        case 'video': return <Video className="h-4 w-4" />;
-        case 'guide': case 'whitepaper': return <BookOpen className="h-4 w-4" />;
-        case 'repository': return <Code className="h-4 w-4" />;
-        default: return <BookOpen className="h-4 w-4" />;
-      }
-    };
-
-    const getDifficultyColor = (difficulty: string) => {
-      switch (difficulty) {
-        case 'beginner': return 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300';
-        case 'intermediate': return 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300';
-        case 'advanced': return 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300';
-        default: return 'bg-gray-100 text-gray-700 dark:bg-gray-900 dark:text-gray-300';
-      }
-    };
-
     return (
       <Card className="glass-card hover:border-primary/20 transition-all duration-300">
         <CardHeader className="pb-4">
@@ -293,16 +293,10 @@ const ResourceLibrary = () => {
                 <User className="h-3 w-3" />
                 <span>{resource.author}</span>
               </div>
-              {resource.duration && (
+              {(resource.duration || resource.readTime) && (
                 <div className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
-                  <span>{resource.duration}</span>
-                </div>
-              )}
-              {resource.readTime && (
-                <div className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  <span>{resource.readTime}</span>
+                  <span>{resource.duration || resource.readTime}</span>
                 </div>
               )}
             </div>
@@ -409,9 +403,7 @@ const ResourceLibrary = () => {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        {resource.type === 'video' && <Video className="h-4 w-4" />}
-                        {(resource.type === 'guide' || resource.type === 'whitepaper') && <BookOpen className="h-4 w-4" />}
-                        {resource.type === 'repository' && <Code className="h-4 w-4" />}
+                        {getTypeIcon(resource.type)}
                         <h3 className="text-lg font-semibold">{resource.title}</h3>
                         <Badge variant="outline" className={getDifficultyColor(resource.difficulty)}>
                           {resource.difficulty}
@@ -423,10 +415,10 @@ const ResourceLibrary = () => {
                           <User className="h-3 w-3" />
                           <span>{resource.author}</span>
                         </div>
-                        {resource.duration && (
+                        {(resource.duration || resource.readTime) && (
                           <div className="flex items-center gap-1">
                             <Clock className="h-3 w-3" />
-                            <span>{resource.duration}</span>
+                            <span>{resource.duration || resource.readTime}</span>
                           </div>
                         )}
                         <div className="flex items-center gap-1">
