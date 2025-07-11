@@ -151,5 +151,148 @@ export const platformData: Record<string, PlatformData> = {
       teams: '$30/member/month'
     },
     marketPosition: 'Innovative browser-based full-stack development platform'
+  },
+  'Claude Code': {
+    overview: 'Security-first CLI agent from Anthropic for terminal-based AI development',
+    keyFeatures: [
+      'Terminal-native interface',
+      'Granular security permissions',
+      'CLAUDE.md context files',
+      'Multi-file refactoring',
+      'Custom slash commands',
+      'Enterprise security'
+    ],
+    strengths: [
+      'Maximum security and control',
+      'Developer-native terminal interface',
+      'Powerful context management',
+      'Anthropic\'s best-in-class models'
+    ],
+    limitations: [
+      'High token consumption costs',
+      'Steep learning curve',
+      'Command-line only interface'
+    ],
+    pricing: {
+      pro: '$17/month',
+      max: '$100/month',
+      api: 'Pay-per-token available'
+    },
+    marketPosition: 'Premium CLI-first AI development tool for power users'
+  },
+  'Gemini CLI': {
+    overview: 'Open-source terminal AI agent from Google with massive context windows',
+    keyFeatures: [
+      'Open source foundation',
+      '1M token context window',
+      'Built-in web search',
+      'MCP protocol support',
+      'Multi-platform support',
+      'Generous free tier'
+    ],
+    strengths: [
+      'Completely open source',
+      'Massive free usage limits',
+      'Large context windows',
+      'Google\'s latest AI models'
+    ],
+    limitations: [
+      'Early alpha stability issues',
+      'Model downgrades on free tier',
+      'Limited advanced features'
+    ],
+    pricing: {
+      free: 'Generous limits with Google account',
+      paid: 'Usage-based API billing',
+      enterprise: 'Google Cloud integration'
+    },
+    marketPosition: 'Open-source challenger with aggressive free tier strategy'
+  },
+  'Base44': {
+    overview: 'Wix-acquired no-code platform with "Buttery Includes" all-in-one philosophy',
+    keyFeatures: [
+      'All-in-one backend included',
+      'Built-in authentication',
+      'Integrated database',
+      'Enterprise SSO',
+      'Multiple AI model support',
+      'Instant deployment'
+    ],
+    strengths: [
+      'True all-in-one solution',
+      'No external service dependencies',
+      'Wix ecosystem integration',
+      'Enterprise-ready features'
+    ],
+    limitations: [
+      'Less flexibility than modular approaches',
+      'Newer platform with smaller community',
+      'Limited customization options'
+    ],
+    pricing: {
+      free: '25 messages/month',
+      starter: '$20/month',
+      builder: '$50/month',
+      pro: '$100/month'
+    },
+    marketPosition: 'Comprehensive no-code solution backed by Wix\'s resources'
+  },
+  'V0': {
+    overview: 'Vercel-native UI component generator optimized for React and Next.js',
+    keyFeatures: [
+      'React component generation',
+      'Tailwind CSS optimization',
+      'Image-to-code conversion',
+      'Vercel deployment integration',
+      'Iterative refinement',
+      'Framework flexibility'
+    ],
+    strengths: [
+      'Specialized UI generation',
+      'Perfect Vercel integration',
+      'High-quality React components',
+      'Designer-developer bridge'
+    ],
+    limitations: [
+      'UI-focused, not full-stack',
+      'Best with Vercel ecosystem',
+      'Limited to frontend development'
+    ],
+    pricing: {
+      free: '200 credits',
+      basic: '$10/month',
+      standard: '$30/month',
+      premium: '$50/month'
+    },
+    marketPosition: 'Leading UI component generator for React ecosystem'
+  },
+  'Rork': {
+    overview: 'Mobile-first AI platform generating native iOS and Android apps with React Native',
+    keyFeatures: [
+      'React Native generation',
+      'Cross-platform deployment',
+      'Native UI components',
+      'App store publishing',
+      'Backend integration',
+      'Real device testing'
+    ],
+    strengths: [
+      'Mobile-specific focus',
+      'True native app generation',
+      'Cross-platform efficiency',
+      'App store deployment'
+    ],
+    limitations: [
+      'Stability and reliability issues',
+      'Limited customer support',
+      'High per-message pricing',
+      'Mobile development complexity'
+    ],
+    pricing: {
+      starter: '$20/month (100 messages)',
+      pro: '$200/month (1000 messages)',
+      enterprise: 'Custom pricing'
+    },
+    marketPosition: 'Specialized mobile app generator with execution challenges'
   }
 };
