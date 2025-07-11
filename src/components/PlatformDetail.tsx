@@ -8,6 +8,8 @@ import { getAllPlatformModules } from '@/components/PlatformModules';
 import PlatformOverview from '@/components/platform/PlatformOverview';
 import PlatformProjects from '@/components/platform/PlatformProjects';
 import PlatformCertification from '@/components/platform/PlatformCertification';
+import PlatformComparison from '@/components/platform/PlatformComparison';
+import LearningPathBuilder from '@/components/platform/LearningPathBuilder';
 import { platformData } from '@/data/platformData';
 import { ArrowLeft } from 'lucide-react';
 
@@ -63,11 +65,13 @@ const PlatformDetail = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="overview">Platform Overview</TabsTrigger>
-            <TabsTrigger value="tutorials">Tutorials & Courses</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="tutorials">Tutorials</TabsTrigger>
             <TabsTrigger value="projects">Projects</TabsTrigger>
+            <TabsTrigger value="paths">Learning Paths</TabsTrigger>
             <TabsTrigger value="certification">Certification</TabsTrigger>
+            <TabsTrigger value="compare">Compare</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview">
@@ -89,10 +93,24 @@ const PlatformDetail = () => {
             />
           </TabsContent>
 
+          <TabsContent value="paths">
+            <LearningPathBuilder 
+              platformName={decodedPlatformName}
+              availableModules={platformModules}
+            />
+          </TabsContent>
+
           <TabsContent value="certification">
             <PlatformCertification 
               platformName={decodedPlatformName}
               platformModules={platformModules}
+            />
+          </TabsContent>
+
+          <TabsContent value="compare">
+            <PlatformComparison 
+              platforms={[decodedPlatformName]}
+              platformModules={allModules}
             />
           </TabsContent>
         </Tabs>

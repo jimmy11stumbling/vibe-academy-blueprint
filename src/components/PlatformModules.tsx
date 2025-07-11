@@ -11,14 +11,15 @@ export const lovableModules: TutorialModule[] = [
     platform: 'Lovable 2.0',
     totalDuration: '8 hours',
     difficultyLevel: 'beginner',
-    completionRate: 0,
+    completionRate: 15,
     rating: 4.8,
     enrolledStudents: 12500,
     certificationAvailable: true,
     practicalProjects: [
       'Build a personal portfolio website using chat commands',
       'Create a task management app with Supabase integration',
-      'Deploy a real-time chat application with authentication'
+      'Deploy a real-time chat application with authentication',
+      'Build a complete SaaS landing page with payment integration'
     ],
     tutorials: [
       {
@@ -80,6 +81,18 @@ export const lovableModules: TutorialModule[] = [
         locked: false,
         topics: ['Team Collaboration', 'Shared Credits', 'Project Management'],
         objectives: ['Set up team workspaces', 'Manage collaborative development', 'Share resources effectively']
+      },
+      {
+        id: 'figma-integration',
+        title: 'Figma to Lovable Workflow',
+        description: 'Import designs from Figma and convert them to functional applications',
+        duration: '50 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Design Import', 'Auto Layout', 'Component Conversion'],
+        objectives: ['Import Figma designs', 'Convert designs to code', 'Maintain design fidelity']
       }
     ]
   },
@@ -90,14 +103,15 @@ export const lovableModules: TutorialModule[] = [
     platform: 'Lovable 2.0',
     totalDuration: '12 hours',
     difficultyLevel: 'advanced',
-    completionRate: 0,
+    completionRate: 8,
     rating: 4.9,
     enrolledStudents: 3200,
     certificationAvailable: true,
     practicalProjects: [
       'Build a complete SaaS application with payment integration',
       'Create a multi-tenant application with advanced security',
-      'Develop a real-time collaborative platform'
+      'Develop a real-time collaborative platform',
+      'Build an enterprise dashboard with complex data visualization'
     ],
     tutorials: [
       {
@@ -111,6 +125,18 @@ export const lovableModules: TutorialModule[] = [
         locked: false,
         topics: ['Performance Optimization', 'Scalability', 'Enterprise Features'],
         objectives: ['Optimize application performance', 'Handle high-traffic scenarios', 'Implement enterprise features']
+      },
+      {
+        id: 'security-best-practices',
+        title: 'Security and Compliance in Lovable',
+        description: 'Implement security best practices and compliance requirements',
+        duration: '75 min',
+        difficulty: 'advanced',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Security Scanning', 'Data Protection', 'Compliance'],
+        objectives: ['Implement security measures', 'Handle sensitive data', 'Meet compliance requirements']
       }
     ]
   }
@@ -125,14 +151,15 @@ export const cursorModules: TutorialModule[] = [
     platform: 'Cursor',
     totalDuration: '10 hours',
     difficultyLevel: 'intermediate',
-    completionRate: 0,
+    completionRate: 22,
     rating: 4.9,
     enrolledStudents: 25000,
     certificationAvailable: true,
     practicalProjects: [
       'Migrate a VS Code project to Cursor with full AI integration',
       'Build a complex React application using AI-assisted development',
-      'Implement advanced refactoring across large codebases'
+      'Implement advanced refactoring across large codebases',
+      'Create a TypeScript library with AI-generated documentation'
     ],
     tutorials: [
       {
@@ -158,6 +185,30 @@ export const cursorModules: TutorialModule[] = [
         locked: false,
         topics: ['AI Chat', 'Context Understanding', 'Code Analysis'],
         objectives: ['Master codebase-aware queries', 'Understand context management', 'Analyze large codebases']
+      },
+      {
+        id: 'predictive-editing',
+        title: 'Mastering Predictive Edits',
+        description: 'Use Tab-to-Accept for lightning-fast code generation',
+        duration: '40 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Predictive Editing', 'Code Completion', 'Workflow Optimization'],
+        objectives: ['Use predictive edits effectively', 'Optimize coding speed', 'Maintain code quality']
+      },
+      {
+        id: 'agent-mode',
+        title: 'Agent Mode for Complex Tasks',
+        description: 'Let AI handle complex, multi-file development tasks',
+        duration: '55 min',
+        difficulty: 'advanced',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Agent Mode', 'Multi-file Tasks', 'Code Refactoring'],
+        objectives: ['Use agent mode effectively', 'Handle complex refactoring', 'Manage AI-driven development']
       }
     ]
   }
@@ -172,14 +223,15 @@ export const replitModules: TutorialModule[] = [
     platform: 'Replit',
     totalDuration: '9 hours',
     difficultyLevel: 'beginner',
-    completionRate: 0,
+    completionRate: 35,
     rating: 4.7,
     enrolledStudents: 42000,
     certificationAvailable: true,
     practicalProjects: [
       'Create a collaborative web application with real-time editing',
       'Build and deploy a full-stack application with ReplDB',
-      'Develop a mobile-responsive app using Replit\'s infrastructure'
+      'Develop a mobile-responsive app using Replit\'s infrastructure',
+      'Build a multiplayer game with real-time features'
     ],
     tutorials: [
       {
@@ -193,6 +245,42 @@ export const replitModules: TutorialModule[] = [
         locked: false,
         topics: ['Platform Navigation', 'Project Creation', 'Language Support'],
         objectives: ['Master the Replit interface', 'Create projects', 'Understand language support']
+      },
+      {
+        id: 'replit-agent',
+        title: 'AI Agent Development',
+        description: 'Use Replit Agent for rapid application development',
+        duration: '50 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['AI Agent', 'Natural Language Coding', 'Code Generation'],
+        objectives: ['Use Replit Agent effectively', 'Generate applications with AI', 'Debug AI-generated code']
+      },
+      {
+        id: 'collaboration',
+        title: 'Real-Time Collaboration',
+        description: 'Master collaborative coding with teams',
+        duration: '45 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Real-time Editing', 'Team Management', 'Version Control'],
+        objectives: ['Collaborate in real-time', 'Manage team permissions', 'Handle merge conflicts']
+      },
+      {
+        id: 'repldb-auth',
+        title: 'ReplDB and Authentication',
+        description: 'Use built-in database and authentication systems',
+        duration: '60 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Database Management', 'User Authentication', 'Data Security'],
+        objectives: ['Set up ReplDB', 'Implement authentication', 'Secure user data']
       }
     ]
   }
@@ -207,14 +295,15 @@ export const windSurfModules: TutorialModule[] = [
     platform: 'Windsurf',
     totalDuration: '11 hours',
     difficultyLevel: 'advanced',
-    completionRate: 0,
+    completionRate: 12,
     rating: 4.8,
     enrolledStudents: 8500,
     certificationAvailable: true,
     practicalProjects: [
       'Build an enterprise application with FedRAMP compliance',
       'Implement complex multi-file refactoring with Cascade',
-      'Deploy a secure on-premise solution'
+      'Deploy a secure on-premise solution',
+      'Create a government-compliant application'
     ],
     tutorials: [
       {
@@ -228,6 +317,30 @@ export const windSurfModules: TutorialModule[] = [
         locked: false,
         topics: ['Cascade Agent', 'Multi-file Tasks', 'Context Understanding'],
         objectives: ['Master Cascade capabilities', 'Handle complex tasks', 'Optimize agent interactions']
+      },
+      {
+        id: 'enterprise-security',
+        title: 'Enterprise Security and Compliance',
+        description: 'Implement FedRAMP and SOC 2 compliance requirements',
+        duration: '90 min',
+        difficulty: 'advanced',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['FedRAMP Compliance', 'SOC 2 Certification', 'Security Best Practices'],
+        objectives: ['Meet compliance requirements', 'Implement security measures', 'Audit security practices']
+      },
+      {
+        id: 'multi-model-support',
+        title: 'Multi-Model AI Integration',
+        description: 'Leverage multiple AI models for optimal development',
+        duration: '55 min',
+        difficulty: 'advanced',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Model Selection', 'AI Optimization', 'Performance Tuning'],
+        objectives: ['Choose optimal models', 'Optimize AI performance', 'Balance cost and quality']
       }
     ]
   }
@@ -242,14 +355,15 @@ export const boltModules: TutorialModule[] = [
     platform: 'Bolt',
     totalDuration: '8 hours',
     difficultyLevel: 'intermediate',
-    completionRate: 0,
+    completionRate: 28,
     rating: 4.6,
     enrolledStudents: 15000,
     certificationAvailable: true,
     practicalProjects: [
       'Build a full-stack application entirely in the browser',
       'Create a real-time collaborative editor',
-      'Deploy a complex JavaScript application with backend'
+      'Deploy a complex JavaScript application with backend',
+      'Build a progressive web app with offline capabilities'
     ],
     tutorials: [
       {
@@ -263,6 +377,30 @@ export const boltModules: TutorialModule[] = [
         locked: false,
         topics: ['WebContainers', 'Browser Runtime', 'Node.js in Browser'],
         objectives: ['Understand WebContainer architecture', 'Leverage browser capabilities', 'Optimize performance']
+      },
+      {
+        id: 'fullstack-browser',
+        title: 'Full-Stack Development in Browser',
+        description: 'Build complete applications without local setup',
+        duration: '75 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Frontend Development', 'Backend APIs', 'Database Integration'],
+        objectives: ['Build full-stack apps', 'Handle data persistence', 'Deploy browser applications']
+      },
+      {
+        id: 'bolt-integrations',
+        title: 'Third-Party Integrations',
+        description: 'Connect with external services and APIs',
+        duration: '50 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['API Integration', 'External Services', 'Authentication'],
+        objectives: ['Integrate external APIs', 'Handle authentication', 'Manage API keys securely']
       }
     ]
   }
@@ -277,14 +415,15 @@ export const claudeCodeModules: TutorialModule[] = [
     platform: 'Claude Code',
     totalDuration: '7 hours',
     difficultyLevel: 'advanced',
-    completionRate: 0,
+    completionRate: 18,
     rating: 4.7,
     enrolledStudents: 6800,
     certificationAvailable: true,
     practicalProjects: [
       'Build a secure CLI workflow with granular permissions',
       'Implement complex refactoring using terminal commands',
-      'Create custom slash commands for automated tasks'
+      'Create custom slash commands for automated tasks',
+      'Develop a security-compliant enterprise application'
     ],
     tutorials: [
       {
@@ -322,6 +461,18 @@ export const claudeCodeModules: TutorialModule[] = [
         locked: false,
         topics: ['Permission Management', 'Secure Workflows', 'Audit Trails'],
         objectives: ['Configure granular permissions', 'Implement secure practices', 'Monitor security events']
+      },
+      {
+        id: 'custom-commands',
+        title: 'Custom Slash Commands',
+        description: 'Create and manage custom automation commands',
+        duration: '40 min',
+        difficulty: 'advanced',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Command Creation', 'Automation', 'Workflow Optimization'],
+        objectives: ['Create custom commands', 'Automate repetitive tasks', 'Optimize development workflows']
       }
     ]
   }
@@ -336,14 +487,15 @@ export const geminiCLIModules: TutorialModule[] = [
     platform: 'Gemini CLI',
     totalDuration: '6 hours',
     difficultyLevel: 'intermediate',
-    completionRate: 0,
+    completionRate: 25,
     rating: 4.5,
     enrolledStudents: 18000,
     certificationAvailable: true,
     practicalProjects: [
       'Build a development automation script using Gemini CLI',
       'Create MCP integrations for custom workflows',
-      'Implement web-integrated research and development tasks'
+      'Implement web-integrated research and development tasks',
+      'Build an AI-powered code analysis tool'
     ],
     tutorials: [
       {
@@ -381,6 +533,18 @@ export const geminiCLIModules: TutorialModule[] = [
         locked: false,
         topics: ['Web Search', 'Real-time Data', 'API Integration'],
         objectives: ['Implement web search features', 'Access real-time information', 'Build integrated workflows']
+      },
+      {
+        id: 'mcp-protocol',
+        title: 'Model Context Protocol Integration',
+        description: 'Build custom integrations using MCP',
+        duration: '50 min',
+        difficulty: 'advanced',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['MCP Protocol', 'Custom Integrations', 'Tool Development'],
+        objectives: ['Implement MCP integrations', 'Build custom tools', 'Extend CLI capabilities']
       }
     ]
   }
@@ -395,14 +559,15 @@ export const base44Modules: TutorialModule[] = [
     platform: 'Base44',
     totalDuration: '5 hours',
     difficultyLevel: 'beginner',
-    completionRate: 0,
+    completionRate: 42,
     rating: 4.6,
     enrolledStudents: 28000,
     certificationAvailable: true,
     practicalProjects: [
       'Build a complete business management app with authentication',
       'Create a customer portal with integrated payments',
-      'Develop an internal tool with database integration'
+      'Develop an internal tool with database integration',
+      'Build a multi-user SaaS application'
     ],
     tutorials: [
       {
@@ -440,6 +605,18 @@ export const base44Modules: TutorialModule[] = [
         locked: false,
         topics: ['Automatic Backend', 'Database Management', 'Authentication'],
         objectives: ['Set up backend services', 'Manage databases', 'Implement user authentication']
+      },
+      {
+        id: 'enterprise-features',
+        title: 'Enterprise SSO and Advanced Features',
+        description: 'Implement enterprise-grade features and integrations',
+        duration: '40 min',
+        difficulty: 'advanced',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['SSO Integration', 'Enterprise Security', 'Advanced Workflows'],
+        objectives: ['Set up SSO', 'Implement enterprise security', 'Build complex workflows']
       }
     ]
   }
@@ -454,14 +631,15 @@ export const v0Modules: TutorialModule[] = [
     platform: 'V0',
     totalDuration: '4 hours',
     difficultyLevel: 'intermediate',
-    completionRate: 0,
+    completionRate: 38,
     rating: 4.4,
     enrolledStudents: 22000,
     certificationAvailable: true,
     practicalProjects: [
       'Generate a complete design system using V0',
       'Create responsive UI components from mockups',
-      'Build and deploy a landing page with V0 components'
+      'Build and deploy a landing page with V0 components',
+      'Develop a component library for team use'
     ],
     tutorials: [
       {
@@ -499,6 +677,30 @@ export const v0Modules: TutorialModule[] = [
         locked: false,
         topics: ['Image Processing', 'Design Conversion', 'Code Generation'],
         objectives: ['Convert designs to code', 'Maintain design fidelity', 'Optimize component structure']
+      },
+      {
+        id: 'component-customization',
+        title: 'Advanced Component Customization',
+        description: 'Customize and optimize generated components for production use',
+        duration: '30 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Component Optimization', 'Code Refinement', 'Performance Tuning'],
+        objectives: ['Optimize components', 'Improve performance', 'Maintain code quality']
+      },
+      {
+        id: 'design-systems',
+        title: 'Building Design Systems with V0',
+        description: 'Create consistent design systems and component libraries',
+        duration: '50 min',
+        difficulty: 'advanced',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Design Systems', 'Component Libraries', 'Team Collaboration'],
+        objectives: ['Build design systems', 'Create component libraries', 'Enable team collaboration']
       }
     ]
   }
@@ -513,14 +715,15 @@ export const rorkModules: TutorialModule[] = [
     platform: 'Rork',
     totalDuration: '6 hours',
     difficultyLevel: 'intermediate',
-    completionRate: 0,
+    completionRate: 14,
     rating: 4.2,
     enrolledStudents: 8500,
     certificationAvailable: true,
     practicalProjects: [
       'Build a cross-platform mobile app from text description',
       'Create a native mobile app with backend integration',
-      'Deploy apps to iOS App Store and Google Play Store'
+      'Deploy apps to iOS App Store and Google Play Store',
+      'Build a location-based mobile application'
     ],
     tutorials: [
       {
@@ -548,6 +751,18 @@ export const rorkModules: TutorialModule[] = [
         objectives: ['Generate mobile apps', 'Understand mobile UI', 'Use native components']
       },
       {
+        id: 'backend-integration',
+        title: 'Backend Integration and Data Management',
+        description: 'Connect mobile apps to backend services and databases',
+        duration: '50 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Backend Services', 'Data Management', 'API Integration'],
+        objectives: ['Connect to backends', 'Manage app data', 'Handle API requests']
+      },
+      {
         id: 'app-store-deployment',
         title: 'App Store Deployment and Publishing',
         description: 'Deploy and publish mobile apps to official app stores',
@@ -558,6 +773,18 @@ export const rorkModules: TutorialModule[] = [
         locked: false,
         topics: ['App Store Publishing', 'Google Play', 'App Distribution'],
         objectives: ['Prepare apps for stores', 'Handle app store requirements', 'Manage app distribution']
+      },
+      {
+        id: 'mobile-testing',
+        title: 'Mobile Testing and Quality Assurance',
+        description: 'Test mobile applications across different devices and platforms',
+        duration: '35 min',
+        difficulty: 'intermediate',
+        type: 'hands-on',
+        completed: false,
+        locked: false,
+        topics: ['Mobile Testing', 'Device Testing', 'Quality Assurance'],
+        objectives: ['Test on multiple devices', 'Ensure app quality', 'Handle platform differences']
       }
     ]
   }
