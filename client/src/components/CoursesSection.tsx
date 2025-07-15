@@ -10,45 +10,45 @@ const CoursesSection = () => {
   const courses = [
     {
       id: 1,
-      title: 'No-Code Platform Mastery',
-      description: 'Complete guide to understanding and leveraging modern no-code development platforms for rapid application development.',
-      instructor: 'AI Development Team',
-      duration: '8 hours',
-      students: '2.5K',
+      title: 'Planning and Development of Your Full Stack App',
+      description: 'Comprehensive guide to planning, designing, and developing full-stack applications from conception to deployment using modern frameworks and best practices.',
+      instructor: 'NoCode Analysis Academy',
+      duration: '4 hours',
+      students: '3.2K',
       rating: 4.9,
-      level: 'Beginner to Advanced',
-      type: 'Interactive Course',
-      modules: 12,
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop',
-      topics: ['Platform Overview', 'AI Integration', 'Deployment Strategies', 'Best Practices']
+      level: 'Beginner',
+      type: 'FREE Course',
+      modules: 8,
+      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop',
+      topics: ['Project Planning', 'Architecture Design', 'Technology Selection', 'Development Workflow']
     },
     {
       id: 2,
-      title: 'AI-Powered Development Workflow',
-      description: 'Learn to integrate AI tools into your development process for maximum productivity and code quality.',
-      instructor: 'Tech Innovation Lab',
-      duration: '6 hours',
-      students: '1.8K',
+      title: 'Creating a PRD and Master Blueprint for Any Full Stack App',
+      description: 'Master the art of creating Product Requirement Documents (PRDs) and comprehensive blueprints that guide successful full-stack application development.',
+      instructor: 'NoCode Analysis Academy',
+      duration: '3 hours',
+      students: '2.8K',
       rating: 4.8,
-      level: 'Intermediate',
-      type: 'Hands-on Workshop',
-      modules: 8,
-      image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop',
-      topics: ['AI Assistants', 'Code Generation', 'Testing Automation', 'Performance Optimization']
+      level: 'Beginner',
+      type: 'FREE Course',
+      modules: 6,
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop',
+      topics: ['PRD Creation', 'Blueprint Design', 'User Stories', 'Technical Specifications']
     },
     {
       id: 3,
-      title: 'Platform Architecture Deep Dive',
-      description: 'Technical analysis of how leading no-code platforms are built and how to make architectural decisions.',
-      instructor: 'Platform Architecture Group',
-      duration: '10 hours',
-      students: '950',
-      rating: 4.7,
-      level: 'Advanced',
-      type: 'Technical Analysis',
-      modules: 15,
-      image: 'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=400&h=200&fit=crop',
-      topics: ['System Design', 'Scalability', 'Security', 'Integration Patterns']
+      title: 'No-Code Platforms Mastery & Prompt Engineering Essentials',
+      description: 'Complete introduction to all showcased no-code platforms with focus on frameworks, best practices, and simple yet effective prompt and context engineering techniques.',
+      instructor: 'NoCode Analysis Academy',
+      duration: '5 hours',
+      students: '4.1K',
+      rating: 4.9,
+      level: 'Beginner',
+      type: 'FREE Course',
+      modules: 10,
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop',
+      topics: ['Platform Overview', 'Prompt Engineering', 'Context Optimization', 'Best Practices']
     }
   ];
 
@@ -63,16 +63,16 @@ const CoursesSection = () => {
     <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4">Learning</Badge>
+          <Badge variant="outline" className="mb-4">Free Learning Path</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Master No-Code
+            Master Full-Stack
             <span className="hero-gradient bg-clip-text text-transparent block mt-2">
               Development
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive courses and tutorials to help you become proficient with 
-            modern AI-powered development platforms.
+            Start your journey with our 3 FREE foundational courses covering planning, PRD creation, 
+            and no-code platform mastery with prompt engineering essentials.
           </p>
         </div>
 
@@ -87,7 +87,10 @@ const CoursesSection = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
-                  <Badge variant="secondary" className="mb-2">
+                  <Badge 
+                    variant="secondary" 
+                    className={`mb-2 ${course.type === 'FREE Course' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100 font-bold' : ''}`}
+                  >
                     {course.type}
                   </Badge>
                 </div>
@@ -150,7 +153,16 @@ const CoursesSection = () => {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="text-center space-y-4">
+          <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6 max-w-2xl mx-auto">
+            <h3 className="text-lg font-semibold text-green-800 dark:text-green-200 mb-2">
+              🎓 Start Your Free Learning Journey
+            </h3>
+            <p className="text-green-700 dark:text-green-300 text-sm">
+              Complete these 3 foundational courses for FREE and discover the power of no-code development. 
+              After completing them, you'll be ready to choose your specialized learning path.
+            </p>
+          </div>
           <Button size="lg" variant="outline" asChild>
             <Link to="/courses">
               <Code className="h-4 w-4 mr-2" />
