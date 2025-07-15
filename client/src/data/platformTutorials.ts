@@ -70,7 +70,25 @@ Bolt uses WebContainer technology to run Node.js directly in your browser, elimi
           ],
           completed: false
         }
-      ]
+      ],
+      finalProject: {
+        title: 'Real-time Collaboration Platform',
+        description: 'Build a complete real-time collaboration platform with WebContainer',
+        requirements: [
+          'Real-time document editing functionality',
+          'User authentication and authorization',
+          'Project management features',
+          'File sharing and version control',
+          'Video chat integration',
+          'Notification system'
+        ],
+        deliverables: [
+          'Deployed collaboration platform',
+          'User guide and documentation',
+          'Technical architecture diagram',
+          'Performance optimization report'
+        ]
+      }
     }
   ],
   'Claude Code': [
@@ -335,7 +353,25 @@ gemini auth setup
           ],
           completed: false
         }
-      ]
+      ],
+      finalProject: {
+        title: 'AI-Powered Research Platform',
+        description: 'Build a comprehensive research platform using Gemini\'s web search and large context capabilities',
+        requirements: [
+          'Real-time web search integration',
+          'Large document analysis',
+          'Research paper summarization',
+          'Citation and reference management',
+          'Collaborative research features',
+          'Export and sharing capabilities'
+        ],
+        deliverables: [
+          'Deployed research platform',
+          'Research methodology documentation',
+          'Performance optimization report',
+          'User guide and tutorials'
+        ]
+      }
     }
   ],
   'Base44': [
