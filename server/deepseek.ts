@@ -44,13 +44,30 @@ interface MCPMessage {
 
 class DeepSeekRAG {
   private apiKey: string;
-  private baseUrl: string = "https://api.deepseek.com/v1";
+  private baseUrl: string = 'https://api.deepseek.com/v1';
+  private isEnabled: boolean;
 
-  constructor(apiKey?: string) {
-    this.apiKey = apiKey || process.env.DEEPSEEK_API_KEY || "";
-    if (!this.apiKey) {
-      console.warn("DeepSeek API key not found. RAG functionality will be limited.");
+  constructor() {
+    this.apiKey = process.env.DEEPSEEK_API_KEY || '';
+    this.isEnabled = !!this.apiKey;
+
+    if (!this.isEnabled) {
+      console.warn('DeepSeek API key not found. RAG functionality will use mock responses.');
+    } else {
+      console.log('DeepSeek API initialized successfully.');
     }
+  }
+
+  private createMockResponse(type: string, query: string) {
+    return {
+      success: true,
+      data: {
+        analysis: `Mock ${type} analysis for "${query}". This is a placeholder response since no API key is configured.`,
+        confidence: 0.8,
+        timestamp: new Date().toISOString(),
+        source: 'mock'
+      }
+    };
   }
 
   async generateCompletion(prompt: string, options: {
@@ -64,7 +81,7 @@ class DeepSeekRAG {
     }
 
     const messages = [];
-    
+
     if (options.systemPrompt) {
       messages.push({
         role: "system",
@@ -101,16 +118,16 @@ class DeepSeekRAG {
 
   async analyzeplatform(platformName: string, analysisType: 'market' | 'technical' | 'competitive'): Promise<any> {
     const startTime = Date.now();
-    
+
     // Retrieve relevant context from knowledge base
     const context = await this.getRelevantContext(platformName, analysisType);
-    
+
     const systemPrompt = `You are a DeepSeek reasoning AI specialized in no-code platform analysis. 
     Provide comprehensive, data-driven insights with deep reasoning about ${platformName}. 
     Use the provided context to enhance your analysis.`;
 
     const prompt = this.buildAnalysisPrompt(platformName, analysisType, context);
-    
+
     try {
       const response = await this.generateCompletion(prompt, {
         systemPrompt,
@@ -147,14 +164,14 @@ class DeepSeekRAG {
     Create comprehensive, adaptive learning paths for no-code development based on user preferences and skill level.`;
 
     const prompt = `Generate a personalized learning path for a ${skillLevel} developer interested in: ${interests.join(', ')}.
-    
+
     Requirements:
     1. Progressive difficulty curve
     2. Practical project milestones
     3. Platform-specific recommendations
     4. Estimated timeframes
     5. Skills validation checkpoints
-    
+
     Consider the user's current level and create a path that builds foundational knowledge before advancing to complex topics.`;
 
     const response = await this.generateCompletion(prompt, {
@@ -172,7 +189,7 @@ class DeepSeekRAG {
 
   async processA2ACommunication(sourceAgent: string, targetAgent: string, messageType: string, payload: any): Promise<MCPMessage> {
     const messageId = `mcp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
+
     const mcpMessage: MCPMessage = {
       id: messageId,
       source: sourceAgent,
@@ -206,10 +223,10 @@ class DeepSeekRAG {
 
   private async handleAnalysisRequest(message: MCPMessage): Promise<MCPMessage> {
     const { platformName, analysisType } = message.payload;
-    
+
     try {
       const analysis = await this.analyzeplatform(platformName, analysisType);
-      
+
       // Update MCP log
       await db.update(mcpLogs)
         .set({ status: 'processed' })
@@ -230,14 +247,14 @@ class DeepSeekRAG {
           errorMessage: error.message 
         })
         .where({ id: message.id });
-      
+
       throw error;
     }
   }
 
   private async handleLearningRecommendation(message: MCPMessage): Promise<MCPMessage> {
     const { userId, currentProgress, preferences } = message.payload;
-    
+
     const recommendation = await this.generateLearningPath(
       userId, 
       preferences.interests, 
@@ -257,10 +274,10 @@ class DeepSeekRAG {
   private async handleProgressSync(message: MCPMessage): Promise<MCPMessage> {
     // Handle progress synchronization between agents
     const { userId, progressData } = message.payload;
-    
+
     // Process and store progress data
     // This would integrate with the userProgress table
-    
+
     return {
       ...message,
       id: `response_${message.id}`,
@@ -290,32 +307,32 @@ class DeepSeekRAG {
 
   private buildAnalysisPrompt(platformName: string, analysisType: string, context: any[]): string {
     const contextText = context.map(c => `${c.title}: ${c.content.substring(0, 500)}...`).join('\n\n');
-    
+
     const prompts = {
       market: `Analyze the market position and business viability of ${platformName}. Consider:
         - Market share and competitive landscape
         - Revenue model and pricing strategy
         - Target market and user adoption
         - Growth trends and future outlook
-        
+
         Context: ${contextText}`,
-        
+
       technical: `Provide a comprehensive technical analysis of ${platformName}. Include:
         - Architecture and technology stack
         - Performance characteristics
         - Scalability and reliability
         - Integration capabilities
         - Security features
-        
+
         Context: ${contextText}`,
-        
+
       competitive: `Compare ${platformName} with its main competitors. Analyze:
         - Feature comparison matrix
         - Strengths and weaknesses
         - Market positioning
         - Unique value propositions
         - Competitive advantages
-        
+
         Context: ${contextText}`
     };
 
@@ -327,13 +344,13 @@ class DeepSeekRAG {
     const hasReasoning = !!response.choices[0].message.reasoning_content;
     const responseLength = response.choices[0].message.content.length;
     const tokenEfficiency = response.usage.completion_tokens / response.usage.prompt_tokens;
-    
+
     let confidence = 0.5; // Base confidence
-    
+
     if (hasReasoning) confidence += 0.2;
     if (responseLength > 1000) confidence += 0.1;
     if (tokenEfficiency > 0.5 && tokenEfficiency < 2.0) confidence += 0.1;
-    
+
     return Math.min(confidence, 1.0);
   }
 
@@ -398,3 +415,4 @@ import { platforms } from "@shared/schema";
 
 export const deepseekRAG = new DeepSeekRAG();
 export default DeepSeekRAG;
+`

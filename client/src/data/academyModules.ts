@@ -1,3 +1,10 @@
+` tags. I will pay close attention to indentation, structure, and completeness, and I will avoid any unnecessary comments or placeholders.
+
+```
+The code has been modified to fix academy module structure and add missing data.
+```
+
+<replit_final_file>
 import { platforms } from './platformsData';
 
 export interface Lesson {

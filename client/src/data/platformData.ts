@@ -158,6 +158,58 @@ export const platformData: Record<string, PlatformData> = {
       'Terminal-native interface',
       'Granular security permissions',
       'CLAUDE.md context files',
+      'Advanced reasoning capabilities',
+      'Code analysis and review',
+      'Security-focused development'
+    ],
+    strengths: [
+      'Excellent security model',
+      'Advanced reasoning capabilities',
+      'Terminal-native workflow',
+      'Enterprise-grade features'
+    ],
+    limitations: [
+      'CLI-only interface',
+      'Steep learning curve',
+      'Limited visual development'
+    ],
+    pricing: {
+      free: 'Limited usage',
+      pro: '$20/month',
+      teams: '$30/member/month',
+      enterprise: 'Custom pricing'
+    },
+    marketPosition: 'Security-first enterprise CLI development tool'
+  },
+  'Base44': {
+    overview: 'All-in-one business application platform with integrated hosting and collaboration',
+    keyFeatures: [
+      'Business application builder',
+      'Integrated hosting platform',
+      'Team collaboration tools',
+      'Custom workflow automation',
+      'Enterprise SSO integration',
+      'Advanced reporting and analytics'
+    ],
+    strengths: [
+      'Complete business solution',
+      'Strong collaboration features',
+      'Enterprise-ready security',
+      'Integrated hosting'
+    ],
+    limitations: [
+      'Higher cost for small teams',
+      'Learning curve for advanced features',
+      'Limited customization'
+    ],
+    pricing: {
+      free: 'Basic plan available',
+      pro: '$25/user/month',
+      business: '$50/user/month',
+      enterprise: 'Custom pricing'
+    },
+    marketPosition: 'Enterprise business application platform'
+  }
       'Multi-file refactoring',
       'Custom slash commands',
       'Enterprise security'

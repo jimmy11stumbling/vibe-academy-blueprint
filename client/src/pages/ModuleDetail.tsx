@@ -3,8 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   ArrowLeft,
   Play,
@@ -26,6 +26,7 @@ import {
   Code
 } from 'lucide-react';
 import { getModuleById } from '@/data/academyModules';
+import AssessmentSystem from '@/components/AssessmentSystem';
 
 const ModuleDetail = () => {
   const { moduleId } = useParams();
@@ -154,7 +155,7 @@ const ModuleDetail = () => {
                   </div>
                   <Progress value={progress} className="h-2" />
                 </div>
-                
+
                 <p className="text-muted-foreground leading-relaxed">{module.overview}</p>
               </div>
             </div>
@@ -173,12 +174,12 @@ const ModuleDetail = () => {
                       <div className="text-sm text-muted-foreground line-through">$99</div>
                     )}
                   </div>
-                  
+
                   <Button className="w-full" size="lg">
                     <Play className="h-4 w-4 mr-2" />
                     {progress > 0 ? 'Continue Learning' : 'Start Course'}
                   </Button>
-                  
+
                   {module.price !== 'free' && (
                     <Button variant="outline" className="w-full">
                       <PlayCircle className="h-4 w-4 mr-2" />
@@ -241,10 +242,11 @@ const ModuleDetail = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="curriculum">Curriculum</TabsTrigger>
             <TabsTrigger value="projects">Projects</TabsTrigger>
+            <TabsTrigger value="assessment">Assessment</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
           </TabsList>
 
@@ -313,7 +315,7 @@ const ModuleDetail = () => {
                     const IconComponent = getLessonIcon(lesson.type);
                     const isLocked = lesson.locked;
                     const isCompleted = lesson.completed;
-                    
+
                     return (
                       <div
                         key={lesson.id}
@@ -334,7 +336,7 @@ const ModuleDetail = () => {
                               <PlayCircle className="h-5 w-5 text-primary" />
                             )}
                           </div>
-                          
+
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
                               <h4 className="font-medium">{lesson.title}</h4>
@@ -344,7 +346,7 @@ const ModuleDetail = () => {
                               </Badge>
                             </div>
                             <p className="text-sm text-muted-foreground">{lesson.description}</p>
-                            
+
                             <div className="flex items-center gap-4 mt-2">
                               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                                 <Clock className="h-3 w-3" />
@@ -406,7 +408,7 @@ const ModuleDetail = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground mb-6">{project.description}</p>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       <div>
                         <h4 className="font-medium mb-3">Skills Practiced</h4>
@@ -418,7 +420,7 @@ const ModuleDetail = () => {
                           ))}
                         </div>
                       </div>
-                      
+
                       <div>
                         <h4 className="font-medium mb-3">Deliverables</h4>
                         <div className="space-y-1">
@@ -429,7 +431,7 @@ const ModuleDetail = () => {
                           ))}
                         </div>
                       </div>
-                      
+
                       <div>
                         <h4 className="font-medium mb-3">Resources</h4>
                         <div className="space-y-1">
@@ -445,6 +447,28 @@ const ModuleDetail = () => {
                 </Card>
               ))}
             </div>
+          </TabsContent>
+
+          <TabsContent value="assessment" className="mt-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Target className="h-5 w-5" />
+                  Module Assessment
+                </CardTitle>
+                <p className="text-muted-foreground">
+                  Test your knowledge and earn your completion certificate.
+                </p>
+              </CardHeader>
+              <CardContent>
+                <AssessmentSystem 
+                  moduleId={module.id}
+                  onComplete={(score, passed) => {
+                    console.log(`Assessment completed: ${score}% - ${passed ? 'Passed' : 'Failed'}`);
+                  }}
+                />
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="reviews" className="mt-8">

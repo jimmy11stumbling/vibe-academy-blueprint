@@ -4,11 +4,10 @@ export interface Lesson {
   title: string;
   description: string;
   duration: string;
-  type: 'video' | 'text' | 'interactive' | 'project';
+  type: 'video' | 'interactive' | 'hands-on' | 'reading' | 'assessment';
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   content: string;
   exercises?: Exercise[];
-  resources?: Resource[];
   completed: boolean;
 }
 
@@ -16,21 +15,11 @@ export interface Exercise {
   id: string;
   title: string;
   description: string;
-  type: 'coding' | 'quiz' | 'project';
+  type: 'quiz' | 'project' | 'coding' | 'design';
   instructions: string[];
-  solution?: string;
-  hints?: string[];
 }
 
-export interface Resource {
-  id: string;
-  title: string;
-  type: 'documentation' | 'video' | 'article' | 'template';
-  url: string;
-  description: string;
-}
-
-export interface AcademyModule {
+export interface Course {
   id: string;
   title: string;
   description: string;
@@ -41,215 +30,274 @@ export interface AcademyModule {
   prerequisites: string[];
   learningObjectives: string[];
   lessons: Lesson[];
-  finalProject?: {
-    title: string;
-    description: string;
-    requirements: string[];
-    deliverables: string[];
-  };
 }
 
-export const academyModules: Record<string, AcademyModule[]> = {
-  'Lovable 2.0': [
+export const academyData: Record<string, Course[]> = {
+  'Foundation': [
     {
-      id: 'lovable-fundamentals',
-      title: 'Lovable 2.0 Fundamentals',
-      description: 'Master the basics of chat-driven full-stack development',
-      platform: 'Lovable 2.0',
-      icon: '🚀',
-      estimatedTime: '4 hours',
+      id: 'project-planning-fundamentals',
+      title: 'Project Planning Fundamentals',
+      description: 'Master the essential skills for planning and scoping no-code projects',
+      platform: 'Foundation',
+      icon: '📋',
+      estimatedTime: '3 hours',
       difficulty: 'beginner',
       prerequisites: [],
       learningObjectives: [
-        'Understand chat-driven development concepts',
-        'Create your first full-stack app',
-        'Master the Lovable interface',
-        'Learn basic deployment workflows'
+        'Define clear project scope and requirements',
+        'Choose the right no-code platform for your needs',
+        'Create effective project documentation',
+        'Plan development timelines and milestones'
       ],
       lessons: [
         {
-          id: 'lovable-intro',
-          title: 'Introduction to Lovable 2.0',
-          description: 'Understanding the revolutionary chat-driven development approach',
-          duration: '30 min',
-          type: 'video',
+          id: 'project-definition',
+          title: 'Defining Your Project Scope',
+          description: 'Learn to clearly define what you want to build',
+          duration: '45 min',
+          type: 'interactive',
           difficulty: 'beginner',
-          content: `# Introduction to Lovable 2.0
+          content: `# Defining Your Project Scope
 
-## What is Lovable 2.0?
-Lovable 2.0 is a European AI startup that's revolutionizing full-stack development through chat-driven interfaces. Instead of writing code line by line, you describe what you want to build in natural language.
+## Why Project Definition Matters
+Before diving into any no-code platform, successful projects start with crystal-clear definition. This lesson will teach you how to articulate your vision and set realistic boundaries.
 
-## Key Concepts:
-- **Chat-driven development**: Describe your app in conversational language
-- **Full-stack capabilities**: Frontend, backend, and database all in one
-- **Native integrations**: Built-in Supabase, authentication, and deployment
-- **Visual editing**: See changes in real-time as you chat
+## The Project Canvas Framework
+Use this structured approach to define your project:
 
-## Getting Started:
-1. Sign up for a Lovable account
-2. Start a new project
-3. Use the chat interface to describe your app
-4. Watch as Lovable builds your full-stack application
+### 1. Problem Statement
+- What specific problem are you solving?
+- Who experiences this problem?
+- How are they currently solving it?
 
-## Best Practices:
-- Be specific about your requirements
-- Break complex features into smaller requests
-- Use the visual editor to fine-tune details
-- Test frequently during development`,
+### 2. Solution Overview
+- What is your proposed solution?
+- How will it address the problem?
+- What makes it better than existing solutions?
+
+### 3. Key Features
+- List 5-10 core features your app must have
+- Prioritize them: Must-have, Nice-to-have, Future consideration
+- Keep it simple for your first version
+
+### 4. User Stories
+Write user stories in this format:
+"As a [user type], I want to [action] so that [benefit]"
+
+Example:
+"As a small business owner, I want to track customer orders so that I can fulfill them efficiently"
+
+## Scope Management
+- Start with the minimum viable product (MVP)
+- Resist feature creep during initial planning
+- Plan for iterative improvements
+- Document assumptions and constraints
+
+## Next Steps
+Once you have a clear project definition, you'll be ready to choose the right platform and begin development.`,
           exercises: [
             {
-              id: 'lovable-signup',
-              title: 'Create Your Lovable Account',
-              description: 'Sign up and explore the Lovable interface',
+              id: 'project-canvas',
+              title: 'Create Your Project Canvas',
+              description: 'Define your own project using the canvas framework',
               type: 'project',
               instructions: [
-                'Visit lovable.dev and create an account',
-                'Explore the dashboard and interface',
-                'Create your first project',
-                'Familiarize yourself with the chat interface'
+                'Choose a project idea you want to build',
+                'Fill out each section of the project canvas',
+                'Write 3-5 user stories for your core features',
+                'Identify your MVP scope'
               ]
-            }
-          ],
-          resources: [
-            {
-              id: 'lovable-docs',
-              title: 'Lovable Documentation',
-              type: 'documentation',
-              url: 'https://docs.lovable.dev',
-              description: 'Official documentation and guides'
             }
           ],
           completed: false
         },
         {
-          id: 'first-lovable-app',
-          title: 'Building Your First App',
-          description: 'Create a simple todo application using chat-driven development',
-          duration: '45 min',
+          id: 'platform-selection',
+          title: 'Choosing the Right Platform',
+          description: 'Compare platforms and make informed decisions',
+          duration: '60 min',
           type: 'interactive',
           difficulty: 'beginner',
-          content: `# Building Your First Lovable App
+          content: `# Choosing the Right No-Code Platform
 
-## Project: Todo Application
-Let's build a simple todo app to understand Lovable's capabilities.
+## Platform Categories
+Understanding different types of platforms helps you make better choices:
 
-## Step 1: Project Setup
-Start by telling Lovable what you want to build:
-"I want to create a todo application where users can add, edit, and delete tasks"
+### AI-Powered Platforms
+- **Lovable 2.0**: Full-stack apps with natural language
+- **Cursor IDE**: AI-enhanced coding environment
+- **Windsurf**: Enterprise agentic development
 
-## Step 2: Adding Features
-Continue the conversation to add features:
-- "Add a priority system with high, medium, low options"
-- "Include due dates for tasks"
-- "Add categories or tags for organization"
+### Traditional No-Code
+- **Bubble**: Complex web applications
+- **Webflow**: Design-focused websites
+- **Airtable**: Database and workflow automation
 
-## Step 3: Styling and UI
-Improve the appearance:
-- "Make the design modern and clean"
-- "Use a color scheme that's easy on the eyes"
-- "Add responsive design for mobile devices"
+### Specialized Platforms
+- **Shopify**: E-commerce focused
+- **Zapier**: Workflow automation
+- **Notion**: Documentation and simple databases
 
-## Step 4: Database Integration
-Lovable automatically handles the backend:
-- Tasks are stored in Supabase
-- Real-time updates work out of the box
-- Authentication is built-in
+## Selection Criteria
 
-## Step 5: Testing and Deployment
-- Test your app thoroughly
-- Use Lovable's one-click deployment
-- Share your app with others`,
+### 1. Project Requirements
+- **Complexity**: Simple landing page vs complex app
+- **Functionality**: What features do you need?
+- **Integrations**: What external services must you connect?
+- **Scalability**: How many users will you have?
+
+### 2. Technical Considerations
+- **Customization**: How much control do you need?
+- **Data Ownership**: Where is your data stored?
+- **Export Options**: Can you export your work?
+- **Performance**: How fast does it need to be?
+
+### 3. Business Factors
+- **Budget**: What can you afford monthly?
+- **Timeline**: How quickly do you need to launch?
+- **Team Size**: Who will be working on this?
+- **Maintenance**: Who will maintain it long-term?
+
+## Platform Comparison Framework
+
+### For Each Platform, Evaluate:
+1. **Ease of Use** (1-5 scale)
+2. **Feature Completeness** (1-5 scale)
+3. **Scalability** (1-5 scale)
+4. **Cost Effectiveness** (1-5 scale)
+5. **Learning Curve** (1-5 scale)
+
+### Decision Matrix
+Create a weighted score based on what matters most to your project.
+
+## Common Mistakes to Avoid
+- Choosing based on popularity alone
+- Not considering long-term costs
+- Ignoring data portability
+- Underestimating learning curve
+- Not testing with real use cases`,
           exercises: [
             {
-              id: 'build-todo-app',
-              title: 'Build Todo App',
-              description: 'Create a complete todo application',
+              id: 'platform-comparison',
+              title: 'Platform Selection Matrix',
+              description: 'Compare 3 platforms for your project using the decision framework',
               type: 'project',
               instructions: [
-                'Start a new Lovable project',
-                'Use chat to describe your todo app',
-                'Add the features mentioned in the lesson',
-                'Test all functionality',
-                'Deploy your app'
+                'Select 3 potential platforms for your project',
+                'Research each platform\'s capabilities',
+                'Score each platform using the evaluation criteria',
+                'Create a weighted decision matrix',
+                'Document your final choice and reasoning'
               ]
             }
           ],
           completed: false
-        }
-      ],
-      finalProject: {
-        title: 'Personal Portfolio Website',
-        description: 'Create a professional portfolio website showcasing your projects',
-        requirements: [
-          'About section with bio and skills',
-          'Projects showcase with images and descriptions',
-          'Contact form with email integration',
-          'Responsive design for all devices',
-          'Professional styling and branding'
-        ],
-        deliverables: [
-          'Deployed portfolio website',
-          'Documentation of development process',
-          'List of features implemented'
-        ]
-      }
-    },
-    {
-      id: 'lovable-advanced',
-      title: 'Advanced Lovable Development',
-      description: 'Master complex features and integrations',
-      platform: 'Lovable 2.0',
-      icon: '⚡',
-      estimatedTime: '6 hours',
-      difficulty: 'intermediate',
-      prerequisites: ['lovable-fundamentals'],
-      learningObjectives: [
-        'Implement complex database relationships',
-        'Master authentication and user management',
-        'Integrate external APIs and services',
-        'Optimize performance and scalability'
-      ],
-      lessons: [
+        },
         {
-          id: 'lovable-database',
-          title: 'Advanced Database Design',
-          description: 'Creating complex data relationships and queries',
-          duration: '60 min',
-          type: 'text',
+          id: 'prd-creation',
+          title: 'Creating Product Requirements Documents',
+          description: 'Document your project for successful development',
+          duration: '90 min',
+          type: 'hands-on',
           difficulty: 'intermediate',
-          content: `# Advanced Database Design in Lovable
+          content: `# Creating Product Requirements Documents (PRDs)
 
-## Understanding Supabase Integration
-Lovable uses Supabase as its backend database, providing powerful PostgreSQL capabilities.
+## What is a PRD?
+A Product Requirements Document is a comprehensive guide that outlines what you're building, why you're building it, and how it should work. It serves as the single source of truth for your project.
 
-## Key Concepts:
-- **Relational Design**: Creating tables with foreign key relationships
-- **Row Level Security**: Protecting data with user-based access controls
-- **Real-time Subscriptions**: Live updates across all connected clients
-- **Complex Queries**: Using SQL for advanced data retrieval
+## PRD Structure
 
-## Common Patterns:
-1. **One-to-Many**: User has many posts
-2. **Many-to-Many**: Users can follow many users
-3. **Hierarchical**: Comments with nested replies
-4. **Polymorphic**: Generic relationships across tables
+### 1. Executive Summary
+- Project overview in 2-3 sentences
+- Primary goals and success metrics
+- Key stakeholders and timeline
 
-## Best Practices:
-- Design your schema before coding
-- Use proper indexing for performance
-- Implement proper access controls
-- Consider data migration strategies`,
+### 2. Problem Statement
+- Detailed problem description
+- Target user personas
+- Current solution limitations
+- Market opportunity size
+
+### 3. Solution Overview
+- High-level solution description
+- Key differentiators
+- Success criteria and KPIs
+- Assumptions and dependencies
+
+### 4. Functional Requirements
+- Core features and functionality
+- User flows and interactions
+- Business logic and rules
+- Integration requirements
+
+### 5. Non-Functional Requirements
+- Performance requirements
+- Security and compliance needs
+- Scalability expectations
+- Accessibility standards
+
+### 6. User Experience Guidelines
+- Design principles
+- User interface standards
+- Interaction patterns
+- Responsive design requirements
+
+### 7. Technical Considerations
+- Platform and technology choices
+- Data architecture
+- Third-party integrations
+- Migration and deployment strategy
+
+## Writing Effective Requirements
+
+### Use Clear Language
+- Avoid technical jargon
+- Be specific and measurable
+- Use active voice
+- Include acceptance criteria
+
+### Requirement Format
+"The system SHALL [action] WHEN [condition] SO THAT [benefit]"
+
+Example:
+"The system SHALL send email notifications WHEN a new order is placed SO THAT customers receive confirmation of their purchase"
+
+### Priority Levels
+- **Must Have**: Core functionality for MVP
+- **Should Have**: Important but not critical
+- **Could Have**: Nice to have features
+- **Won't Have**: Out of scope for current version
+
+## Wireframing and Mockups
+- Include visual representations
+- Show user flow diagrams
+- Create interactive prototypes when helpful
+- Annotate with explanations
+
+## Review and Approval Process
+- Define stakeholder review cycles
+- Create feedback collection process
+- Establish change management procedures
+- Set approval criteria and sign-off requirements
+
+## Maintaining Your PRD
+- Keep it updated as requirements evolve
+- Track changes with version control
+- Communicate updates to all stakeholders
+- Use it as reference throughout development`,
           exercises: [
             {
-              id: 'design-blog-schema',
-              title: 'Design Blog Database',
-              description: 'Create a complete blog database schema',
+              id: 'create-prd',
+              title: 'Write Your Project PRD',
+              description: 'Create a comprehensive PRD for your project',
               type: 'project',
               instructions: [
-                'Design tables for users, posts, comments, and categories',
-                'Set up proper relationships between tables',
-                'Implement row-level security',
-                'Create sample data and test queries'
+                'Use the PRD template to document your project',
+                'Include all sections with relevant details',
+                'Create at least 3 user flow diagrams',
+                'Define 10-15 specific functional requirements',
+                'Add wireframes or mockups for key screens',
+                'Review and refine based on feedback'
               ]
             }
           ],
@@ -258,63 +306,371 @@ Lovable uses Supabase as its backend database, providing powerful PostgreSQL cap
       ]
     }
   ],
-  'Cursor': [
+  'Lovable': [
     {
-      id: 'cursor-fundamentals',
-      title: 'Cursor IDE Fundamentals',
-      description: 'Master AI-powered development with Cursor',
-      platform: 'Cursor',
-      icon: '🎯',
-      estimatedTime: '3 hours',
+      id: 'lovable-fundamentals',
+      title: 'Lovable 2.0 Fundamentals',
+      description: 'Master the revolutionary AI-powered full-stack development platform',
+      platform: 'Lovable',
+      icon: '🚀',
+      estimatedTime: '4 hours',
       difficulty: 'beginner',
-      prerequisites: [],
+      prerequisites: ['Project Planning Fundamentals'],
       learningObjectives: [
-        'Navigate the Cursor interface efficiently',
-        'Use AI chat for code assistance',
-        'Master predictive editing features',
-        'Understand codebase-aware AI capabilities'
+        'Understand Lovable\'s AI-powered development approach',
+        'Master conversational app building',
+        'Build and deploy full-stack applications',
+        'Integrate databases and authentication'
       ],
       lessons: [
         {
-          id: 'cursor-setup',
-          title: 'Getting Started with Cursor',
-          description: 'Installation, setup, and first steps',
+          id: 'lovable-introduction',
+          title: 'Introduction to Lovable 2.0',
+          description: 'Understanding the revolutionary approach to app development',
           duration: '30 min',
           type: 'video',
           difficulty: 'beginner',
-          content: `# Getting Started with Cursor
+          content: `# Introduction to Lovable 2.0
 
-## What is Cursor?
-Cursor is an AI-first IDE built on VS Code, designed to enhance developer productivity with intelligent code assistance.
+## What Makes Lovable Revolutionary?
+Lovable 2.0 represents a paradigm shift in how we build applications. Instead of learning complex frameworks and writing extensive code, you simply describe what you want in natural language.
 
-## Key Features:
-- **Codebase-aware AI**: Understands your entire project context
-- **Predictive editing**: Suggests code as you type
-- **Agent mode**: Handles complex multi-file tasks
-- **VS Code compatibility**: All your favorite extensions work
+## Core Capabilities
 
-## Installation:
-1. Download from cursor.sh
-2. Install like any other application
-3. Import your VS Code settings (optional)
-4. Sign up for Cursor Pro for full AI features
+### AI-Powered Full-Stack Development
+- **Frontend**: React components with modern styling
+- **Backend**: Automatic API generation and database integration
+- **Database**: Supabase integration with real-time capabilities
+- **Authentication**: Built-in user management
+- **Deployment**: One-click deployment to production
 
-## First Steps:
-1. Open or create a new project
-2. Try the AI chat (Cmd/Ctrl + L)
-3. Experience predictive editing
-4. Explore the command palette features`,
+### Natural Language Interface
+- Describe features in plain English
+- Iterate with conversational refinements
+- AI understands context and maintains consistency
+- Real-time preview of changes
+
+## How Lovable Works
+
+### 1. Project Initialization
+Start by describing your app concept:
+"I want to create a task management app where teams can collaborate on projects"
+
+### 2. Feature Development
+Add functionality through conversation:
+- "Add user authentication with email and password"
+- "Create a dashboard showing project progress"
+- "Allow team members to comment on tasks"
+
+### 3. Refinement and Iteration
+Continuously improve your app:
+- "Make the design more modern and professional"
+- "Add real-time notifications for task updates"
+- "Implement file upload for task attachments"
+
+## The Lovable Advantage
+
+### Speed
+- Build full applications in hours, not weeks
+- No need to learn multiple frameworks
+- Automatic best practices implementation
+
+### Quality
+- Production-ready code generation
+- Responsive design by default
+- Security and performance optimizations
+
+### Flexibility
+- Full customization through conversation
+- Export code when needed
+- Integrate with external services
+
+## Getting Started
+To begin with Lovable:
+1. Sign up for a Lovable account
+2. Start a new project
+3. Describe your app idea
+4. Iterate through conversation
+5. Deploy with one click
+
+## Best Practices
+- Start with a clear problem statement
+- Use specific, actionable language
+- Test features as you build them
+- Plan for user feedback and iteration`,
           exercises: [
             {
-              id: 'cursor-setup-exercise',
-              title: 'Set Up Cursor IDE',
-              description: 'Install and configure Cursor for development',
+              id: 'lovable-exploration',
+              title: 'Explore Lovable Interface',
+              description: 'Get familiar with the Lovable development environment',
+              type: 'interactive',
+              instructions: [
+                'Create a free Lovable account',
+                'Start a new project',
+                'Explore the chat interface',
+                'Try building a simple "Hello World" app',
+                'Test the preview functionality'
+              ]
+            }
+          ],
+          completed: false
+        },
+        {
+          id: 'building-first-app',
+          title: 'Building Your First App',
+          description: 'Step-by-step guide to creating a complete application',
+          duration: '90 min',
+          type: 'hands-on',
+          difficulty: 'beginner',
+          content: `# Building Your First Lovable App
+
+## Project: Personal Task Manager
+We'll build a simple but complete task management application to demonstrate Lovable's capabilities.
+
+## Step 1: Project Setup
+Start by telling Lovable what you want to build:
+"I want to create a personal task manager where I can add, edit, delete, and mark tasks as complete"
+
+## Step 2: Core Functionality
+Add the basic features through conversation:
+
+### Adding Tasks
+"Allow users to add new tasks with a title and description"
+
+### Task Management
+"Users should be able to:
+- Mark tasks as complete or incomplete
+- Edit existing tasks
+- Delete tasks they no longer need
+- See a list of all their tasks"
+
+### Task Organization
+"Add a priority system with high, medium, and low priority levels"
+"Include due dates for tasks"
+"Add categories or tags for better organization"
+
+## Step 3: User Interface Improvements
+Enhance the visual design:
+
+### Design Refinements
+"Make the design clean and modern with a professional look"
+"Use a calming color scheme that's easy on the eyes"
+"Add icons for different actions and priority levels"
+
+### User Experience
+"Add confirmation dialogs for deleting tasks"
+"Show completed tasks with a strikethrough effect"
+"Add smooth animations for task interactions"
+
+## Step 4: Database Integration
+Lovable automatically handles the backend:
+- Tasks are stored in Supabase
+- Real-time updates work out of the box
+- Data persistence across sessions
+
+### Understanding the Backend
+- Each task is stored with ID, title, description, priority, due date, completion status
+- Automatic API endpoints for CRUD operations
+- Real-time subscriptions for live updates
+
+## Step 5: User Authentication
+Add user accounts:
+"Add user authentication so people can sign up and manage their own tasks"
+
+This adds:
+- Sign up and login forms
+- User session management
+- Task ownership (users only see their own tasks)
+- Secure data access
+
+## Step 6: Advanced Features
+Enhance your app with additional functionality:
+
+### Filtering and Search
+"Add filters to show only complete, incomplete, or high-priority tasks"
+"Include a search function to find tasks by title or description"
+
+### Statistics
+"Show a dashboard with task completion statistics and progress charts"
+
+## Step 7: Mobile Responsiveness
+"Make the app work perfectly on mobile devices with touch-friendly interactions"
+
+## Step 8: Testing and Refinement
+- Test all functionality thoroughly
+- Ask Lovable to fix any issues you discover
+- Refine the user experience based on testing
+
+## Deployment
+Once satisfied with your app:
+1. Click the deployment button
+2. Choose your domain name
+3. Your app is live on the internet
+
+## What You've Learned
+- How to communicate effectively with Lovable
+- Building full-stack applications through conversation
+- Understanding automatic database integration
+- Implementing user authentication
+- Creating responsive, modern interfaces`,
+          exercises: [
+            {
+              id: 'build-task-manager',
+              title: 'Build the Task Manager App',
+              description: 'Follow the step-by-step guide to build your first complete app',
               type: 'project',
               instructions: [
-                'Download and install Cursor',
-                'Create a new project',
-                'Test the AI chat feature',
-                'Try predictive editing with a simple function'
+                'Follow each step in the lesson',
+                'Build the task manager app as described',
+                'Test all functionality thoroughly',
+                'Add one additional feature of your choice',
+                'Deploy your app and share the link'
+              ]
+            }
+          ],
+          completed: false
+        },
+        {
+          id: 'advanced-features',
+          title: 'Advanced Lovable Features',
+          description: 'Explore powerful capabilities for complex applications',
+          duration: '120 min',
+          type: 'interactive',
+          difficulty: 'intermediate',
+          content: `# Advanced Lovable Features
+
+## Database Relationships
+Learn to work with related data models:
+
+### One-to-Many Relationships
+"Create a project management app where each project can have multiple tasks"
+
+This automatically creates:
+- Projects table with project details
+- Tasks table with project_id foreign key
+- Proper join queries for displaying related data
+
+### Many-to-Many Relationships
+"Allow users to collaborate on projects, where users can be part of multiple projects"
+
+Lovable handles:
+- Junction tables for relationships
+- User permission systems
+- Collaborative features
+
+## Advanced UI Components
+
+### Data Tables
+"Create a data table for managing users with sorting, filtering, and pagination"
+
+### Charts and Analytics
+"Add a dashboard with charts showing project progress and team performance"
+
+### File Uploads
+"Allow users to attach files to their tasks and projects"
+
+## API Integrations
+
+### External Services
+"Integrate with Google Calendar to sync project deadlines"
+"Add Slack notifications when tasks are completed"
+
+### Payment Processing
+"Add Stripe integration for premium subscriptions"
+
+## Advanced Authentication
+
+### Role-Based Access
+"Create admin, manager, and user roles with different permissions"
+
+### SSO Integration
+"Add Google and GitHub login options"
+
+## Performance Optimization
+
+### Database Optimization
+- Lovable automatically optimizes queries
+- Implements proper indexing
+- Handles connection pooling
+
+### Caching Strategies
+"Implement caching for frequently accessed data to improve performance"
+
+## Real-Time Features
+
+### Live Updates
+"Add real-time notifications when team members update shared projects"
+
+### Collaborative Editing
+"Allow multiple users to edit project details simultaneously"
+
+## Custom Business Logic
+
+### Automation Rules
+"Create automated workflows that assign tasks based on priority and team member availability"
+
+### Custom Calculations
+"Add time tracking with automatic billing calculations"
+
+## Advanced Deployment Options
+
+### Environment Management
+- Separate staging and production environments
+- Environment-specific configurations
+- Automated testing pipelines
+
+### Custom Domains
+- Connect your own domain
+- SSL certificate management
+- CDN integration for global performance
+
+## Debugging and Monitoring
+
+### Error Handling
+"Implement comprehensive error handling with user-friendly messages"
+
+### Analytics Integration
+"Add Google Analytics and custom event tracking"
+
+### Performance Monitoring
+"Set up performance monitoring and alerting"
+
+## Code Export and Customization
+
+### When to Export
+- Need for highly specific customizations
+- Integration with existing systems
+- Advanced performance requirements
+
+### Export Process
+- Full React/Supabase codebase
+- Documentation and setup instructions
+- Migration guidelines
+
+## Enterprise Features
+
+### Security
+- Data encryption at rest and in transit
+- Compliance with GDPR and other regulations
+- Advanced audit logging
+
+### Scalability
+- Automatic scaling based on usage
+- Global deployment options
+- Enterprise-grade SLAs`,
+          exercises: [
+            {
+              id: 'advanced-project',
+              title: 'Build a Complex Multi-User App',
+              description: 'Create an application using advanced Lovable features',
+              type: 'project',
+              instructions: [
+                'Choose a complex app idea (e.g., team collaboration tool)',
+                'Implement user roles and permissions',
+                'Add real-time features',
+                'Integrate with at least one external API',
+                'Include data visualization or analytics',
+                'Deploy to production with custom domain'
               ]
             }
           ],
@@ -325,252 +681,479 @@ Cursor is an AI-first IDE built on VS Code, designed to enhance developer produc
   ],
   'Replit': [
     {
-      id: 'replit-fundamentals',
+      id: 'replit-collaborative-development',
       title: 'Replit Collaborative Development',
-      description: 'Master collaborative coding and deployment',
+      description: 'Master collaborative coding and deployment on Replit',
       platform: 'Replit',
-      icon: '🔄',
-      estimatedTime: '4 hours',
-      difficulty: 'beginner',
-      prerequisites: [],
+      icon: '🤝',
+      estimatedTime: '3 hours',
+      difficulty: 'intermediate',
+      prerequisites: ['Basic programming knowledge'],
       learningObjectives: [
-        'Understand collaborative development workflows',
-        'Master Replit\'s development environment',
-        'Learn real-time coding with others',
-        'Deploy applications seamlessly'
+        'Set up collaborative development environments',
+        'Master Replit\'s multiplayer features',
+        'Deploy applications effectively',
+        'Manage dependencies and environments'
       ],
       lessons: [
         {
-          id: 'replit-intro',
-          title: 'Introduction to Replit',
-          description: 'Understanding collaborative browser-based development',
+          id: 'replit-setup',
+          title: 'Setting Up Your Replit Environment',
+          description: 'Configure Replit for optimal development',
           duration: '45 min',
-          type: 'interactive',
+          type: 'hands-on',
           difficulty: 'beginner',
-          content: `# Introduction to Replit
+          content: `# Setting Up Your Replit Environment
 
-## What is Replit?
-Replit is a collaborative browser-based IDE with over 40 million users, offering zero-setup development environments.
+## Creating Your First Repl
+Replit makes it easy to start coding immediately:
 
-## Key Features:
-- **Real-time collaboration**: Code with others simultaneously
-- **Zero setup**: No installation required
-- **Multi-language support**: Support for 50+ programming languages
-- **Built-in database**: ReplDB for data storage
-- **Instant deployment**: Share your apps immediately
+### Choosing Templates
+- **Blank Templates**: Start from scratch with any language
+- **Framework Templates**: Pre-configured setups for React, Node.js, Python, etc.
+- **Educational Templates**: Structured for learning specific concepts
 
-## Getting Started:
-1. Create a Replit account
-2. Start a new repl
-3. Choose your language/framework
-4. Begin coding immediately
+### Project Structure
+Replit automatically sets up:
+- Development server configuration
+- Package management (npm, pip, etc.)
+- Basic file structure
+- Environment variables management
 
-## Collaboration Features:
-- **Multiplayer**: Invite others to code together
-- **Comments**: Leave feedback directly in code
-- **Version control**: Built-in Git integration
-- **Live cursors**: See where others are working`,
+## Replit IDE Features
+
+### Code Editor
+- Syntax highlighting for 50+ languages
+- IntelliSense and auto-completion
+- Multi-cursor editing
+- Vim and Emacs keybindings
+
+### Integrated Tools
+- **Terminal**: Full Linux terminal access
+- **Debugger**: Built-in debugging for multiple languages
+- **Version Control**: Git integration
+- **Package Manager**: Automatic dependency installation
+
+### File Management
+- Drag and drop file uploads
+- Directory creation and organization
+- File sharing and permissions
+- Import from GitHub repositories
+
+## Environment Configuration
+
+### .replit File
+Configure your Repl's behavior:
+```
+language = "nodejs"
+run = "npm start"
+entrypoint = "index.js"
+
+[packager]
+language = "nodejs"
+
+[packager.features]
+enabledForHosting = false
+packageSearch = true
+guessImports = true
+
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
+syntax = "javascript"
+
+[languages.javascript.languageServer]
+start = "typescript-language-server --stdio"
+```
+
+### Environment Variables
+- Secure storage of API keys and secrets
+- Environment-specific configurations
+- Automatic injection into your application
+
+### Dependencies
+- Automatic package detection and installation
+- Support for npm, pip, gem, cargo, and more
+- Version management and conflict resolution
+
+## Development Workflow
+
+### 1. Project Planning
+- Define your project structure
+- Set up necessary dependencies
+- Configure development environment
+
+### 2. Development Process
+- Write code with real-time collaboration
+- Test continuously with live preview
+- Debug using integrated tools
+
+### 3. Version Control
+- Initialize Git repository
+- Commit changes regularly
+- Branch for feature development
+- Merge with pull requests
+
+### 4. Deployment
+- One-click deployment to Replit hosting
+- Custom domain configuration
+- Environment variable management
+- Performance monitoring
+
+## Best Practices
+
+### Code Organization
+- Use clear directory structures
+- Separate concerns (frontend/backend)
+- Document your code and APIs
+- Follow language-specific conventions
+
+### Performance Optimization
+- Optimize for Replit's environment
+- Use efficient algorithms and data structures
+- Implement proper caching strategies
+- Monitor resource usage
+
+### Security Considerations
+- Use environment variables for secrets
+- Implement proper authentication
+- Validate all user inputs
+- Keep dependencies updated`,
           exercises: [
             {
-              id: 'replit-collaboration',
-              title: 'Collaborative Coding Exercise',
-              description: 'Work on a project with team members',
-              type: 'project',
+              id: 'replit-project-setup',
+              title: 'Set Up a Development Environment',
+              description: 'Create and configure a Repl for a web application',
+              type: 'hands-on',
               instructions: [
-                'Create a new repl',
-                'Invite a friend to collaborate',
-                'Build a simple calculator together',
-                'Use comments to communicate'
+                'Create a new Repl using a framework template',
+                'Configure the .replit file for your needs',
+                'Set up environment variables',
+                'Install additional dependencies',
+                'Create a basic file structure',
+                'Test the development server'
               ]
             }
           ],
           completed: false
         },
         {
-          id: 'replit-database',
-          title: 'ReplDB Database Integration',
-          description: 'Learn to use Replit\'s built-in database',
+          id: 'multiplayer-collaboration',
+          title: 'Multiplayer Development',
+          description: 'Master real-time collaborative coding',
           duration: '60 min',
           type: 'interactive',
           difficulty: 'intermediate',
-          content: `# ReplDB Database Integration
+          content: `# Multiplayer Development on Replit
 
-## Understanding ReplDB
-ReplDB is Replit's built-in key-value database, perfect for storing application data without external setup.
+## Real-Time Collaboration
+Replit's multiplayer features enable seamless team development:
 
-## Key Features:
-- **Zero Configuration**: No setup required
-- **Persistent Storage**: Data persists across sessions
-- **Simple API**: Easy-to-use key-value interface
-- **Real-time Updates**: Instant data synchronization
-- **Multi-language Support**: Available in all languages
+### Live Code Editing
+- Multiple cursors visible in real-time
+- Conflict resolution for simultaneous edits
+- User presence indicators
+- Chat integration for communication
 
-## Basic Operations:
-\`\`\`javascript
-// Setting data
-await db.set("user:123", { name: "John", age: 30 });
+### Shared Workspaces
+- Invite team members to your Repl
+- Role-based permissions (read, write, admin)
+- Shared terminal and debugger sessions
+- Synchronized file trees and navigation
 
-// Getting data
-const user = await db.get("user:123");
+## Collaboration Best Practices
 
-// Deleting data
-await db.delete("user:123");
+### Project Organization
+- Establish clear file naming conventions
+- Create README.md with project guidelines
+- Use comments to explain complex logic
+- Maintain consistent code style
 
-// Listing keys
-const keys = await db.list();
-\`\`\`
+### Communication Protocols
+- Use built-in chat for quick questions
+- Comment on specific lines of code
+- Create issues for bug tracking
+- Schedule regular sync meetings
 
-## Advanced Patterns:
-- User authentication systems
-- Real-time chat applications
-- Data analytics tracking
-- Content management systems`,
+### Workflow Management
+- Assign specific files or features to team members
+- Use branches for major feature development
+- Implement code review processes
+- Establish testing procedures
+
+## Advanced Collaboration Features
+
+### Voice and Video Chat
+- Built-in voice chat for real-time discussions
+- Screen sharing for debugging sessions
+- Recording capabilities for async review
+
+### Code Review Tools
+- Inline commenting on code changes
+- Suggestion mode for collaborative editing
+- Version comparison and diff views
+- Approval workflows for changes
+
+### Project Management
+- Create and assign tasks within Replit
+- Track progress with project boards
+- Set milestones and deadlines
+- Generate progress reports
+
+## Managing Team Permissions
+
+### Permission Levels
+- **Viewer**: Read-only access to code and outputs
+- **Editor**: Can modify code and run programs
+- **Admin**: Full access including settings and permissions
+
+### Access Control
+- Invite team members via email
+- Share public links for broader access
+- Set expiration dates for temporary access
+- Revoke access when needed
+
+## Collaborative Debugging
+
+### Shared Debug Sessions
+- Multiple developers can debug simultaneously
+- Shared breakpoints and variable inspection
+- Collaborative problem-solving
+- Knowledge transfer through guided debugging
+
+### Error Tracking
+- Shared error logs and stack traces
+- Collaborative error resolution
+- Documentation of common issues
+- Prevention strategies for future errors
+
+## Version Control Integration
+
+### Git Workflow
+- Initialize repositories for team projects
+- Create feature branches for development
+- Merge through pull requests
+- Maintain clean commit history
+
+### GitHub Integration
+- Import existing repositories
+- Push changes to GitHub
+- Sync with external contributors
+- Maintain backup of your work
+
+## Deployment Collaboration
+
+### Staging Environments
+- Create shared staging instances
+- Test collaborative changes
+- Gather team feedback
+- Validate before production deployment
+
+### Production Management
+- Shared access to production environments
+- Coordinated deployment schedules
+- Rollback procedures
+- Performance monitoring
+
+## Teaching and Learning
+
+### Educational Features
+- Create assignments and tutorials
+- Monitor student progress
+- Provide real-time assistance
+- Grade and provide feedback
+
+### Mentoring Tools
+- Guide junior developers through problems
+- Share best practices and techniques
+- Create reusable learning materials
+- Build educational curricula`,
           exercises: [
             {
-              id: 'replit-db-app',
-              title: 'Build Database App',
-              description: 'Create an app using ReplDB for data storage',
+              id: 'collaborative-project',
+              title: 'Build a Project with Team Members',
+              description: 'Create a collaborative application with multiple developers',
               type: 'project',
               instructions: [
-                'Create a new repl with database',
-                'Implement user registration system',
-                'Add data CRUD operations',
-                'Test data persistence',
-                'Deploy the application'
+                'Invite 2-3 team members to your Repl',
+                'Assign different components to each member',
+                'Use multiplayer editing to build together',
+                'Implement code review process',
+                'Deploy the completed application',
+                'Document the collaboration experience'
               ]
             }
           ],
           completed: false
-        }
-      ]
-    },
-    {
-      id: 'replit-advanced',
-      title: 'Advanced Replit Development',
-      description: 'Master advanced features and deployment',
-      platform: 'Replit',
-      icon: '🚀',
-      estimatedTime: '5 hours',
-      difficulty: 'intermediate',
-      prerequisites: ['replit-fundamentals'],
-      learningObjectives: [
-        'Master advanced collaboration features',
-        'Implement CI/CD workflows',
-        'Build scalable applications',
-        'Optimize performance'
-      ],
-      lessons: [
+        },
         {
-          id: 'replit-deployment',
-          title: 'Production Deployment Strategies',
-          description: 'Deploy and scale applications on Replit',
-          duration: '90 min',
-          type: 'project',
-          difficulty: 'intermediate',
-          content: `# Production Deployment on Replit
+          id: 'deployment-strategies',
+          title: 'Advanced Deployment on Replit',
+          description: 'Master production deployment and scaling',
+          duration: '75 min',
+          type: 'hands-on',
+          difficulty: 'advanced',
+          content: `# Advanced Deployment on Replit
 
 ## Deployment Options
 Replit offers multiple deployment strategies for different application types and scaling needs.
 
-## Static Site Deployment:
-- **HTML/CSS/JS**: Simple static websites
-- **React/Vue**: Single-page applications
-- **Documentation**: Project documentation sites
-- **Portfolio**: Personal portfolio websites
+## Static Site Deployment
 
-## Dynamic Application Deployment:
-- **Node.js**: Server-side JavaScript applications
-- **Python**: Django, Flask, FastAPI applications
-- **Web Servers**: Express, Koa, Nest.js applications
-- **APIs**: RESTful and GraphQL services
+### HTML/CSS/JS Applications
+- Simple static websites
+- Portfolio sites
+- Documentation sites
+- Landing pages
 
-## Advanced Features:
-- **Custom Domains**: Connect your own domain
-- **Environment Variables**: Secure configuration
-- **Scaling**: Handle increased traffic
-- **Monitoring**: Track application performance
-- **SSL Certificates**: Secure HTTPS connections
+### Single-Page Applications
+- React, Vue, Angular applications
+- Build process optimization
+- Asset optimization and compression
+- CDN distribution
 
-## Best Practices:
-- Optimize for production
-- Implement error handling
-- Use environment variables
-- Monitor performance metrics
-- Plan for scaling`,
+### Deployment Process
+1. Configure build commands
+2. Set up deployment branch
+3. Configure custom domains
+4. Enable SSL certificates
+5. Monitor performance
+
+## Dynamic Application Deployment
+
+### Server Applications
+- Node.js with Express, Koa, Nest.js
+- Python with Django, Flask, FastAPI
+- Web servers and API services
+- Real-time applications with WebSockets
+
+### Database Integration
+- Connect to external databases
+- Environment-specific configurations
+- Connection pooling and optimization
+- Data migration strategies
+
+### Advanced Features
+- Custom domains and SSL
+- Environment variables management
+- Scaling and performance monitoring
+- Logging and error tracking
+
+## Production Best Practices
+
+### Performance Optimization
+- Code splitting and lazy loading
+- Image optimization and compression
+- Caching strategies
+- Database query optimization
+
+### Security Considerations
+- HTTPS enforcement
+- Security headers configuration
+- Rate limiting implementation
+- Input validation and sanitization
+
+### Monitoring and Analytics
+- Application performance monitoring
+- Error tracking and alerting
+- User analytics integration
+- Performance metrics dashboard
+
+## Scaling Strategies
+
+### Horizontal Scaling
+- Load balancing configurations
+- Session management across instances
+- Database connection management
+- Caching layer implementation
+
+### Performance Optimization
+- Code profiling and optimization
+- Database indexing and query optimization
+- CDN configuration for global delivery
+- Memory and CPU usage monitoring
+
+## CI/CD Pipeline
+
+### Automated Testing
+- Unit test integration
+- Integration test setup
+- End-to-end testing
+- Performance testing
+
+### Deployment Automation
+- Automated build processes
+- Staging environment testing
+- Production deployment triggers
+- Rollback procedures
+
+## Domain and SSL Management
+
+### Custom Domain Setup
+- DNS configuration
+- Domain verification
+- SSL certificate installation
+- Redirect configuration
+
+### SSL Best Practices
+- Certificate renewal automation
+- Security header configuration
+- HTTPS enforcement
+- Mixed content resolution
+
+## Monitoring and Maintenance
+
+### Application Monitoring
+- Performance metrics tracking
+- Error rate monitoring
+- User experience metrics
+- Resource utilization monitoring
+
+### Maintenance Procedures
+- Regular security updates
+- Performance optimization reviews
+- Backup and recovery procedures
+- Incident response planning
+
+## Advanced Configuration
+
+### Environment Management
+- Development, staging, production environments
+- Environment-specific configurations
+- Secret management
+- Configuration validation
+
+### Load Testing
+- Performance testing under load
+- Bottleneck identification
+- Capacity planning
+- Optimization strategies
+
+## Troubleshooting Deployment Issues
+
+### Common Problems
+- Build failures and resolution
+- Runtime errors and debugging
+- Performance issues diagnosis
+- Configuration problems
+
+### Debugging Tools
+- Application logs analysis
+- Performance profiling
+- Error tracking integration
+- Health check implementation`,
           exercises: [
             {
-              id: 'replit-production-deploy',
-              title: 'Production Deployment',
-              description: 'Deploy a full application to production',
+              id: 'production-deployment',
+              title: 'Deploy a Production Application',
+              description: 'Deploy a complete application with all production considerations',
               type: 'project',
               instructions: [
-                'Build a complete web application',
-                'Configure environment variables',
-                'Set up custom domain',
-                'Implement monitoring',
-                'Test production deployment'
-              ]
-            }
-          ],
-          completed: false
-        }
-      ]
-    }
-  ],
-  'Windsurf': [
-    {
-      id: 'windsurf-enterprise',
-      title: 'Enterprise Development with Windsurf',
-      description: 'Master enterprise-grade agentic development',
-      platform: 'Windsurf',
-      icon: '🏢',
-      estimatedTime: '5 hours',
-      difficulty: 'advanced',
-      prerequisites: [],
-      learningObjectives: [
-        'Understand enterprise security requirements',
-        'Master Cascade AI agent capabilities',
-        'Implement compliance and governance',
-        'Deploy scalable applications'
-      ],
-      lessons: [
-        {
-          id: 'windsurf-security',
-          title: 'Enterprise Security and Compliance',
-          description: 'Understanding FedRAMP and SOC 2 compliance',
-          duration: '60 min',
-          type: 'text',
-          difficulty: 'advanced',
-          content: `# Enterprise Security in Windsurf
-
-## Security Features:
-- **FedRAMP Certification**: Government-grade security
-- **SOC 2 Compliance**: Industry-standard security controls
-- **On-premise deployment**: Keep data within your infrastructure
-- **Role-based access**: Fine-grained permission controls
-
-## Best Practices:
-1. Implement least privilege access
-2. Regular security audits and updates
-3. Encrypted data transmission and storage
-4. Comprehensive logging and monitoring
-
-## Compliance Requirements:
-- Data residency requirements
-- Audit trail maintenance
-- Regular security assessments
-- Incident response procedures`,
-          exercises: [
-            {
-              id: 'security-audit',
-              title: 'Security Assessment',
-              description: 'Conduct a security review of your development environment',
-              type: 'project',
-              instructions: [
-                'Review access controls and permissions',
-                'Audit data handling procedures',
-                'Test security configurations',
-                'Document compliance measures'
+                'Build a full-stack web application',
+                'Configure production environment variables',
+                'Set up custom domain with SSL',
+                'Implement monitoring and logging',
+                'Test production deployment thoroughly',
+                'Create deployment documentation'
               ]
             }
           ],
@@ -581,56 +1164,25 @@ Replit offers multiple deployment strategies for different application types and
   ]
 };
 
-export const learningPaths = [
-  {
-    id: 'beginner-fullstack',
-    title: 'Complete Beginner to Full-Stack Developer',
-    description: 'Learn to build full-stack applications without coding',
-    duration: '12 weeks',
-    modules: [
-      'lovable-fundamentals',
-      'replit-fundamentals',
-      'cursor-fundamentals',
-      'lovable-advanced'
-    ],
-    difficulty: 'beginner'
-  },
-  {
-    id: 'enterprise-developer',
-    title: 'Enterprise Application Development',
-    description: 'Build secure, scalable enterprise applications',
-    duration: '8 weeks',
-    modules: [
-      'windsurf-enterprise',
-      'cursor-fundamentals',
-      'lovable-advanced'
-    ],
-    difficulty: 'advanced'
-  },
-  {
-    id: 'mobile-developer',
-    title: 'Mobile App Development Path',
-    description: 'Master mobile app development with no-code tools',
-    duration: '10 weeks',
-    modules: [
-      'rork-mobile-development',
-      'bolt-fundamentals',
-      'v0-ui-generation'
-    ],
-    difficulty: 'intermediate'
-  },
-  {
-    id: 'ui-specialist',
-    title: 'UI/UX Design and Development',
-    description: 'Specialize in creating beautiful user interfaces',
-    duration: '6 weeks',
-    modules: [
-      'v0-ui-generation',
-      'bolt-fundamentals',
-      'base44-allinone'
-    ],
-    difficulty: 'beginner'
-  }
-];
+// Export individual sections for easier access
+export const foundationCourses = academyData['Foundation'];
+export const lovableCourses = academyData['Lovable'];
+export const replitCourses = academyData['Replit'];
 
-// Complete academy modules are exported from completeAcademyData.ts to avoid circular imports
+// Helper functions
+export const getAllCourses = (): Course[] => {
+  return Object.values(academyData).flat();
+};
+
+export const getCoursesByPlatform = (platform: string): Course[] => {
+  return academyData[platform] || [];
+};
+
+export const getCourseById = (courseId: string): Course | undefined => {
+  return getAllCourses().find(course => course.id === courseId);
+};
+
+export const getLessonById = (courseId: string, lessonId: string): Lesson | undefined => {
+  const course = getCourseById(courseId);
+  return course?.lessons.find(lesson => lesson.id === lessonId);
+};
