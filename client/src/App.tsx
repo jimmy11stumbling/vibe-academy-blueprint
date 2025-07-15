@@ -38,7 +38,7 @@ function App() {
                   <Route path="/platforms" element={<Platforms />} />
                   <Route path="/platforms/:platformId" element={<PlatformDetail />} />
                   <Route path="/courses" element={<Courses />} />
-                  <Route path="/course/:courseId" element={<CourseDetail />} />
+                  <Route path="/courses/:courseId" element={<CourseDetail />} />
                   <Route path="/academy" element={<Academy />} />
                   <Route path="/academy/module/:moduleId" element={<ModuleDetail />} />
                   <Route path="/resources" element={<Resources />} />
