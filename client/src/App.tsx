@@ -52,8 +52,14 @@ function App() {
                   <Route path="/resources" element={<Resources />} />
                   <Route path="/analysis" element={<Analysis />} />
                   <Route path="/demo" element={<Demo />} />
+                  <Route path="/demo/:platformId" element={<Demo />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/projects" element={<Projects />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/settings" element={<Settings />} />
                   <Route path="/profile" element={<UserProfile />} />
                   <Route path="/search" element={<SearchComponent />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
               <Footer />

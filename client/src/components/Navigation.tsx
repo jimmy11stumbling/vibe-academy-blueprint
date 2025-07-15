@@ -44,15 +44,19 @@ const Navigation = () => {
   const navigation = [
     { name: 'Home', href: '/' },
     { 
+      name: 'Academy', 
+      href: '/academy',
+      badge: '45+'
+    },
+    { 
       name: 'Platforms', 
       href: '/platforms',
       badge: '10+'
     },
-    { name: 'Analysis', href: '/analysis' },
+    { name: 'Projects', href: '/projects' },
     { name: 'Demo', href: '/demo' },
-    { name: 'Resources', href: '/resources' },
-    { name: 'Courses', href: '/courses' },
-    { name: 'Projects', href: '/projects' }
+    { name: 'Analysis', href: '/analysis' },
+    { name: 'Resources', href: '/resources' }
   ];
 
   const isActive = (path: string) => {
@@ -150,9 +154,15 @@ const Navigation = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <Link to="/profile">
+                  <Link to="/dashboard">
                     <User className="h-4 w-4 mr-2" />
-                    Profile
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/settings">
+                    <User className="h-4 w-4 mr-2" />
+                    Settings
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
