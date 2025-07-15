@@ -802,20 +802,3 @@ export const getAllPlatformModules = () => ({
   'V0': v0Modules,
   'Rork': rorkModules
 });
-
-// Default export for the component
-const PlatformModules = {
-  lovableModules,
-  cursorModules,
-  replitModules,
-  windSurfModules,
-  boltModules,
-  claudeCodeModules,
-  geminiCLIModules,
-  base44Modules,
-  v0Modules,
-  rorkModules,
-  getAllPlatformModules
-};
-
-export default PlatformModules;

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,17 +20,8 @@ import {
   Code,
   Zap
 } from 'lucide-react';
-import { completeAcademyModules, learningPaths } from '@/data/completeAcademyData';
-import PlatformModules from '@/components/PlatformModules';
-import LearningPathBuilder from '@/components/platform/LearningPathBuilder';
-import PlatformOverview from '@/components/platform/PlatformOverview';
-import LearningDashboard from '@/components/LearningDashboard';
-import InteractiveLearning from '@/components/InteractiveLearning';
-import AssessmentSystem from '@/components/AssessmentSystem';
-import CertificationSystem from '@/components/CertificationSystem';
-import ProgressTracker from '@/components/ProgressTracker';
-import FullStackCapabilities from '@/components/FullStackCapabilities';
-import ComprehensiveAcademy from '@/components/ComprehensiveAcademy';
+import { learningPaths } from '@/data/academyData';
+import { completeAcademyModules } from '@/data/completeAcademyData';
 import { Link } from 'react-router-dom';
 
 const Academy = () => {
@@ -98,12 +90,12 @@ const Academy = () => {
           </Badge>
         </div>
       </CardHeader>
-
+      
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground leading-relaxed">
           {module.description}
         </p>
-
+        
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
             <Clock className="h-3 w-3" />
@@ -167,10 +159,10 @@ const Academy = () => {
           <Award className="h-6 w-6 text-yellow-500" />
         </div>
       </CardHeader>
-
+      
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">{path.description}</p>
-
+        
         <div className="flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
             <Clock className="h-3 w-3" />
@@ -209,7 +201,7 @@ const Academy = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-
+      
       <main className="pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
@@ -257,52 +249,88 @@ const Academy = () => {
             </Card>
           </div>
 
-          <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-8">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="fullstack">Full-Stack</TabsTrigger>
-            <TabsTrigger value="modules">Modules</TabsTrigger>
-            <TabsTrigger value="paths">Learning Paths</TabsTrigger>
-            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-            <TabsTrigger value="assessments">Assessments</TabsTrigger>
-            <TabsTrigger value="certifications">Certifications</TabsTrigger>
-            <TabsTrigger value="progress">Progress</TabsTrigger>
-          </TabsList>
+          <Tabs defaultValue="modules" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="modules">Learning Modules</TabsTrigger>
+              <TabsTrigger value="paths">Learning Paths</TabsTrigger>
+              <TabsTrigger value="platforms">Platform Guide</TabsTrigger>
+            </TabsList>
 
-            <TabsContent value="dashboard" className="space-y-6">
-              <LearningDashboard />
+            <TabsContent value="modules" className="space-y-8">
+              {/* Filters */}
+              <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-2">
+                  {platforms.map(platform => (
+                    <Button
+                      key={platform.id}
+                      variant={selectedPlatform === platform.id ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setSelectedPlatform(platform.id)}
+                    >
+                      {platform.icon} {platform.name}
+                    </Button>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {difficulties.map(difficulty => (
+                    <Button
+                      key={difficulty.id}
+                      variant={selectedDifficulty === difficulty.id ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setSelectedDifficulty(difficulty.id)}
+                    >
+                      {difficulty.name}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Modules Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredModules.map((module) => (
+                  <ModuleCard key={module.id} module={module} />
+                ))}
+              </div>
             </TabsContent>
 
-            <TabsContent value="modules" className="space-y-6">
-              <PlatformModules />
+            <TabsContent value="paths" className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {learningPaths.map((path) => (
+                  <LearningPathCard key={path.id} path={path} />
+                ))}
+              </div>
             </TabsContent>
 
-            <TabsContent value="interactive" className="space-y-6">
-              <InteractiveLearning />
-            </TabsContent>
-
-            <TabsContent value="assessments" className="space-y-6">
-              <AssessmentSystem />
-            </TabsContent>
-
-            <TabsContent value="certifications" className="space-y-6">
-              <CertificationSystem />
-            </TabsContent>
-
-            <TabsContent value="paths" className="space-y-6">
-              <LearningPathBuilder />
-            </TabsContent>
-
-            <TabsContent value="platforms" className="space-y-6">
-              <PlatformOverview />
-            </TabsContent>
-            
-             <TabsContent value="fullstack" className="space-y-6">
-              <FullStackCapabilities />
-            </TabsContent>
-
-            <TabsContent value="overview" className="space-y-6">
-              <ComprehensiveAcademy />
+            <TabsContent value="platforms" className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {platforms.slice(1).map((platform) => (
+                  <Card key={platform.id} className="glass-card">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <span className="text-2xl">{platform.icon}</span>
+                        {platform.name}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        Comprehensive learning modules for {platform.name}
+                      </p>
+                      <div className="flex gap-2">
+                        <Link to={`/platforms/${platform.id}`} className="flex-1">
+                          <Button variant="outline" className="w-full">
+                            <Code className="h-4 w-4 mr-2" />
+                            View Platform
+                          </Button>
+                        </Link>
+                        <Button className="flex-1 hero-gradient text-white">
+                          <Play className="h-4 w-4 mr-2" />
+                          Start Learning
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
         </div>

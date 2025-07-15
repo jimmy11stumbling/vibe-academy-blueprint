@@ -1,3 +1,4 @@
+
 export interface PlatformData {
   overview: string;
   keyFeatures: string[];
@@ -7,333 +8,291 @@ export interface PlatformData {
   marketPosition: string;
 }
 
-export const platformData = {
+export const platformData: Record<string, PlatformData> = {
   'Lovable 2.0': {
-    overview: 'European startup revolutionizing full-stack development through chat-driven interfaces. Build complete applications by describing what you want in natural language.',
+    overview: 'European AI startup revolutionizing full-stack development through chat-driven interfaces',
     keyFeatures: [
       'Chat-driven full-stack development',
-      'Native Supabase integration for backend',
-      'Real-time visual editing and previews',
-      'Multiplayer workspaces for team collaboration',
-      'One-click deployment to production',
-      'Built-in authentication and user management',
-      'Figma to code conversion',
-      'Security scanning and compliance'
+      'Native Supabase integration',
+      'Visual editing capabilities',
+      'Multiplayer workspaces',
+      'One-click deployment',
+      'Security scanning',
+      'Figma integration'
     ],
     strengths: [
-      'Zero coding required - purely conversational',
-      'Complete full-stack capabilities in one platform',
-      'Fast iteration and prototyping',
-      'Strong European backing (Accel, 20VC)',
-      'Excellent for non-technical founders',
-      'Comprehensive backend integration'
+      'Fastest time-to-market for MVPs',
+      'No coding experience required',
+      'Powerful backend integration',
+      'Growing European ecosystem'
     ],
     limitations: [
-      'Limited customization for complex requirements',
-      'Credit-based pricing can be expensive',
-      'Relatively new platform with evolving features',
-      'Learning curve for effective prompting'
+      'Pricing can be expensive for large projects',
+      'Recent stability issues with 2.0 launch',
+      'Limited to web applications'
     ],
     pricing: {
-      'Free': '5 credits/day',
-      'Pro': '$25/month',
-      'Enterprise': 'Custom pricing'
+      free: 'Limited daily credits',
+      pro: '$25/month',
+      teams: '$30/user/month',
+      enterprise: 'Custom pricing'
     },
-    marketPosition: 'Leading the charge in conversational full-stack development, positioning itself as the go-to platform for non-technical founders and rapid prototyping.'
+    marketPosition: 'Leading no-code platform for rapid full-stack development'
   },
   'Cursor': {
-    overview: 'AI-first IDE built on VS Code, designed for professional developers who want to maintain full control while leveraging AI assistance.',
+    overview: 'AI-first IDE built on VS Code, trusted by developers at major tech companies',
     keyFeatures: [
-      'Codebase-aware AI chat with full context',
-      'Predictive editing with Tab-to-Accept',
-      'Agent mode for complex multi-file tasks',
-      'Complete VS Code compatibility',
-      'Privacy mode for sensitive code',
-      'Enterprise-grade security features',
-      'Custom model support',
-      'Advanced refactoring capabilities'
+      'Codebase-aware AI chat',
+      'Predictive editing',
+      'Agent mode for complex tasks',
+      'VS Code compatibility',
+      'Enterprise security',
+      'Privacy mode'
     ],
     strengths: [
-      'Full-stack development with AI assistance',
-      'Professional developer focused',
-      'Maintains code quality and standards',
-      'Excellent for complex enterprise projects',
-      'Strong privacy and security features',
-      'Seamless VS Code migration'
+      'Familiar VS Code interface',
+      'Powerful AI integration',
+      'Professional developer focus',
+      'Strong funding and backing'
     ],
     limitations: [
-      'Requires coding knowledge to be effective',
-      'Learning curve for AI collaboration',
-      'Subscription cost for full features',
-      'Still need to understand underlying technologies'
+      'Learning curve for AI features',
+      'Can be overwhelming for beginners',
+      'Subscription required for full features'
     ],
     pricing: {
-      'Free': 'Limited features',
-      'Pro': '$20/month',
-      'Enterprise': 'Custom pricing'
+      pro: '$20/month',
+      enterprise: 'Custom pricing',
+      api: 'Bring your own key option'
     },
-    marketPosition: 'Dominant in the professional AI-assisted development space, backed by major investors and used by millions of developers worldwide.'
+    marketPosition: 'Leading AI-first IDE for professional developers'
   },
   'Replit': {
-    overview: 'The world\'s most popular collaborative coding platform with 40M+ users, offering zero-setup development environments.',
+    overview: 'Collaborative browser-based IDE with 40M+ users and zero-setup development',
     keyFeatures: [
-      'Real-time collaborative coding',
-      'Zero setup development environment',
+      'Real-time collaboration',
+      'Zero-setup environment',
       'Built-in database (ReplDB)',
-      'Instant deployment and hosting',
-      'Mobile app for coding on the go',
-      'AI Agent for code generation',
-      'Support for 50+ programming languages',
-      'Integrated version control'
+      'Authentication system',
+      'AI agent assistance',
+      'Mobile development'
     ],
     strengths: [
-      'Complete full-stack development platform',
-      'Massive community and ecosystem',
-      'Perfect for learning and education',
-      'Excellent collaboration features',
-      'Mobile development capabilities',
-      'Strong free tier'
+      'Massive community',
+      'Perfect for education',
+      'True collaborative coding',
+      'Multi-language support'
     ],
     limitations: [
-      'Performance limitations on free tier',
-      'Limited customization options',
-      'Dependency on internet connection',
-      'Can be slow for large projects'
+      'Performance can be slower than local development',
+      'Limited offline capabilities',
+      'Pricing for teams can add up'
     ],
     pricing: {
-      'Free': 'Basic features',
-      'Core': '$20/month',
-      'Teams': '$35/user/month'
+      starter: 'Free tier available',
+      core: '$20/month',
+      teams: '$35/user/month'
     },
-    marketPosition: 'Leading educational and collaborative coding platform, essential for learning and team development with unmatched community support.'
+    marketPosition: 'Dominant collaborative coding platform with educational focus'
   },
   'Windsurf': {
-    overview: 'Enterprise-grade agentic code editor with FedRAMP certification, designed for secure, scalable development environments.',
+    overview: 'Enterprise-grade agentic code editor with FedRAMP certification and Cascade AI',
     keyFeatures: [
-      'Powerful Cascade agent for complex tasks',
-      'Multi-model AI support (OpenAI, Claude, Gemini)',
-      'FedRAMP and SOC 2 compliance',
-      'On-premise deployment options',
-      'Advanced context understanding',
-      'Enterprise security controls',
-      'Custom workflow automation',
-      'Integration with existing dev tools'
+      'Cascade AI agent',
+      'Multi-model support',
+      'FedRAMP certification',
+      'SOC 2 compliance',
+      'On-premise deployment',
+      'MCP support'
     ],
     strengths: [
-      'Enterprise-grade security and compliance',
-      'Powerful AI agent capabilities',
-      'Supports complex full-stack projects',
-      'Government and enterprise ready',
-      'Multi-model AI flexibility',
-      'Advanced automation features'
+      'Enterprise security focus',
+      'Powerful agentic capabilities',
+      'Government compliance',
+      'Multi-model flexibility'
     ],
     limitations: [
-      'Complex setup for enterprise features',
-      'Higher cost for full capabilities',
-      'Learning curve for advanced features',
+      'Higher learning curve',
+      'More expensive than alternatives',
       'Overkill for simple projects'
     ],
     pricing: {
-      'Free': '25 credits/month',
-      'Pro': '$15/month',
-      'Teams': '$30/month'
+      free: '25 credits/month',
+      pro: '$15/month',
+      teams: '$30/month',
+      enterprise: '$60+/user/month'
     },
-    marketPosition: 'Leading enterprise AI development solution with unique security certifications, perfect for government and large enterprise use cases.'
+    marketPosition: 'Premium enterprise AI coding solution'
   },
   'Bolt': {
-    overview: 'Revolutionary platform running full-stack development entirely in the browser using WebContainer technology.',
+    overview: 'Revolutionary in-browser full-stack development using WebContainer technology',
     keyFeatures: [
-      'WebContainer technology for browser-based Node.js',
-      'Full-stack development without local setup',
-      'Real-time code execution and preview',
-      'GitHub integration and export',
-      'Open-source foundation',
-      'Complete npm ecosystem support',
-      'Instant deployment capabilities',
-      'Collaborative development features'
+      'WebContainer technology',
+      'Full-stack browser development',
+      'Real-time code execution',
+      'Open source core',
+      'GitHub integration',
+      'Code export capabilities'
     ],
     strengths: [
-      'True full-stack development in browser',
-      'Zero setup required',
-      'Revolutionary WebContainer technology',
-      'Strong open-source community',
-      'Excellent for learning and prototyping',
-      'Fast iteration cycles'
+      'Unique WebContainer technology',
+      'True full-stack in browser',
+      'Open source foundation',
+      'No local setup required'
     ],
     limitations: [
-      'Limited to web technologies',
-      'Browser performance constraints',
-      'Newer platform with evolving features',
-      'Limited enterprise features'
+      'Limited to JavaScript ecosystem',
+      'Token-based pricing can be unpredictable',
+      'Browser performance constraints'
     ],
     pricing: {
-      'Free': '150K tokens/day',
-      'Pro': '$20/month',
-      'Teams': '$30/member/month'
+      free: '150K tokens/day',
+      pro: '$20/month',
+      teams: '$30/member/month'
     },
-    marketPosition: 'Pioneering browser-based full-stack development, ideal for modern web applications and rapid prototyping.'
+    marketPosition: 'Innovative browser-based full-stack development platform'
   },
   'Claude Code': {
-    overview: 'Security-first CLI agent by Anthropic, designed for professional developers who prioritize security and control.',
+    overview: 'Security-first CLI agent from Anthropic for terminal-based AI development',
     keyFeatures: [
-      'Terminal-native development experience',
-      'Security-first architecture',
-      'Granular permission controls',
-      'Project-specific context management',
+      'Terminal-native interface',
+      'Granular security permissions',
+      'CLAUDE.md context files',
+      'Multi-file refactoring',
       'Custom slash commands',
-      'Enterprise security features',
-      'Audit trails and monitoring',
-      'MCP protocol support'
+      'Enterprise security'
     ],
     strengths: [
-      'Unmatched security and privacy',
-      'Professional developer focused',
-      'Excellent for complex full-stack projects',
-      'Terminal-native workflow',
-      'Fine-grained control over AI actions',
+      'Maximum security and control',
+      'Developer-native terminal interface',
+      'Powerful context management',
+      'Anthropic\'s best-in-class models'
+    ],
+    limitations: [
+      'High token consumption costs',
+      'Steep learning curve',
+      'Command-line only interface'
+    ],
+    pricing: {
+      pro: '$17/month',
+      max: '$100/month',
+      api: 'Pay-per-token available'
+    },
+    marketPosition: 'Premium CLI-first AI development tool for power users'
+  },
+  'Gemini CLI': {
+    overview: 'Open-source terminal AI agent from Google with massive context windows',
+    keyFeatures: [
+      'Open source foundation',
+      '1M token context window',
+      'Built-in web search',
+      'MCP protocol support',
+      'Multi-platform support',
+      'Generous free tier'
+    ],
+    strengths: [
+      'Completely open source',
+      'Massive free usage limits',
+      'Large context windows',
+      'Google\'s latest AI models'
+    ],
+    limitations: [
+      'Early alpha stability issues',
+      'Model downgrades on free tier',
+      'Limited advanced features'
+    ],
+    pricing: {
+      free: 'Generous limits with Google account',
+      paid: 'Usage-based API billing',
+      enterprise: 'Google Cloud integration'
+    },
+    marketPosition: 'Open-source challenger with aggressive free tier strategy'
+  },
+  'Base44': {
+    overview: 'Wix-acquired no-code platform with "Buttery Includes" all-in-one philosophy',
+    keyFeatures: [
+      'All-in-one backend included',
+      'Built-in authentication',
+      'Integrated database',
+      'Enterprise SSO',
+      'Multiple AI model support',
+      'Instant deployment'
+    ],
+    strengths: [
+      'True all-in-one solution',
+      'No external service dependencies',
+      'Wix ecosystem integration',
       'Enterprise-ready features'
     ],
     limitations: [
-      'Command-line interface only',
-      'Requires technical expertise',
-      'Learning curve for setup',
-      'Limited visual interface'
-    ],
-    pricing: {
-      'Pro': '$17/month',
-      'Max': '$100/month',
-      'API': 'Usage-based'
-    },
-    marketPosition: 'Premier security-focused AI development tool, trusted by enterprises and security-conscious developers worldwide.'
-  },
-  'Gemini CLI': {
-    overview: 'Google\'s open-source AI development tool with massive context windows and free tier, perfect for individual developers.',
-    keyFeatures: [
-      'Open-source with full transparency',
-      'Massive 1M+ token context windows',
-      'Built-in web search capabilities',
-      'Generous free tier limits',
-      'MCP protocol integration',
-      'Real-time information access',
-      'Cross-platform compatibility',
-      'Google Cloud integration'
-    ],
-    strengths: [
-      'Completely open-source',
-      'Excellent free tier offering',
-      'Massive context window capabilities',
-      'Great for full-stack development',
-      'Strong Google ecosystem integration',
-      'Perfect for learning and experimentation'
-    ],
-    limitations: [
-      'Limited enterprise features',
-      'Newer platform with evolving capabilities',
-      'Requires technical setup',
-      'Limited visual interface'
-    ],
-    pricing: {
-      'Free': 'Generous limits',
-      'API': 'Usage-based pricing'
-    },
-    marketPosition: 'Leading open-source AI development solution, perfect for individual developers and those wanting transparency and control.'
-  },
-  'Base44': {
-    overview: 'Comprehensive no-code platform acquired by Wix, following the "Buttery Includes" philosophy where everything is included.',
-    keyFeatures: [
-      'All-in-one development platform',
-      'Built-in backend and database',
-      'Native user authentication',
-      'Enterprise SSO integration',
-      'Multiple AI model support',
-      'Instant deployment and hosting',
-      'Business-focused templates',
-      'Comprehensive admin tools'
-    ],
-    strengths: [
-      'Complete full-stack solution',
-      'Perfect for business applications',
-      'No external dependencies needed',
-      'Enterprise-ready features',
-      'Strong Wix ecosystem integration',
-      'Excellent for non-technical users'
-    ],
-    limitations: [
-      'Limited customization options',
-      'Vendor lock-in with Wix',
-      'Can be expensive for advanced features',
-      'Learning curve for complex features'
-    ],
-    pricing: {
-      'Free': '25 messages/month',
-      'Starter': '$20/month',
-      'Pro': '$100/month'
-    },
-    marketPosition: 'Comprehensive business application platform, perfect for entrepreneurs and businesses needing complete solutions.'
-  },
-  'V0': {
-    overview: 'Vercel\'s specialized UI component generator, designed for creating beautiful React components with Tailwind CSS.',
-    keyFeatures: [
-      'Specialized React component generation',
-      'Tailwind CSS optimization',
-      'Image-to-code conversion',
-      'Figma design integration',
-      'Responsive design generation',
-      'Vercel deployment integration',
-      'Component library creation',
-      'Design system support'
-    ],
-    strengths: [
-      'Excellent for UI/UX development',
-      'Perfect React and Tailwind integration',
-      'High-quality code generation',
-      'Great for design systems',
-      'Seamless Vercel deployment',
-      'Professional design output'
-    ],
-    limitations: [
-      'Limited to frontend development',
-      'Requires backend integration separately',
-      'Focused only on React ecosystem',
+      'Less flexibility than modular approaches',
+      'Newer platform with smaller community',
       'Limited customization options'
     ],
     pricing: {
-      'Free': '200 credits',
-      'Basic': '$10/month',
-      'Premium': '$50/month'
+      free: '25 messages/month',
+      starter: '$20/month',
+      builder: '$50/month',
+      pro: '$100/month'
     },
-    marketPosition: 'Leading UI component generation platform, essential for modern React development and design systems.'
+    marketPosition: 'Comprehensive no-code solution backed by Wix\'s resources'
   },
-  'Rork': {
-    overview: 'Specialized mobile app development platform using React Native, perfect for creating cross-platform mobile applications.',
+  'V0': {
+    overview: 'Vercel-native UI component generator optimized for React and Next.js',
     keyFeatures: [
-      'React Native app generation',
-      'Cross-platform mobile development',
-      'App store deployment assistance',
-      'Backend integration support',
-      'Native device feature access',
-      'Real device testing',
-      'Performance optimization',
-      'Mobile-first design patterns'
+      'React component generation',
+      'Tailwind CSS optimization',
+      'Image-to-code conversion',
+      'Vercel deployment integration',
+      'Iterative refinement',
+      'Framework flexibility'
     ],
     strengths: [
-      'Specialized mobile development',
-      'Cross-platform compatibility',
-      'Native performance capabilities',
-      'App store deployment support',
-      'Perfect for mobile-first startups',
-      'React Native expertise'
+      'Specialized UI generation',
+      'Perfect Vercel integration',
+      'High-quality React components',
+      'Designer-developer bridge'
     ],
     limitations: [
-      'Limited to mobile applications',
-      'Requires mobile development knowledge',
-      'Smaller community compared to others',
-      'Limited web application support'
+      'UI-focused, not full-stack',
+      'Best with Vercel ecosystem',
+      'Limited to frontend development'
     ],
     pricing: {
-      'Starter': '$20/month',
-      'Pro': '$200/month'
+      free: '200 credits',
+      basic: '$10/month',
+      standard: '$30/month',
+      premium: '$50/month'
     },
-    marketPosition: 'Specialized mobile development platform, ideal for entrepreneurs and startups focusing on mobile-first applications.'
+    marketPosition: 'Leading UI component generator for React ecosystem'
+  },
+  'Rork': {
+    overview: 'Mobile-first AI platform generating native iOS and Android apps with React Native',
+    keyFeatures: [
+      'React Native generation',
+      'Cross-platform deployment',
+      'Native UI components',
+      'App store publishing',
+      'Backend integration',
+      'Real device testing'
+    ],
+    strengths: [
+      'Mobile-specific focus',
+      'True native app generation',
+      'Cross-platform efficiency',
+      'App store deployment'
+    ],
+    limitations: [
+      'Stability and reliability issues',
+      'Limited customer support',
+      'High per-message pricing',
+      'Mobile development complexity'
+    ],
+    pricing: {
+      starter: '$20/month (100 messages)',
+      pro: '$200/month (1000 messages)',
+      enterprise: 'Custom pricing'
+    },
+    marketPosition: 'Specialized mobile app generator with execution challenges'
   }
-}
+};

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,9 +17,6 @@ import {
   User,
   Zap
 } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { PracticalProjects } from '@/components/PracticalProjects';
-import ProjectShowcase from '@/components/ProjectShowcase';
 
 const Projects = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -272,25 +270,11 @@ const Projects = () => {
 
         {/* All Projects */}
         <div>
-        <Tabs defaultValue="showcase" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="showcase">Showcase</TabsTrigger>
-            <TabsTrigger value="all">All Projects</TabsTrigger>
-            <TabsTrigger value="beginner">Beginner</TabsTrigger>
-            <TabsTrigger value="intermediate">Intermediate</TabsTrigger>
-            <TabsTrigger value="advanced">Advanced</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="showcase" className="space-y-6">
-            <ProjectShowcase />
-          </TabsContent>
-
-          <TabsContent value="all" className="space-y-6">
           <h2 className="text-2xl font-bold mb-6">
             {selectedCategory === 'all' ? 'All Projects' : categories.find(c => c.id === selectedCategory)?.name}
             <span className="text-muted-foreground ml-2">({filteredProjects.length})</span>
           </h2>
-
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project) => (
               <Card key={project.id} className="glass-card border-border/50 hover:border-primary/20 transition-all duration-300 group">
@@ -374,17 +358,6 @@ const Projects = () => {
               </p>
             </div>
           )}
-        </TabsContent>
-          <TabsContent value="beginner" className="space-y-6">
-            Content for Beginner projects goes here.
-          </TabsContent>
-          <TabsContent value="intermediate" className="space-y-6">
-            Content for Intermediate projects goes here.
-          </TabsContent>
-          <TabsContent value="advanced" className="space-y-6">
-            Content for Advanced projects goes here.
-          </TabsContent>
-        </Tabs>
         </div>
       </div>
     </div>

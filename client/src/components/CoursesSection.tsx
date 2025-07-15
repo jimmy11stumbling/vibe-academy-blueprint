@@ -10,48 +10,45 @@ const CoursesSection = () => {
   const courses = [
     {
       id: 1,
-      title: 'App Planning & Strategy Fundamentals',
-      description: 'Master the art of planning full-stack applications across any of the 10 no-code platforms. Learn to define requirements, user flows, and technical specifications.',
-      instructor: 'NoCode Academy',
-      duration: '3 hours',
-      students: '5.2K',
+      title: 'No-Code Platform Mastery',
+      description: 'Complete guide to understanding and leveraging modern no-code development platforms for rapid application development.',
+      instructor: 'AI Development Team',
+      duration: '8 hours',
+      students: '2.5K',
       rating: 4.9,
-      level: 'Beginner',
-      type: 'FREE Fundamentals',
-      modules: 6,
-      price: 'FREE',
+      level: 'Beginner to Advanced',
+      type: 'Interactive Course',
+      modules: 12,
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop',
-      topics: ['App Requirements Analysis', 'User Story Mapping', 'Feature Prioritization', 'Technology Selection', 'Project Roadmapping']
+      topics: ['Platform Overview', 'AI Integration', 'Deployment Strategies', 'Best Practices']
     },
     {
       id: 2,
-      title: 'Master Blueprint Creation',
-      description: 'Create comprehensive blueprints for full-stack applications. Learn wireframing, database design, API planning, and system architecture for any platform.',
-      instructor: 'NoCode Academy',
-      duration: '4 hours',
-      students: '4.8K',
+      title: 'AI-Powered Development Workflow',
+      description: 'Learn to integrate AI tools into your development process for maximum productivity and code quality.',
+      instructor: 'Tech Innovation Lab',
+      duration: '6 hours',
+      students: '1.8K',
       rating: 4.8,
-      level: 'Beginner',
-      type: 'FREE Fundamentals',
+      level: 'Intermediate',
+      type: 'Hands-on Workshop',
       modules: 8,
-      price: 'FREE',
       image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop',
-      topics: ['Wireframe Design', 'Database Schema Planning', 'API Architecture', 'Component Mapping', 'Integration Planning']
+      topics: ['AI Assistants', 'Code Generation', 'Testing Automation', 'Performance Optimization']
     },
     {
       id: 3,
-      title: 'Prompt Engineering for Full-Stack Apps',
-      description: 'Master the essential skill of prompt engineering to effectively communicate with AI platforms and achieve optimal results for complex full-stack development.',
-      instructor: 'NoCode Academy',
-      duration: '2.5 hours',
-      students: '6.1K',
+      title: 'Platform Architecture Deep Dive',
+      description: 'Technical analysis of how leading no-code platforms are built and how to make architectural decisions.',
+      instructor: 'Platform Architecture Group',
+      duration: '10 hours',
+      students: '950',
       rating: 4.7,
-      level: 'Beginner',
-      type: 'FREE Fundamentals',
-      modules: 5,
-      price: 'FREE',
+      level: 'Advanced',
+      type: 'Technical Analysis',
+      modules: 15,
       image: 'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=400&h=200&fit=crop',
-      topics: ['Prompt Structure & Clarity', 'Context Setting', 'Iterative Refinement', 'Platform-Specific Prompts', 'Advanced Techniques']
+      topics: ['System Design', 'Scalability', 'Security', 'Integration Patterns']
     }
   ];
 
@@ -66,7 +63,7 @@ const CoursesSection = () => {
     <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4">FREE Fundamentals</Badge>
+          <Badge variant="outline" className="mb-4">Learning</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Master No-Code
             <span className="hero-gradient bg-clip-text text-transparent block mt-2">
@@ -74,8 +71,8 @@ const CoursesSection = () => {
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            3 Essential FREE modules to master full-stack app development across all 10 no-code platforms. 
-            Start with planning, blueprint creation, and prompt engineering fundamentals.
+            Comprehensive courses and tutorials to help you become proficient with 
+            modern AI-powered development platforms.
           </p>
         </div>
 
@@ -89,11 +86,6 @@ const CoursesSection = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute top-4 right-4">
-                  <Badge className="bg-green-500 text-white font-bold">
-                    FREE
-                  </Badge>
-                </div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <Badge variant="secondary" className="mb-2">
                     {course.type}
@@ -146,10 +138,10 @@ const CoursesSection = () => {
                   </div>
                 </div>
 
-                <Button className="w-full group bg-green-600 hover:bg-green-700" asChild>
+                <Button className="w-full group" asChild>
                   <Link to={`/courses/${course.id}`}>
                     <Video className="h-4 w-4 mr-2" />
-                    Start FREE Course
+                    Start Learning
                     <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
@@ -160,9 +152,9 @@ const CoursesSection = () => {
 
         <div className="text-center">
           <Button size="lg" variant="outline" asChild>
-            <Link to="/academy">
+            <Link to="/courses">
               <Code className="h-4 w-4 mr-2" />
-              Explore Full Academy
+              View All Courses
             </Link>
           </Button>
         </div>
