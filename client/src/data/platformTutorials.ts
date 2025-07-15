@@ -457,8 +457,4 @@ Rork specializes in generating native mobile applications using React Native and
   ]
 };
 
-// Merge with existing academy modules
-export const completeAcademyModules = {
-  ...academyModules,
-  ...platformTutorials
-};
+// Complete academy modules are exported from completeAcademyData.ts to avoid circular imports

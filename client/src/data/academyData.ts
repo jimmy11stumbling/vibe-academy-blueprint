@@ -505,4 +505,4 @@ export const learningPaths = [
   }
 ];
 
-// This will be exported from platformTutorials.ts to avoid circular imports
+// Complete academy modules are exported from completeAcademyData.ts to avoid circular imports

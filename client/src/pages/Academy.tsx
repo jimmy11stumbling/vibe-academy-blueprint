@@ -20,7 +20,8 @@ import {
   Code,
   Zap
 } from 'lucide-react';
-import { completeAcademyModules, learningPaths } from '@/data/academyData';
+import { learningPaths } from '@/data/academyData';
+import { completeAcademyModules } from '@/data/completeAcademyData';
 import { Link } from 'react-router-dom';
 
 const Academy = () => {

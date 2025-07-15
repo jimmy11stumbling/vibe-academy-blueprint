@@ -23,7 +23,7 @@ import {
   ChevronRight,
   ArrowLeft
 } from 'lucide-react';
-import { completeAcademyModules } from '@/data/academyData';
+import { completeAcademyModules } from '@/data/completeAcademyData';
 import { Link } from 'react-router-dom';
 
 const ModuleDetail = () => {
