@@ -1,23 +1,28 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Toaster } from 'sonner';
-import { AuthProvider } from '@/contexts/AuthContext';
 import { ThemeProvider } from '@/contexts/ThemeContext';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
-import ErrorBoundary from '@/components/ErrorBoundary';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { Toaster } from '@/components/ui/sonner';
 import Home from '@/pages/Home';
+import Platforms from '@/pages/Platforms';
+import PlatformDetail from '@/pages/PlatformDetail';
 import Courses from '@/pages/Courses';
 import CourseDetail from '@/pages/CourseDetail';
-import Projects from '@/pages/Projects';
-import Pricing from '@/pages/Pricing';
-import Platforms from '@/pages/Platforms';
+import Academy from '@/pages/Academy';
+import ModuleDetail from '@/pages/ModuleDetail';
+import Resources from '@/pages/Resources';
 import Analysis from '@/pages/Analysis';
 import Demo from '@/pages/Demo';
-import Resources from '@/pages/Resources';
+import Dashboard from '@/pages/Dashboard';
+import Settings from '@/pages/Settings';
+import Projects from '@/pages/Projects';
+import Pricing from '@/pages/Pricing';
+import NotFound from '@/pages/NotFound';
+import ErrorBoundary from '@/components/ErrorBoundary';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import UserProfile from '@/components/UserProfile';
 import SearchComponent from '@/components/SearchComponent';
-import PlatformDetailPage from '@/pages/PlatformDetail';
 
 function App() {
   return (
@@ -30,15 +35,15 @@ function App() {
               <main>
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/courses" element={<Courses />} />
-                  <Route path="/courses/:id" element={<CourseDetail />} />
-                  <Route path="/projects" element={<Projects />} />
-                  <Route path="/pricing" element={<Pricing />} />
                   <Route path="/platforms" element={<Platforms />} />
-                  <Route path="/platforms/:platformName" element={<PlatformDetailPage />} />
+                  <Route path="/platforms/:platformId" element={<PlatformDetail />} />
+                  <Route path="/courses" element={<Courses />} />
+                  <Route path="/course/:courseId" element={<CourseDetail />} />
+                  <Route path="/academy" element={<Academy />} />
+                  <Route path="/academy/module/:moduleId" element={<ModuleDetail />} />
+                  <Route path="/resources" element={<Resources />} />
                   <Route path="/analysis" element={<Analysis />} />
                   <Route path="/demo" element={<Demo />} />
-                  <Route path="/resources" element={<Resources />} />
                   <Route path="/profile" element={<UserProfile />} />
                   <Route path="/search" element={<SearchComponent />} />
                 </Routes>

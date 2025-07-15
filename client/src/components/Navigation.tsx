@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -33,7 +32,7 @@ const Navigation = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -119,7 +118,7 @@ const Navigation = () => {
                 <Search className="h-4 w-4" />
               </Link>
             </Button>
-            
+
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm">
@@ -211,7 +210,7 @@ const Navigation = () => {
                 )}
               </Link>
             ))}
-            
+
             <div className="pt-4 border-t border-border/50 space-y-2">
               <div className="flex items-center gap-2 px-3">
                 <span className="text-sm text-muted-foreground">Theme:</span>
@@ -239,7 +238,7 @@ const Navigation = () => {
                   </Button>
                 </div>
               </div>
-              
+
               <Button className="w-full mx-3" style={{ width: 'calc(100% - 1.5rem)' }} asChild>
                 <Link to="/pricing">Get Started</Link>
               </Button>
