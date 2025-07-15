@@ -1,4 +1,3 @@
-
 import { AcademyModule, academyModules } from './academyData';
 
 export const platformTutorials: Record<string, AcademyModule[]> = {
@@ -143,6 +142,121 @@ claude auth login
                 'Configure authentication',
                 'Create a test project with CLAUDE.md',
                 'Test basic commands and responses'
+              ]
+            }
+          ],
+          completed: false
+        },
+        {
+          id: 'claude-advanced-features',
+          title: 'Advanced Claude CLI Features',
+          description: 'Master complex refactoring and multi-file operations',
+          duration: '90 min',
+          type: 'interactive',
+          difficulty: 'advanced',
+          content: `# Advanced Claude CLI Features
+
+## Multi-file Operations
+Claude CLI excels at handling complex, multi-file refactoring tasks with full context awareness.
+
+## Key Capabilities:
+- **Codebase Analysis**: Understand entire project structure
+- **Refactoring**: Safe, context-aware code changes
+- **Architecture**: Design system-level improvements
+- **Testing**: Generate comprehensive test suites
+
+## Advanced Commands:
+- \`claude analyze\`: Deep codebase analysis
+- \`claude refactor\`: Multi-file refactoring
+- \`claude test\`: Generate test coverage
+- \`claude docs\`: Create documentation
+
+## Best Practices:
+- Use descriptive CLAUDE.md files
+- Break large tasks into smaller chunks
+- Review changes before applying
+- Maintain version control integration
+
+## Token Optimization:
+- Use targeted queries
+- Leverage context files efficiently
+- Monitor usage patterns
+- Implement caching strategies`,
+          exercises: [
+            {
+              id: 'claude-refactor',
+              title: 'Multi-file Refactoring',
+              description: 'Perform complex refactoring across multiple files',
+              type: 'project',
+              instructions: [
+                'Create a sample project with multiple files',
+                'Use Claude to analyze code structure',
+                'Perform architecture improvements',
+                'Generate comprehensive documentation'
+              ]
+            }
+          ],
+          completed: false
+        }
+      ]
+    },
+    {
+      id: 'claude-enterprise',
+      title: 'Enterprise Claude Development',
+      description: 'Implement Claude in enterprise environments',
+      platform: 'Claude Code',
+      icon: '🏢',
+      estimatedTime: '6 hours',
+      difficulty: 'advanced',
+      prerequisites: ['claude-cli-mastery'],
+      learningObjectives: [
+        'Implement enterprise security',
+        'Scale Claude across teams',
+        'Integrate with CI/CD pipelines',
+        'Manage costs and usage'
+      ],
+      lessons: [
+        {
+          id: 'claude-enterprise-security',
+          title: 'Enterprise Security Implementation',
+          description: 'Secure Claude for enterprise use',
+          duration: '120 min',
+          type: 'text',
+          difficulty: 'advanced',
+          content: `# Enterprise Security with Claude
+
+## Security Framework
+Implementing Claude in enterprise environments requires comprehensive security measures.
+
+## Key Security Features:
+- **Role-based Access Control**: Granular permissions
+- **Audit Logging**: Complete activity tracking
+- **Data Protection**: Encryption and privacy
+- **Compliance**: Meet regulatory requirements
+
+## Implementation Steps:
+1. Security assessment and planning
+2. Access control configuration
+3. Monitoring and logging setup
+4. Compliance validation
+5. Team training and adoption
+
+## Best Practices:
+- Regular security reviews
+- Principle of least privilege
+- Comprehensive audit trails
+- Incident response procedures`,
+          exercises: [
+            {
+              id: 'claude-security-setup',
+              title: 'Enterprise Security Setup',
+              description: 'Configure Claude for enterprise security requirements',
+              type: 'project',
+              instructions: [
+                'Design security architecture',
+                'Configure access controls',
+                'Set up audit logging',
+                'Test security measures'
               ]
             }
           ],

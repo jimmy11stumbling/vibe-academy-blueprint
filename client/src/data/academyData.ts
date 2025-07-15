@@ -385,6 +385,134 @@ Replit is a collaborative browser-based IDE with over 40 million users, offering
             }
           ],
           completed: false
+        },
+        {
+          id: 'replit-database',
+          title: 'ReplDB Database Integration',
+          description: 'Learn to use Replit\'s built-in database',
+          duration: '60 min',
+          type: 'interactive',
+          difficulty: 'intermediate',
+          content: `# ReplDB Database Integration
+
+## Understanding ReplDB
+ReplDB is Replit's built-in key-value database, perfect for storing application data without external setup.
+
+## Key Features:
+- **Zero Configuration**: No setup required
+- **Persistent Storage**: Data persists across sessions
+- **Simple API**: Easy-to-use key-value interface
+- **Real-time Updates**: Instant data synchronization
+- **Multi-language Support**: Available in all languages
+
+## Basic Operations:
+\`\`\`javascript
+// Setting data
+await db.set("user:123", { name: "John", age: 30 });
+
+// Getting data
+const user = await db.get("user:123");
+
+// Deleting data
+await db.delete("user:123");
+
+// Listing keys
+const keys = await db.list();
+\`\`\`
+
+## Advanced Patterns:
+- User authentication systems
+- Real-time chat applications
+- Data analytics tracking
+- Content management systems`,
+          exercises: [
+            {
+              id: 'replit-db-app',
+              title: 'Build Database App',
+              description: 'Create an app using ReplDB for data storage',
+              type: 'project',
+              instructions: [
+                'Create a new repl with database',
+                'Implement user registration system',
+                'Add data CRUD operations',
+                'Test data persistence',
+                'Deploy the application'
+              ]
+            }
+          ],
+          completed: false
+        }
+      ]
+    },
+    {
+      id: 'replit-advanced',
+      title: 'Advanced Replit Development',
+      description: 'Master advanced features and deployment',
+      platform: 'Replit',
+      icon: '🚀',
+      estimatedTime: '5 hours',
+      difficulty: 'intermediate',
+      prerequisites: ['replit-fundamentals'],
+      learningObjectives: [
+        'Master advanced collaboration features',
+        'Implement CI/CD workflows',
+        'Build scalable applications',
+        'Optimize performance'
+      ],
+      lessons: [
+        {
+          id: 'replit-deployment',
+          title: 'Production Deployment Strategies',
+          description: 'Deploy and scale applications on Replit',
+          duration: '90 min',
+          type: 'project',
+          difficulty: 'intermediate',
+          content: `# Production Deployment on Replit
+
+## Deployment Options
+Replit offers multiple deployment strategies for different application types and scaling needs.
+
+## Static Site Deployment:
+- **HTML/CSS/JS**: Simple static websites
+- **React/Vue**: Single-page applications
+- **Documentation**: Project documentation sites
+- **Portfolio**: Personal portfolio websites
+
+## Dynamic Application Deployment:
+- **Node.js**: Server-side JavaScript applications
+- **Python**: Django, Flask, FastAPI applications
+- **Web Servers**: Express, Koa, Nest.js applications
+- **APIs**: RESTful and GraphQL services
+
+## Advanced Features:
+- **Custom Domains**: Connect your own domain
+- **Environment Variables**: Secure configuration
+- **Scaling**: Handle increased traffic
+- **Monitoring**: Track application performance
+- **SSL Certificates**: Secure HTTPS connections
+
+## Best Practices:
+- Optimize for production
+- Implement error handling
+- Use environment variables
+- Monitor performance metrics
+- Plan for scaling`,
+          exercises: [
+            {
+              id: 'replit-production-deploy',
+              title: 'Production Deployment',
+              description: 'Deploy a full application to production',
+              type: 'project',
+              instructions: [
+                'Build a complete web application',
+                'Configure environment variables',
+                'Set up custom domain',
+                'Implement monitoring',
+                'Test production deployment'
+              ]
+            }
+          ],
+          completed: false
         }
       ]
     }
