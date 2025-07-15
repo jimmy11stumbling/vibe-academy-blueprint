@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -31,6 +31,10 @@ import { platforms, getplatformByDd } from '@/data/platformsData';
 const PlatformDetail = () => {
   const { platformId } = useParams();
   const [activeTab, setActiveTab] = useState('overview');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const platform = getplatformByDd(platformId || '');
 

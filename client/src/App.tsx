@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { Toaster } from '@/components/ui/sonner';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 import Home from '@/pages/Home';
 import Platforms from '@/pages/Platforms';
 import PlatformDetail from '@/pages/PlatformDetail';
@@ -24,12 +25,18 @@ import Footer from '@/components/Footer';
 import UserProfile from '@/components/UserProfile';
 import SearchComponent from '@/components/SearchComponent';
 
+function ScrollToTopWrapper() {
+  useScrollToTop();
+  return null;
+}
+
 function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider>
         <AuthProvider>
           <Router>
+            <ScrollToTopWrapper />
             <div className="min-h-screen bg-background text-foreground">
               <Navigation />
               <main>
