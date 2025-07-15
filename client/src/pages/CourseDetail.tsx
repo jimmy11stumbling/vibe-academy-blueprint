@@ -422,15 +422,6 @@ const CourseDetail = () => {
 };
 
 export default CourseDetail;
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import Navigation from '@/components/Navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Play, Clock, Users, Star, BookOpen } from 'lucide-react';
-
-const CourseDetail = () => {
   const { courseId } = useParams();
 
   // Free courses data (same as in CoursesSection)
