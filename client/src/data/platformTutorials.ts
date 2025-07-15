@@ -1,5 +1,5 @@
 
-import { AcademyModule } from './academyData';
+import { AcademyModule, academyModules } from './academyData';
 
 export const platformTutorials: Record<string, AcademyModule[]> = {
   'Bolt': [

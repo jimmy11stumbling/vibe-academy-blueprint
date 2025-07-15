@@ -49,8 +49,6 @@ export interface AcademyModule {
   };
 }
 
-import { platformTutorials } from './platformTutorials';
-
 export const academyModules: Record<string, AcademyModule[]> = {
   'Lovable 2.0': [
     {
@@ -507,8 +505,4 @@ export const learningPaths = [
   }
 ];
 
-// Complete academy modules including all platforms
-export const completeAcademyModules = {
-  ...academyModules,
-  ...platformTutorials
-};
+// This will be exported from platformTutorials.ts to avoid circular imports
