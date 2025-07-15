@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -156,7 +155,7 @@ export default function CertificationSystem() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm mb-4">{cert.description}</p>
-                
+
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium">Progress</span>

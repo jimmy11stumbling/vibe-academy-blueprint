@@ -23,11 +23,11 @@ import { completeAcademyModules, learningPaths } from '@/data/completeAcademyDat
 import PlatformModules from '@/components/PlatformModules';
 import LearningPathBuilder from '@/components/platform/LearningPathBuilder';
 import PlatformOverview from '@/components/platform/PlatformOverview';
-import { LearningDashboard } from '@/components/LearningDashboard';
-import { InteractiveLearning } from '@/components/InteractiveLearning';
-import { AssessmentSystem } from '@/components/AssessmentSystem';
-import { CertificationSystem } from '@/components/CertificationSystem';
-import { ProgressTracker } from '@/components/ProgressTracker';
+import LearningDashboard from '@/components/LearningDashboard';
+import InteractiveLearning from '@/components/InteractiveLearning';
+import AssessmentSystem from '@/components/AssessmentSystem';
+import CertificationSystem from '@/components/CertificationSystem';
+import ProgressTracker from '@/components/ProgressTracker';
 import FullStackCapabilities from '@/components/FullStackCapabilities';
 import ComprehensiveAcademy from '@/components/ComprehensiveAcademy';
 import { Link } from 'react-router-dom';

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -118,7 +117,7 @@ export default function InteractiveLearning() {
 
   const submitAnswer = () => {
     if (selectedAnswer === null) return;
-    
+
     const currentQuestion = sampleQuiz[currentQuestionIndex];
     if (selectedAnswer === currentQuestion.correctAnswer) {
       setScore(score + 10);
@@ -172,7 +171,7 @@ export default function InteractiveLearning() {
         <CardContent>
           <div className="space-y-4">
             <p className="text-muted-foreground">{activeExercise.description}</p>
-            
+
             <div>
               <h4 className="font-medium mb-2">Instructions:</h4>
               <ol className="list-decimal list-inside space-y-1">
@@ -286,7 +285,7 @@ export default function InteractiveLearning() {
                 <h3 className="text-lg font-medium">
                   {sampleQuiz[currentQuestionIndex].question}
                 </h3>
-                
+
                 <div className="space-y-2">
                   {sampleQuiz[currentQuestionIndex].options.map((option, index) => (
                     <button
