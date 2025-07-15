@@ -23,11 +23,13 @@ import { completeAcademyModules, learningPaths } from '@/data/completeAcademyDat
 import PlatformModules from '@/components/PlatformModules';
 import LearningPathBuilder from '@/components/platform/LearningPathBuilder';
 import PlatformOverview from '@/components/platform/PlatformOverview';
-import LearningDashboard from '@/components/LearningDashboard';
-import ProgressTracker from '@/components/ProgressTracker';
-import CertificationSystem from '@/components/CertificationSystem';
-import AssessmentSystem from '@/components/AssessmentSystem';
-import InteractiveLearning from '@/components/InteractiveLearning';
+import { LearningDashboard } from '@/components/LearningDashboard';
+import { InteractiveLearning } from '@/components/InteractiveLearning';
+import { AssessmentSystem } from '@/components/AssessmentSystem';
+import { CertificationSystem } from '@/components/CertificationSystem';
+import { ProgressTracker } from '@/components/ProgressTracker';
+import FullStackCapabilities from '@/components/FullStackCapabilities';
+import ComprehensiveAcademy from '@/components/ComprehensiveAcademy';
 import { Link } from 'react-router-dom';
 
 const Academy = () => {
@@ -255,12 +257,17 @@ const Academy = () => {
             </Card>
           </div>
 
-          <Tabs defaultValue="modules" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="modules">Learning Modules</TabsTrigger>
-              <TabsTrigger value="paths">Learning Paths</TabsTrigger>
-              <TabsTrigger value="platforms">Platform Guide</TabsTrigger>
-            </TabsList>
+          <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-8">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="fullstack">Full-Stack</TabsTrigger>
+            <TabsTrigger value="modules">Modules</TabsTrigger>
+            <TabsTrigger value="paths">Learning Paths</TabsTrigger>
+            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+            <TabsTrigger value="assessments">Assessments</TabsTrigger>
+            <TabsTrigger value="certifications">Certifications</TabsTrigger>
+            <TabsTrigger value="progress">Progress</TabsTrigger>
+          </TabsList>
 
             <TabsContent value="dashboard" className="space-y-6">
               <LearningDashboard />
@@ -288,6 +295,14 @@ const Academy = () => {
 
             <TabsContent value="platforms" className="space-y-6">
               <PlatformOverview />
+            </TabsContent>
+            
+             <TabsContent value="fullstack" className="space-y-6">
+              <FullStackCapabilities />
+            </TabsContent>
+
+            <TabsContent value="overview" className="space-y-6">
+              <ComprehensiveAcademy />
             </TabsContent>
           </Tabs>
         </div>
