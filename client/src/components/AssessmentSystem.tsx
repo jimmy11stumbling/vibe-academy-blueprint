@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -166,7 +165,7 @@ const assessments: Assessment[] = [
   }
 ];
 
-export default function AssessmentSystem() {
+const AssessmentSystem = () => {
   const [currentAssessment, setCurrentAssessment] = useState<Assessment | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
@@ -219,7 +218,7 @@ export default function AssessmentSystem() {
     currentAssessment.questions.forEach(question => {
       totalScore += question.points;
       const userAnswer = answers[question.id];
-      
+
       if (question.type === 'multiple-select') {
         const correctAnswers = question.correctAnswer as string[];
         const userAnswers = userAnswer as string[] || [];
@@ -247,7 +246,7 @@ export default function AssessmentSystem() {
 
   if (showResults && currentAssessment && score !== null) {
     const passed = score >= currentAssessment.passingScore;
-    
+
     return (
       <Card className="w-full max-w-4xl mx-auto">
         <CardHeader className="text-center">
@@ -350,7 +349,7 @@ export default function AssessmentSystem() {
                             currentQuestion.difficulty === 'intermediate' ? 'default' : 'destructive'}>
                 {currentQuestion.difficulty}
               </Badge>
-              <Badge variant="outline">{currentQuestion.points} points</Badge>
+              <Badge variant="outline">{currentQuestion.points}</Badge>
             </div>
             <h3 className="text-lg font-medium mb-4">{currentQuestion.question}</h3>
 
@@ -442,7 +441,7 @@ export default function AssessmentSystem() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">{assessment.description}</p>
-              
+
               <div className="space-y-2 mb-4">
                 <div className="flex items-center justify-between text-sm">
                   <span className="flex items-center gap-1">
@@ -479,4 +478,6 @@ export default function AssessmentSystem() {
       </div>
     </div>
   );
-}
+};
+
+export default AssessmentSystem;

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { TutorialModule } from '@/types/tutorial';
 
@@ -803,19 +802,19 @@ export const getAllPlatformModules = () => ({
   'Rork': rorkModules
 });
 
-// Default export for the component
-const PlatformModules = {
-  lovableModules,
-  cursorModules,
-  replitModules,
-  windSurfModules,
-  boltModules,
-  claudeCodeModules,
-  geminiCLIModules,
-  base44Modules,
-  v0Modules,
-  rorkModules,
-  getAllPlatformModules
+const PlatformModules = () => {
+  return (
+    <div className="space-y-8">
+      <div className="text-center">
+        <h2 className="text-3xl font-bold mb-4">Platform-Specific Modules</h2>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Deep dive into each no-code platform with comprehensive modules
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default PlatformModules;
+
+export { lovableModules, cursorModules, replitModules, windSurfModules, boltModules, claudeCodeModules, geminiCLIModules, base44Modules, v0Modules, rorkModules };
