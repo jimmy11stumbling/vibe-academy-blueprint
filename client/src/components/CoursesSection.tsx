@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -99,7 +100,7 @@ const CoursesSection = () => {
                   </Badge>
                 </div>
               </div>
-
+              
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <Badge variant="outline" className={getLevelColor(course.level)}>
@@ -118,7 +119,7 @@ const CoursesSection = () => {
 
               <CardContent className="space-y-4">
                 <p className="text-sm leading-relaxed">{course.description}</p>
-
+                
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Clock className="h-3 w-3" />

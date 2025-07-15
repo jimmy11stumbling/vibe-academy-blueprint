@@ -296,7 +296,7 @@ const Academy = () => {
             <TabsContent value="platforms" className="space-y-6">
               <PlatformOverview />
             </TabsContent>
-
+            
              <TabsContent value="fullstack" className="space-y-6">
               <FullStackCapabilities />
             </TabsContent>
